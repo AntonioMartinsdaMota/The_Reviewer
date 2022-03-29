@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Data
@@ -16,18 +17,22 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, unique = true, updatable = false)
     private Integer movieId;
-    @Column
+    @Column(nullable = false, unique = true, updatable = false)
+    private String imDbId;
+    @Column(nullable = false, unique = true)
     private String originalTitle;
-    @Column
+    @Column(nullable = false, unique = true)
     private String portugueseTitle;
-    @Column
+    @Column(nullable = false)
     private String director;
-    @Column
+    @Column(nullable = false)
     private String type;
     @Column
     private Float ratingIMDB;
     @Column
     private Integer ratingRottenTomatoes;
+    @Column
+    private Integer localRating;
     @OneToMany (
             cascade = {CascadeType.ALL},
             orphanRemoval = true,
