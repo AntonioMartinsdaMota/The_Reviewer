@@ -1,13 +1,15 @@
 package academy.mindswap.controllers;
 
 
-import academy.mindswap.commands.MovieDto;
 import academy.mindswap.persistence.models.Movie;
 import academy.mindswap.services.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.persistence.OneToMany;
 import java.util.List;
@@ -16,7 +18,6 @@ import java.util.List;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class MovieController {
-
 
     @Autowired
     private MovieService movieService;
@@ -42,22 +43,19 @@ public class MovieController {
         return movieService.getMoviesFromDirector(director);
     }
 
-
-    @GetMapping("/movies/{gender}")
-    public List<MovieDto> getMoviesByGenre(String gender) {
-        return movieService.getMoviesByGender(gender);
+    @GetMapping("/movie/{gender}")
+    public ResponseEntity<Movie> getMovieByGenre(String gender) {
+        return movieService.getMovieByGender(gender);
     }
 
     @GetMapping("/movie/imdb")
     public List<MovieDto> getMoviesByImdb(@RequestParam(value = "rating") float rating) {
         return movieService.getMoviesByImdb(rating);
     }
-
     @GetMapping("/movie/rottenTomatoes")
-    public List<MovieDto> getMoviesByRottenTomatoes(@RequestParam(value = "rating") Integer rating) {
+    public ResponseEntity<List<Movie>> getMoviesByRottenTomatoes(@RequestParam(value = "rating") Integer rating) {
         return movieService.getMoviesByRottenTomatoes(rating);
     }
-
     @GetMapping("/movie/localRating")
     public List<MovieDto> getMoviesByLocalRating(@RequestParam(value = "rating") Integer rating) {
         return movieService.getMoviesByLocalRating(rating);
