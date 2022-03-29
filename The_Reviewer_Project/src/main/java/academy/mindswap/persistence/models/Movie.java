@@ -24,13 +24,17 @@ public class Movie {
     @Column(nullable = false, unique = true)
     private String portugueseTitle;
     @Column(nullable = false)
-    private String director;
+    private String directors;
+    @Column(nullable = false)
+    private String actors;
+    @Column(nullable = false)
+    private Integer year;
     @Column(nullable = false)
     private String type;
     @Column
-    private Float ratingIMDB;
+    private Float IMDBRating;
     @Column
-    private Integer ratingRottenTomatoes;
+    private Integer rottenTomatoesRating;
     @Column
     private Integer localRating;
     @OneToMany (

@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Data
@@ -19,10 +17,8 @@ public class User {
     @Column(nullable = false, unique = true, updatable = false)
     private Integer userId;
     @Column
-    @Size(min = 3, max = 15)
     private String username;
     @Column
-    @Email
     private String email;
     @Column
     private String password;
