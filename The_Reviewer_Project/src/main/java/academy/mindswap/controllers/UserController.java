@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @GetMapping("/allUsers")
-    public List<User> getUsers() {
+    public  ResponseEntity<List<User>> getUsers() {
         return userService.getAllUsers();
     }
 
@@ -48,14 +48,9 @@ public class UserController {
         return userService.getUserReviews(id);
     }
 
-    @GetMapping("/user/{id}/review/{reviewId}")
-    public ResponseEntity<Review> getReviewById(@PathVariable Integer id, @PathVariable Integer reviewId) {
-        return userService.getReviewById(id, reviewId);
-    }
-
-    @GetMapping("/user/{id}/review/movie/{title}")
+    @GetMapping("/user/{id}/review/{title}")
     public ResponseEntity<Review> deleteReviewByMovieTitle(@PathVariable Integer id, @PathVariable String title) {
-        return userService.getReviwByMovieTitle(id, title);
+        return userService.getReviewByMovieTitle(id, title);
     }
 
 
@@ -68,40 +63,25 @@ public class UserController {
         return userService.createUser(user);
     }
 
-    @PostMapping("/user/{id}/review/new")
+    /*@PostMapping("/user/{id}/review/new")
     public ResponseEntity<Review> createReview(@PathVariable Integer id, @RequestBody Review review) {
         return userService.createReview(id, review);
-    }
+    }*/
 
 
     /**
      * Updaters
      */
 
-    @PutMapping("/user/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User user) {
-        return userService.updateUser(id, user);
+    @PutMapping("/user/settings")
+    public ResponseEntity<User> updateUserByUsername(@RequestBody User user) {
+        return userService.updateUser(user);
     }
 
-    @PutMapping("/user/{username}")
-    public ResponseEntity<User> updateUserByUsername(@PathVariable String username, @RequestBody User user) {
-        return userService.updateUserByUsername(username, user);
-    }
-
-    @PutMapping("/user/{email}")
-    public ResponseEntity<User> updateUserByEmail(@PathVariable String email, @RequestBody User user) {
-        return userService.updateUserByEmail(email, user);
-    }
-
-    @PutMapping("/user/{id}/review/{reviewId}")
-    public ResponseEntity<Review> updateReview(@PathVariable Integer id, @PathVariable Integer reviewId, @RequestBody Review review) {
-        return userService.updateReviewByReviewId(id, reviewId, review);
-    }
-
-    @PutMapping("/user/{id}/review/movie/{title}")
+    /*@PutMapping("/user/{id}/review/{title}")
     public ResponseEntity<Review> updateReviewByMovieTitle(@PathVariable Integer id, @PathVariable String title, @RequestBody Review review) {
         return userService.updateReviewByMovieTitle(id, title, review);
-    }
+    }*/
 
     /**
      * Deleters
@@ -112,7 +92,7 @@ public class UserController {
         return userService.deleteUserById(id);
     }
 
-    @DeleteMapping("/user/{username}")
+   /* @DeleteMapping("/user/{username}")
     public ResponseEntity<User> deleteUserByUsername(@PathVariable String username) {
         return userService.deleteUserByUsername(username);
     }
@@ -120,17 +100,17 @@ public class UserController {
     @DeleteMapping("/user/{email}")
     public ResponseEntity<User> deleteUserByEmail(@PathVariable String email) {
         return userService.deleteUserByEmail(email);
-    }
+    }*/
 
     @DeleteMapping("/users")
     public ResponseEntity<User> deleteAllUsers() {
         return userService.deleteAllUsers();
     }
 
-    @DeleteMapping("/user/{id}/review/{reviewId}")
+    /*@DeleteMapping("/user/{id}/review/{reviewId}")
     public ResponseEntity<Review> deleteReview(@PathVariable Integer id, @PathVariable Integer reviewId) {
         return userService.deleteReviewByReviewId(id, reviewId);
-    }
+    }*/
 
 }
 

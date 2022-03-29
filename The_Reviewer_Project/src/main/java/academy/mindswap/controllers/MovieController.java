@@ -32,19 +32,14 @@ public class MovieController {
         return movieService.getMovieByOriginalTitle(originalTitle);
     }
 
-    @GetMapping("/movie/{portugueseTitle")
-    public ResponseEntity<Movie> getMovieByPortugueseTitle(String portugueseTitle) {
-        return movieService.getMovieByPortugueseTitle(portugueseTitle);
-    }
-
     @GetMapping("/movie/{director}")
     public ResponseEntity<Movie> getMovieByDirector(String director) {
         return movieService.getMovieByDirector(director);
     }
 
-    @GetMapping("/movie/{genre}")
-    public ResponseEntity<Movie> getMovieByGenre(String genre) {
-        return movieService.getMovieByGenre(genre);
+    @GetMapping("/movie/{gender}")
+    public ResponseEntity<Movie> getMovieByGenre(String gender) {
+        return movieService.getMovieByGenre(gender);
     }
 
     @GetMapping("/movie/imdb")
@@ -52,7 +47,7 @@ public class MovieController {
         return movieService.getMoviesByIMDB(rating);
     }
     @GetMapping("/movie/rottenTomatoes")
-    public ResponseEntity<List<Movie>> getMoviesByRottenTomatoes(@RequestParam(value = "rating") float rating) {
+    public ResponseEntity<List<Movie>> getMoviesByRottenTomatoes(@RequestParam(value = "rating") Integer rating) {
         return movieService.getMoviesByRottenTomatoes(rating);
     }
     @GetMapping("/movie/localRating")
