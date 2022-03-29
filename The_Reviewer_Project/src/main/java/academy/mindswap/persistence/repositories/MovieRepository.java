@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
@@ -35,12 +36,11 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     List<Movie> findByLocalRating(@Param("localRating") float localRating);
 
 
-    Movie findByMovieId(Integer movieId);
-
-    Movie findByOriginalTitle(String originalTitle);
+    Optional<Movie> findByOriginalTitle(String originalTitle);
 
     List<Movie> findByDirectorsContaining(String director);
 
     List<Movie> findByYear(Integer year);
+
 }
 
