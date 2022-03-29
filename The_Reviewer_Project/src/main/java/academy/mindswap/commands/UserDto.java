@@ -14,7 +14,7 @@ public class UserDto {
     private Integer id;
 
     @NotBlank( message= "Name cannot be empty")
-    private String name;
+    private String username;
 
     @Email(message = "Invalid email address")
     @NotBlank( message= "Email cannot be empty")
@@ -26,7 +26,7 @@ public class UserDto {
     public String toString() {
         return "UserDto{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", reviews=" + reviews +
                 '}';

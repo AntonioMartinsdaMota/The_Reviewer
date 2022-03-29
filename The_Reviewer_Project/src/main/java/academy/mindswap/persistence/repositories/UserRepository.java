@@ -13,9 +13,9 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    List<User> findByName(String username);
+    Optional<User> findByName(String username);
 
-    User findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
     User findByNameAndPassword(String name, String password);
 
@@ -23,4 +23,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     List<User> deleteAllUsersById (int userId);
 
+    User findByUsername(String userName);
 }

@@ -63,7 +63,13 @@ public class UserService {
         return user.map(userconverter::toDto);
     }
 
-    public List<ReviewDto> getUserReviews(int id){
+    public List<UserDto> getAllUsers() {
+        return userRepository.findAll().stream().map(userconverter::toDto).collect(Collectors.toList());
+    }
+
+
+
+    public List<ReviewDto> getReviewsByUserId(int id){
         if(id < 0) {
             LOGGER.log(Level.WARN, "Unknown user: " + id);
             throw new InvalidUserId(Integer.toString(id));
@@ -73,7 +79,46 @@ public class UserService {
         if (userOpt.isEmpty()) {
             throw new UsernameNotFoundException("");
         }
-        return userOpt.get().getReviews().stream().map(r -> reviewConverter.toDto(r)).collect(Collectors.toList());
+        return userOpt.get().getReviews().stream().map(r -> reviewConverter.convertToDto(r)).collect(Collectors.toList());
+    }
+
+    public UserDto createUser(UserDto userDto) throws UserAlreadyExistsException{
+        if(userRepository.findByName(userDto.getUsername()).isPresent() || userRepository.findByEmail(userDto.getEmail()).isPresent()) {
+            throw new UserAlreadyExistsException(userDto.getUsername());
+        }
+        return userconverter.toDto(userRepository.save(userconverter.toEntity(userDto)));
+
+    }
+
+    public UserDto updateUser(UserDto userDto) throws UserNotFoundException{
+
+        //Get ID from Cookie
+
+        Optional<User> userOpt = userRepository.findById(userId);
+
+        if (userOpt.isEmpty()) {
+            throw new UserNotFoundException();
+        }
+
+        User user = userOpt.get();
+
+        if(userDto.getUsername() == null) {
+            userDto.setUsername(user.getUsername());
+        }
+
+        if(userDto.getEmail() == null) {
+            userDto.setEmail(user.getEmail());
+        }
+
+        return userconverter.toDto(userRepository.save(userconverter.toEntity(userDto)));
+    }
+
+    public void deleteUserByUserId(int id) {
+        userRepository.deleteById(id);
+    }
+
+    public void deleteAllUsers() {
+        userRepository.deleteAll();
     }
 
 /*

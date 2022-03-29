@@ -61,8 +61,6 @@ public class ReviewService {
         Movie IMDBMovie = futureIMDBMovie.get();
         Movie MovieDBMovie = futureMovieDBMovie.get();
 
-
-
         return userGit;
 
     }

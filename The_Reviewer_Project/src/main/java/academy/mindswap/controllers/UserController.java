@@ -1,6 +1,8 @@
 package academy.mindswap.controllers;
 
 
+import academy.mindswap.commands.ReviewDto;
+import academy.mindswap.commands.UserDto;
 import academy.mindswap.persistence.models.Review;
 import academy.mindswap.persistence.models.User;
 import academy.mindswap.services.UserService;
@@ -24,29 +26,23 @@ public class UserController {
      */
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
-        return userService.getUserById(id);
-    }
-
-    @GetMapping("/user/{username}")
-    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
-        return userService.getUserByUsername(username);
-    }
-
-    @GetMapping("/user/{email}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
-        return userService.getUserByEmail(email);
+    public ResponseEntity<UserDto> getUserById(@PathVariable Integer id) {
+        UserDto userDto = userService.getUserById(id).get();
+        return ResponseEntity.ok(userDto);
     }
 
     @GetMapping("/allUsers")
-    public  ResponseEntity<List<User>> getUsers() {
-        return userService.getAllUsers();
+    public  ResponseEntity<List<UserDto>> getUsers() {
+        List<UserDto> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping("/user/{id}/reviews")
-    public ResponseEntity<List<Review>> getUserReviews(@PathVariable Integer id) {
-        return userService.getUserReviews(id);
+    public ResponseEntity<List<ReviewDto>> getUserReviews(@PathVariable Integer id) {
+        List<ReviewDto> reviews = userService.getReviewsByUserId(id);
+        return ResponseEntity.ok(reviews);
     }
+
 
    /* @GetMapping("/user/{id}/review/{title}")
     public ResponseEntity<Review> deleteReviewByMovieTitle(@PathVariable Integer id, @PathVariable String title) {
@@ -59,8 +55,9 @@ public class UserController {
      */
 
     @PostMapping("/user")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+        UserDto user = userService.createUser(userDto);
+        return ResponseEntity.ok(user);
     }
 
     /*@PostMapping("/user/{id}/review/new")
@@ -74,8 +71,9 @@ public class UserController {
      */
 
     @PutMapping("/user/settings")
-    public ResponseEntity<User> updateUserByUsername(@RequestBody User user) {
-        return userService.updateUser(user);
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
+        UserDto user = userService.updateUser(userDto);
+        return ResponseEntity.ok(user);
     }
 
     /*@PutMapping("/user/{id}/review/{title}")
@@ -88,8 +86,9 @@ public class UserController {
      */
 
     @DeleteMapping("/user/{id}")
-    public ResponseEntity<UserDto> deleteUserById(@PathVariable Integer id) {
-        return userService.deleteUserById(id);
+    public ResponseEntity<?> deleteUserById(@PathVariable Integer id) {
+       userService.deleteUserByUserId(id);
+       return ResponseEntity.ok().build();
     }
 
    /* @DeleteMapping("/user/{username}")
@@ -103,8 +102,9 @@ public class UserController {
     }*/
 
     @DeleteMapping("/users")
-    public ResponseEntity<UserDto> deleteAllUsers() {
-        return userService.deleteAllUsers();
+    public ResponseEntity<?> deleteAllUsers() {
+        userService.deleteAllUsers();
+        return ResponseEntity.ok().build();
     }
 
     /*@DeleteMapping("/user/{id}/review/{reviewId}")
