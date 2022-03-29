@@ -35,4 +35,5 @@ public class User {
     @Column
     private Integer securityRoleId;
 
+
 }
