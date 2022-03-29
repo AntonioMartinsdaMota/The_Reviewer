@@ -13,7 +13,10 @@ public class MovieDto {
     private String imDbId;*/
 
     @NotBlank( message= "Title cannot be empty")
-    private String title;
+    private String originalTitle;
+
+    @NotBlank( message= "Title cannot be empty")
+    private String portugueseTitle;
 
     @NotBlank( message= "Year cannot be empty")
     private Integer year;

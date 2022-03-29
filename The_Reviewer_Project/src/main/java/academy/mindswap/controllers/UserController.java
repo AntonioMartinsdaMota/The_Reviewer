@@ -48,11 +48,11 @@ public class UserController {
         return userService.getUserReviews(id);
     }
 
-    @GetMapping("/user/{id}/review/{title}")
+   /* @GetMapping("/user/{id}/review/{title}")
     public ResponseEntity<Review> deleteReviewByMovieTitle(@PathVariable Integer id, @PathVariable String title) {
         return userService.getReviewByMovieTitle(id, title);
     }
-
+*/
 
     /**
      * Posters

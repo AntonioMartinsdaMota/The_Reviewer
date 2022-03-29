@@ -39,7 +39,7 @@ public class MovieController {
 
     @GetMapping("/movie/{gender}")
     public ResponseEntity<Movie> getMovieByGenre(String gender) {
-        return movieService.getMovieByGenre(gender);
+        return movieService.getMovieByGender(gender);
     }
 
     @GetMapping("/movie/imdb")
@@ -54,9 +54,6 @@ public class MovieController {
     public ResponseEntity<List<Movie>> getMoviesByLocalRating(@RequestParam(value = "rating") float rating) {
         return movieService.getMoviesByLocalRating(rating);
     }
-
-
-
 
 
 }

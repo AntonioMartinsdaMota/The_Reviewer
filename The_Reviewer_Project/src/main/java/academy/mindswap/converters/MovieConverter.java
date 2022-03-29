@@ -3,6 +3,7 @@ package academy.mindswap.converters;
 import academy.mindswap.commands.MovieDto;
 import academy.mindswap.commands.MovieFullCastDto;
 import academy.mindswap.commands.MovieRatingDto;
+import academy.mindswap.persistence.models.Movie;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
