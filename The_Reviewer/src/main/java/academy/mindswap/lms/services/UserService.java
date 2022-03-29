@@ -67,6 +67,7 @@ public class UserService {
     }
 
 
+
     public Optional<UserDto> getUserById(int id) {
 
         if(id < 0) {
@@ -82,6 +83,7 @@ public class UserService {
     }
 
     public User validate(String email) {
+
         return userRepository.findByEmail(email);
     }
 
