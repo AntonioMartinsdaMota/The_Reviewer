@@ -10,7 +10,12 @@ import org.hibernate.cache.spi.DirectAccessRegion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.imageio.plugins.tiff.TIFFImageReadParam;
+import java.lang.management.OperatingSystemMXBean;
+import java.sql.Time;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,15 +40,19 @@ public class MovieService  {
                 .collect(Collectors.toList());
     }
 
-    public MovieDto getMovieByOriginalTitle(String originalTitle) {
-        return movieConverter.convertToDto(movieRepository.findByOriginalTitle(originalTitle));
+    public MovieDto getMovieByOriginalTitle(String originalTitle) throws MovieNotFoundException {
+        Optional<Movie> movieOpt = movieRepository.findByOriginalTitle(originalTitle);
+        if (movieOpt.isEmpty()){
+            throw new MovieNotFoundException();
+    }
+        return movieConverter.convertToDto(movieOpt.get());
 
     }
 
     public List <MovieDto> getMoviesFromDirector(String director) throws DirectorNotFoundException {
         List<Movie> movies = movieRepository.findByDirectorsContaining(director);
         if (movies.isEmpty()) {
-            throw new DirectorNotFoundException();
+           throw new DirectorNotFoundException();
         }
         return movies.stream().map(m -> movieConverter.convertToDto(m)).collect(Collectors.toList());
     }
@@ -55,22 +64,34 @@ public class MovieService  {
                 .collect(Collectors.toList());
     }*/
 
-    public List<MovieDto> getMoviesByImdbRating(float rating){
+    public List<MovieDto> getMoviesByImdbRating(float rating) throws RatingOutOfRangeException {
+        if (rating < 0 || rating > 10) {
+            throw new RatingOutOfRangeException();
+        }
         return movieRepository.findByImdbRating(rating).stream().map(movieConverter::convertToDto).collect(Collectors.toList());
 
     }
 
-    public List<MovieDto> getMoviesByRottenTomatoes(Integer rating){
+    public List<MovieDto> getMoviesByRottenTomatoesRating(Integer rating) throws RatingOutOfRangeException {
+        if (rating < 0 || rating > 100) {
+            throw new RatingOutOfRangeException();
+        }
         return movieRepository.findByRottenTomatoesRating(rating).stream().map(movieConverter::convertToDto).collect(Collectors.toList());
 
     }
 
-    public List<MovieDto> getMoviesByLocalRating(float rating){
+    public List<MovieDto> getMoviesByLocalRating(float rating) throws RatingOutOfRangeException {
+        if (rating < 1 || rating > 5) {
+            throw new RatingOutOfRangeException();
+        }
         return movieRepository.findByLocalRating(rating).stream().map(movieConverter::convertToDto).collect(Collectors.toList());
 
     }
 
-    public List<MovieDto> getMoviesByYear(Integer year){
+    public List<MovieDto> getMoviesByYear(Integer year) throws YearOutOfRangeException {
+        if (year < 1900 || year > LocalDate.now().getYear()) {
+            throw new YearOutOfRangeException();
+        }
         return movieRepository.findByYear(year).stream().map(movieConverter::convertToDto).collect(Collectors.toList());
 
     }
