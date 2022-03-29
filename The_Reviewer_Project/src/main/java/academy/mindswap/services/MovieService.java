@@ -41,20 +41,21 @@ public class MovieService  {
     }
 
     public List <MovieDto> getMoviesFromDirector(String director) throws DirectorNotFoundException {
-        return movieRepository.findByDirector(director)
-                .stream()
-                .map(movieConverter::convertToDto)
-                .collect(Collectors.toList());
+        List<Movie> movies = movieRepository.findByDirectorsContaining(director);
+        if (movies.isEmpty()) {
+            throw new DirectorNotFoundException();
+        }
+        return movies.stream().map(m -> movieConverter.convertToDto(m)).collect(Collectors.toList());
     }
 
-    public List <MovieDto> getMoviesByGender(String gender){
+    /*public List <MovieDto> getMoviesByGender(String gender){
         return movieRepository.findByGender(gender)
                 .stream()
                 .map(movieConverter::convertToDto)
                 .collect(Collectors.toList());
-    }
+    }*/
 
-    public List<MovieDto> getMoviesByImdb(float rating){
+    public List<MovieDto> getMoviesByImdbRating(float rating){
         return movieRepository.findByImdbRating(rating).stream().map(movieConverter::convertToDto).collect(Collectors.toList());
 
     }
@@ -64,7 +65,7 @@ public class MovieService  {
 
     }
 
-    public List<MovieDto> getMoviesByLocalRating(Integer rating){
+    public List<MovieDto> getMoviesByLocalRating(float rating){
         return movieRepository.findByLocalRating(rating).stream().map(movieConverter::convertToDto).collect(Collectors.toList());
 
     }

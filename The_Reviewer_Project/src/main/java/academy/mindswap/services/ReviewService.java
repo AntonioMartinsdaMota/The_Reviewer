@@ -2,6 +2,9 @@ package academy.mindswap.services;
 
 import academy.mindswap.commands.ReviewDto;
 import academy.mindswap.controllers.ReviewController;
+import academy.mindswap.converters.ReviewConverter;
+import academy.mindswap.persistence.models.Movie;
+import academy.mindswap.persistence.repositories.MovieRepository;
 import academy.mindswap.persistence.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,9 @@ public class ReviewService {
 
     @Autowired
     private ReviewRepository reviewRepository;
+
+    @Autowired
+    private MovieRepository movieRepository;
 
     @Autowired
     private ReviewConverter reviewConverter;
@@ -29,11 +35,12 @@ public class ReviewService {
     }
 
     public ReviewDto createReviewByMovieId(ReviewDto reviewDto) {
-       return reviewRepository.save(reviewConverter.convertToEntity(reviewDto));
+       return reviewConverter.convertToDto(reviewRepository.save(reviewConverter.convertToEntity(reviewDto)));
     }
 
     public ReviewDto getReviewByMovieId(Integer movieId) {
-        return reviewConverter.convertToDto(reviewRepository.getReviewByMovieId(movieId));
+        Movie movie = movieRepository.findMovieById(movieId);
+        return reviewConverter.convertToDto(reviewRepository.getReviewByMovieId(movie));
     }
 
     public ReviewDto getReviewById(Integer reviewId) {

@@ -32,11 +32,11 @@ public class Movie {
     @Column
     private String type;
     @Column
-    private Float IMDBRating;
+    private float IMDBRating;
     @Column
     private Integer rottenTomatoesRating;
     @Column
-    private Integer localRating;
+    private float localRating;
     @OneToMany (
             cascade = {CascadeType.ALL},
             orphanRemoval = true,
