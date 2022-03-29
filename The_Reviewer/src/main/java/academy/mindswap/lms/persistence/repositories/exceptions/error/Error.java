@@ -1,4 +1,4 @@
-package academy.mindswap.lms.exceptions.error;
+package academy.mindswap.lms.persistence.repositories.exceptions.error;
 
 import lombok.Builder;
 import lombok.Data;
