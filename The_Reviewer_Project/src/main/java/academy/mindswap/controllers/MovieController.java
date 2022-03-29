@@ -1,6 +1,7 @@
 package academy.mindswap.controllers;
 
 
+import academy.mindswap.commands.MovieDto;
 import academy.mindswap.persistence.models.Movie;
 import academy.mindswap.services.MovieService;
 import lombok.RequiredArgsConstructor;
@@ -22,37 +23,49 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
+
+    /**
+     * Getters
+     */
+
     @GetMapping("/movies")
-    public ResponseEntity<List<Movie>> getAllMovies() {
+    public ResponseEntity<List<MovieDto>> getAllMovies() {
         return movieService.getAllMovies();
     }
 
     @GetMapping("/movie/{originalTitle}")
-    public ResponseEntity<Movie> getMovieByOriginalTitle(String originalTitle) {
+    public ResponseEntity<MovieDto> getMovieByOriginalTitle(String originalTitle) {
         return movieService.getMovieByOriginalTitle(originalTitle);
     }
 
     @GetMapping("/movie/{director}")
-    public ResponseEntity<Movie> getMovieByDirector(String director) {
+    public ResponseEntity<MovieDto> getMovieByDirector(String director) {
         return movieService.getMovieByDirector(director);
     }
 
     @GetMapping("/movie/{gender}")
-    public ResponseEntity<Movie> getMovieByGenre(String gender) {
+    public ResponseEntity<MovieDto> getMovieByGenre(String gender) {
         return movieService.getMovieByGenre(gender);
     }
 
     @GetMapping("/movie/imdb")
-    public ResponseEntity<List<Movie>> getMoviesByImdb(@RequestParam(value = "rating") float rating) {
+    public ResponseEntity<List<MovieDto>> getMoviesByImdb(@RequestParam(value = "rating") float rating) {
         return movieService.getMoviesByIMDB(rating);
     }
+
     @GetMapping("/movie/rottenTomatoes")
-    public ResponseEntity<List<Movie>> getMoviesByRottenTomatoes(@RequestParam(value = "rating") Integer rating) {
+    public ResponseEntity<List<MovieDto>> getMoviesByRottenTomatoes(@RequestParam(value = "rating") Integer rating) {
         return movieService.getMoviesByRottenTomatoes(rating);
     }
+
     @GetMapping("/movie/localRating")
-    public ResponseEntity<List<Movie>> getMoviesByLocalRating(@RequestParam(value = "rating") float rating) {
+    public ResponseEntity<List<MovieDto>> getMoviesByLocalRating(@RequestParam(value = "rating") float rating) {
         return movieService.getMoviesByLocalRating(rating);
+    }
+
+    @GetMapping("/movie/{year}")
+    public ResponseEntity<List<MovieDto>> getMoviesByYear(@RequestParam(value = "year") Integer year) {
+        return movieService.getMoviesByYear(year);
     }
 
 
