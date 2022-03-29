@@ -8,6 +8,6 @@ import java.util.List;
 public class MovieFullCastDto {
 
 
-    private List<DirectorDto> directors;
+    private DirectorDto directors;
     private List<PersonDto> actors;
 }

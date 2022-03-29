@@ -33,8 +33,7 @@ public class MovieConverter {
                 .filter(t -> t.getIso_639_1().equalsIgnoreCase("pt"))
                 .filter(t -> t.getIso_3166_1().equalsIgnoreCase("pt"))
                 .findFirst().get().getData().stream().findFirst().get().getTitle());
-        movie.setDirectors(movieFullCastDto.getDirectors().stream().filter(d -> d.getJob().equals("Director"))
-                .map(DirectorDto::getItems).toString());
+        movie.setDirectors(movieFullCastDto.getDirectors().getItems().toString());
         movie.setActors(movieFullCastDto.getActors().stream().limit(5).toString());
         movie.setYear(movieRatingDto.getYear());
         //movie.setType();
