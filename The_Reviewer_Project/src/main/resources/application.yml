@@ -1,0 +1,22 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+
+  output:
+    ansi:
+      enabled: ALWAYS
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDB103Dialect
+    hibernate:
+      ddl-auto: ${HIBERNATE_DDL_AUTO:create-drop}
+      show-sql: true
+  datasource:
+    url: ${MARIADB_URL:jdbc:mariadb://localhost:3306/lms}
+    username: ${MARIADB_USER:root}
+    password: ${MARIADB_PASSWORD:mypass}
+
+
+

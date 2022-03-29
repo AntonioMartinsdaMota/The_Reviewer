@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-@Configuration
+/*@Configuration
 @EnableWebSecurity
 public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
@@ -20,12 +20,12 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
 
     private MyAuthProvider myAuthenticationProvider;
 
-   /* @Override
+    @Override
     public void configure(WebSecurity web) throws Exception {
         web
                 .ignoring()
                 .antMatchers(HttpMethod.POST,"/auth/login");
-    }*/
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -37,18 +37,18 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST,"/auth/login").permitAll()
                 .antMatchers(HttpMethod.GET,"/api/movies").permitAll()
-               // .antMatchers(
-          //      HttpMethod.GET,
-          //      "/api/*/1","/login")
-          //      .authenticated()
+                .antMatchers(
+                HttpMethod.GET,
+                "/api/*/1","/login")
+                .authenticated()
                 //.permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new CookieFilter(myAuthenticationProvider), BasicAuthenticationFilter.class);
 
-             //   .and()
+                .and()
         ;
-      //  super.configure(http);
+        super.configure(http);
     }
 
 
@@ -56,4 +56,4 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
     public void setMyAuthenticationProvider(MyAuthProvider myAuthenticationProvider) {
         this.myAuthenticationProvider = myAuthenticationProvider;
     }
-}
+}*/
