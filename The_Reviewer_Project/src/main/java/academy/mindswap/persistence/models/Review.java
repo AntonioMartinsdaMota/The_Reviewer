@@ -28,4 +28,5 @@ public class Review {
     @Min(0)
     @Max(5)
     private Integer rating;
+
 }
