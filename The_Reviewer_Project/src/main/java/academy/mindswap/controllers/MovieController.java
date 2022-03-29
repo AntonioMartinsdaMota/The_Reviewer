@@ -7,10 +7,7 @@ import academy.mindswap.services.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.OneToMany;
 import java.util.List;
@@ -19,6 +16,7 @@ import java.util.List;
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class MovieController {
+
 
     @Autowired
     private MovieService movieService;
@@ -29,47 +27,46 @@ public class MovieController {
      */
 
     @GetMapping("/movies")
-    public ResponseEntity<List<MovieDto>> getAllMovies() {
+    public List<MovieDto> getAllMovies() {
         return movieService.getAllMovies();
     }
 
     @GetMapping("/movie/{originalTitle}")
-    public ResponseEntity<MovieDto> getMovieByOriginalTitle(String originalTitle) {
-        return movieService.getMovieByOriginalTitle(originalTitle);
+    public ResponseEntity<MovieDto> getMoviesByOriginalTitle(@PathVariable String originalTitle) {
+        MovieDto movieDto = movieService.getMovieByOriginalTitle(originalTitle);
+        return ResponseEntity.ok(movieDto);
     }
 
-    @GetMapping("/movie/{director}")
-    public ResponseEntity<MovieDto> getMovieByDirector(String director) {
-        return movieService.getMovieByDirector(director);
+    @GetMapping("/movies/{director}")
+    public List<MovieDto> getMovieByDirector(String director) {
+        return movieService.getMoviesFromDirector(director);
     }
 
-    @GetMapping("/movie/{gender}")
-    public ResponseEntity<MovieDto> getMovieByGenre(String gender) {
-        return movieService.getMovieByGenre(gender);
+
+    @GetMapping("/movies/{gender}")
+    public List<MovieDto> getMoviesByGenre(String gender) {
+        return movieService.getMoviesByGender(gender);
     }
 
     @GetMapping("/movie/imdb")
-    public ResponseEntity<List<MovieDto>> getMoviesByImdb(@RequestParam(value = "rating") float rating) {
-        return movieService.getMoviesByIMDB(rating);
+    public List<MovieDto> getMoviesByImdb(@RequestParam(value = "rating") float rating) {
+        return movieService.getMoviesByImdb(rating);
     }
 
     @GetMapping("/movie/rottenTomatoes")
-    public ResponseEntity<List<MovieDto>> getMoviesByRottenTomatoes(@RequestParam(value = "rating") Integer rating) {
+    public List<MovieDto> getMoviesByRottenTomatoes(@RequestParam(value = "rating") Integer rating) {
         return movieService.getMoviesByRottenTomatoes(rating);
     }
 
     @GetMapping("/movie/localRating")
-    public ResponseEntity<List<MovieDto>> getMoviesByLocalRating(@RequestParam(value = "rating") float rating) {
+    public List<MovieDto> getMoviesByLocalRating(@RequestParam(value = "rating") Integer rating) {
         return movieService.getMoviesByLocalRating(rating);
     }
 
     @GetMapping("/movie/{year}")
-    public ResponseEntity<List<MovieDto>> getMoviesByYear(@RequestParam(value = "year") Integer year) {
+    public List<MovieDto> getMoviesByYear(@RequestParam(value = "year") Integer year) {
         return movieService.getMoviesByYear(year);
     }
-
-
-
 
 
 }

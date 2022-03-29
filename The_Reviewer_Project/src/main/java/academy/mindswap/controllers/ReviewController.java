@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
@@ -22,27 +24,30 @@ public class ReviewController {
      */
 
     @GetMapping("/reviews")
-    public ResponseEntity<ReviewDto> getAllReviews() {
+    public List<ReviewDto> getAllReviews() {
         return reviewService.getAllReviews();
     }
 
     @GetMapping("/reviews/{movieId}")
-    public ResponseEntity<ReviewDto> getReviewsByMovieId(@PathVariable Integer movieId) {
-        return reviewService.getReviewsByMovieId(movieId);
+    public ResponseEntity<ReviewDto> getReviewByMovieId(@PathVariable Integer movieId) {
+        ReviewDto reviewDto = reviewService.getReviewByMovieId(movieId);
+        return ResponseEntity.ok(reviewDto);
     }
 
     @GetMapping("/review/{reviewId}")
     public ResponseEntity<ReviewDto> getReviewById(@PathVariable Integer reviewId) {
-        return reviewService.getReviewById(reviewId);
+        ReviewDto reviewDto = reviewService.getReviewById(reviewId);
+        return ResponseEntity.ok(reviewDto);
     }
 
     /**
      * Posters
      */
 
-    @PostMapping("/review/{movieId}")
-    public ResponseEntity<ReviewDto> createReviewByMovieId(@RequestBody ReviewDto reviewDto, @PathVariable Integer movieId) {
-      return reviewService.createReviewByMovieId(reviewDto, movieId);
+    @PostMapping("/review")
+    public ResponseEntity<ReviewDto> createReview(@RequestBody ReviewDto reviewDto) {
+        ReviewDto reviewDto1 = reviewService.createReviewByMovieId(reviewDto);
+      return  ResponseEntity.ok(reviewDto1);
     }
 
 
@@ -52,15 +57,14 @@ public class ReviewController {
 
 
     @DeleteMapping("/review/{reviewId}")
-    public ResponseEntity<ReviewDto> deleteReviewById(@PathVariable Integer reviewId) {
-        return reviewService.deleteReviewById(reviewId);
+    public void deleteReviewById(@PathVariable Integer reviewId) {
+         reviewService.deleteReview(reviewId);
     }
+
     @DeleteMapping("/reviews")
-    public ResponseEntity<ReviewDto> deleteAllReviews() {
-        return reviewService.deleteAllReviews();
+    public void deleteAllReviews() {
+        reviewService.deleteAllReviews();
     }
-
-
 }
 
 
