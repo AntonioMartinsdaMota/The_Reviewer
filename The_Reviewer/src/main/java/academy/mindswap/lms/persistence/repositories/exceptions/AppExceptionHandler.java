@@ -1,6 +1,6 @@
-package academy.mindswap.lms.exceptions;
+package academy.mindswap.lms.persistence.repositories.exceptions;
 
-import academy.mindswap.lms.exceptions.error.Error;
+import academy.mindswap.lms.persistence.repositories.exceptions.error.Error;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

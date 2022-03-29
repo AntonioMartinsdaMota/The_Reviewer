@@ -1,4 +1,4 @@
-package academy.mindswap.lms.exceptions;
+package academy.mindswap.lms.persistence.repositories.exceptions;
 
 import java.util.function.IntConsumer;
 
