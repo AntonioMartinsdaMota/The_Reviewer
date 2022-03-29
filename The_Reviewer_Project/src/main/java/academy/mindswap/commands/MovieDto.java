@@ -21,7 +21,6 @@ public class MovieDto {
     @NotBlank( message= "Year cannot be empty")
     private Integer year;
 
-    @NotBlank( message= "Type cannot be empty")
     private String type;
 
     private float IMDBRating;

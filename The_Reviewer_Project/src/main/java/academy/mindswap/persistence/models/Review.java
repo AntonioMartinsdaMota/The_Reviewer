@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 
 @Data
@@ -28,4 +29,16 @@ public class Review {
     @Column
     private Integer localRating;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Review)) return false;
+        Review review = (Review) o;
+        return Objects.equals(getUser(), review.getUser()) && Objects.equals(getMovie(), review.getMovie());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUser(), getMovie());
+    }
 }

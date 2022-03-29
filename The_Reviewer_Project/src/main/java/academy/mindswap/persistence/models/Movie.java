@@ -29,7 +29,7 @@ public class Movie {
     private String actors;
     @Column(nullable = false)
     private Integer year;
-    @Column(nullable = false)
+    @Column
     private String type;
     @Column
     private Float IMDBRating;
