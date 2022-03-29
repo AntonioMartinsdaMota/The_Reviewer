@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mindswap-mariadb:
+    image: mariadb:latest
+    container_name: mindswap-mariadb
+    ports:
+      - '3306:3306'
+ #   volumes:
+ #     - './data/mariadb:/var/lib/mysql'
+    environment:
+      MARIADB_ROOT_PASSWORD: 'mypass'
+      MARIADB_DATABASE: 'mindswap'
+    restart: always
+ #   networks:
+ #     - mindswap-net
+#    depends_on:
+#      - mindswap-redis
+#    logging:
+#      driver: syslog
+#      options:
+#        syslog-address: tcp://
+  mindswap-app:
+    image : users_service
+    restart: on-failure
+    container_name: mindswap-app
+    depends_on:
+      - mindswap-mariadb
+    ports:
+      - '8080:8080'
+    environment:
+      MARIADB_DB: 'mindswap'
+      MARIADB_USER: 'root'
+      MARIADB_PASSWORD: 'mypass'
+      MARIADB_URL: jdbc:mariadb://mindswap-mariadb:3306/mindswap
+      SERVER_PORT: '8080'
+      HIBERNATE_DDL_AUTO: 'create-drop'
+
