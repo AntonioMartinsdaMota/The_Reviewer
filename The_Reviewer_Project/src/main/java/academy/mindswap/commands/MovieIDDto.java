@@ -7,6 +7,5 @@ import java.util.List;
 
 @Data
 public class MovieIDDto {
-
     private List<ResultsDto> results;
 }

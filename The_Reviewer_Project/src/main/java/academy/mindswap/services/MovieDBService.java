@@ -29,8 +29,8 @@ public class MovieDBService {
     }
 
     public String getGetIdUrl(String movieName) {
-        movieName.replaceAll(" ", "%20");
-        return String.format(MOVIEDB_GETID_URL, movieName);
+        String movieNameNewFormat = movieName.replaceAll(" ", "%20");
+        return String.format(MOVIEDB_GETID_URL, movieNameNewFormat);
     }
     public String getMovieDBGetRatingsUrl(String movieId) {
         return String.format(MOVIEDB_GET_TRANSLATIONS_URL, movieId);
@@ -62,7 +62,7 @@ public class MovieDBService {
         return translationDto;
     }
 
-    public Movie createMovieFromIMDB(String movieName) throws MovieNotFoundInMovieDBException {
+    public Movie createMovieFromMovieDB(String movieName) throws MovieNotFoundInMovieDBException {
 
         MovieDBTranslationDto translationDto = findMovieDBTranslations(movieName);
 

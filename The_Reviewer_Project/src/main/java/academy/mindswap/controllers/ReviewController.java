@@ -3,6 +3,8 @@ package academy.mindswap.controllers;
 
 import academy.mindswap.commands.ReviewDto;
 import academy.mindswap.persistence.models.Review;
+import academy.mindswap.persistence.repositories.exceptions.CookieNotFoundException;
+import academy.mindswap.persistence.repositories.exceptions.MovieNotFoundInMovieDBException;
 import academy.mindswap.services.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +48,8 @@ public class ReviewController {
      */
 
     @PostMapping("/review")//ALL
-    public ResponseEntity<ReviewDto> createReview(@RequestBody ReviewDto reviewDto, HttpServletRequest request) throws Exception {
+    public ResponseEntity<ReviewDto> createReview(@RequestBody ReviewDto reviewDto, HttpServletRequest request)
+            throws MovieNotFoundInMovieDBException, CookieNotFoundException {
       return  ResponseEntity.ok(reviewService.createReviewByMovieId(reviewDto, request));
     }
 

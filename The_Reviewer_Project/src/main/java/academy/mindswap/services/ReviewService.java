@@ -55,6 +55,7 @@ public class ReviewService {
             throws MovieNotFoundInMovieDBException, CookieNotFoundException {
 
         Integer userId = cookiesService.getIdFromCookie(request);
+
         Optional<User> user = userRepository.findById(userId);
 
         Optional<Movie> movieOpt = movieRepository.findByOriginalTitle(reviewDto.getMovieName());
@@ -67,7 +68,7 @@ public class ReviewService {
         }
 
         Movie newIMDBMovie = imdbService.createMovieFromIMDB(reviewDto.getMovieName());
-        Movie newMovieDBMovie = movieDBService.createMovieFromIMDB(reviewDto.getMovieName());
+        Movie newMovieDBMovie = movieDBService.createMovieFromMovieDB(newIMDBMovie.getOriginalTitle());
 
         newIMDBMovie.setPortugueseTitle(newMovieDBMovie.getPortugueseTitle());
 
