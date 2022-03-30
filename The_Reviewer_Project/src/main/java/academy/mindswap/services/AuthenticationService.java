@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthenticationService {
 
-
     @Autowired
     private UserService userService;
 
@@ -19,7 +18,6 @@ public class AuthenticationService {
     }
 
     public void logout(){
-
     }
 
 
@@ -27,9 +25,9 @@ public class AuthenticationService {
         return userService.validate(email);
     }
 
-    @Autowired
+    /*@Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
-    }
+    }*/
 }
 

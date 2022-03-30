@@ -30,7 +30,7 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     List<Movie> findByImdbRating(@Param("IMDBRating") float IMDBRating);
 
     @Query("Select m from Movie m where m.rottenTomatoesRating >= :rottenTomatoesRating")
-    List<Movie> findByRottenTomatoesRating(@Param("IMDBRating") Integer rottenTomatoesRating);
+    List<Movie> findByRottenTomatoesRating(@Param("rottenTomatoesRating") Integer rottenTomatoesRating);
 
     @Query("Select m from Movie m where m.localRating >= :localRating")
     List<Movie> findByLocalRating(@Param("localRating") float localRating);

@@ -13,11 +13,14 @@ import academy.mindswap.persistence.repositories.exceptions.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Service
 public class UserService {
 
     private static final Logger LOGGER = LogManager.getLogger(UserService.class);
@@ -42,7 +45,7 @@ public class UserService {
 
 
     public User login(String name, String password) {
-        return userRepository.findByNameAndPassword(name, password);
+        return userRepository.findByUsernameAndPassword(name, password);
     }
 
     public User validate(String email) {
@@ -88,7 +91,7 @@ public class UserService {
     }
 
     public UserDto createUser(UserDto userDto) throws UserAlreadyExistsException {
-        if(userRepository.findByName(userDto.getUsername()).isPresent() || userRepository.findByEmail(userDto.getEmail()).isPresent()) {
+        if(userRepository.findByUsername(userDto.getUsername()).isPresent() || userRepository.findByEmail(userDto.getEmail()).isPresent()) {
             throw new UserAlreadyExistsException(userDto.getUsername());
         }
         return userconverter.toDto(userRepository.save(userconverter.toEntity(userDto)));

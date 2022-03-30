@@ -5,10 +5,12 @@ import academy.mindswap.persistence.models.Movie;
 import academy.mindswap.persistence.models.Review;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 
+@Component
 public class MovieConverter {
 
     @Autowired

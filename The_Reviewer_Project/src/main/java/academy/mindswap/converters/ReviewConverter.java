@@ -3,10 +3,9 @@ package academy.mindswap.converters;
 
 import academy.mindswap.commands.ReviewDto;
 import academy.mindswap.persistence.models.Review;
-import academy.mindswap.persistence.repositories.UserRepository;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ReviewConverter {
 
 
