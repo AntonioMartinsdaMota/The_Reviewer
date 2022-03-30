@@ -42,16 +42,22 @@ public class UserService {
     private MovieConverter movieConverter;
 
     @Autowired
-    private CookiesService cookiesService;
+    private CookieService cookieService;
 
 
-    /*public User login(String name, String password) {
+    public User login(String name, String password) {
         return userRepository.findByNameAndPassword(name, password);
     }
 
     public User validate(String email) {
-        return userRepository.findByEmail(email);
-    }*/
+        return userRepository.findByEmail(email).get();
+    }
+
+    public User findByEmailAndPassword(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password)
+                .orElseThrow(()->new UserNotFoundException());
+    }
+
 
     public Optional<UserDto> getUserById(int id) throws UserNotFoundException {
         if(id < 0) {
