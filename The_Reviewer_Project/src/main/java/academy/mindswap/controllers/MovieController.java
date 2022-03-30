@@ -25,18 +25,18 @@ public class MovieController {
      * Getters
      */
 
-    @GetMapping("/movies")
+    @GetMapping("/movies")//ALL
     public List<MovieDto> getAllMovies() {
         return movieService.getAllMovies();
     }
 
-    @GetMapping("/movie/{originalTitle}")
+    @GetMapping("/movie/{originalTitle}")//ALL
     public ResponseEntity<MovieDto> getMoviesByOriginalTitle(@PathVariable String originalTitle) {
         MovieDto movieDto = movieService.getMovieByOriginalTitle(originalTitle);
         return ResponseEntity.ok(movieDto);
     }
 
-    @GetMapping("/movies/{director}")
+    @GetMapping("/movies/{director}")//ALL
     public List<MovieDto> getMovieByDirector(String director) {
         return movieService.getMoviesFromDirector(director);
     }
@@ -46,23 +46,23 @@ public class MovieController {
         return movieService.getMovieByGender(gender);
     }*/
 
-    @GetMapping("/movie/imdb")
+    @GetMapping("/movie/imdb")//ALL
     public ResponseEntity<List<MovieDto>> getMoviesByImdb(@RequestParam(value = "rating") float rating) {
         List<MovieDto> movieDtoList = movieService.getMoviesByImdbRating(rating);
         return ResponseEntity.ok(movieDtoList);
     }
-    @GetMapping("/movie/rottenTomatoes")
+    @GetMapping("/movie/rottenTomatoes")//ALL
     public ResponseEntity<List<MovieDto>> getMoviesByRottenTomatoes(@RequestParam(value = "rating") Integer rating) {
         List<MovieDto> movieDtoList = movieService.getMoviesByRottenTomatoesRating(rating);
         return ResponseEntity.ok(movieDtoList);
     }
-    @GetMapping("/movie/localRating")
+    @GetMapping("/movie/localRating")//ALL
     public ResponseEntity<List<MovieDto>> getMoviesByLocalRating(@RequestParam(value = "rating") float rating) {
         List<MovieDto> movieDtoList = movieService.getMoviesByLocalRating(rating);
         return ResponseEntity.ok(movieDtoList);
     }
 
-    @GetMapping("/movie/{year}")
+    @GetMapping("/movie/{year}")//ALL
     public ResponseEntity<List<MovieDto>> getMoviesByYear(@RequestParam(value = "year") Integer year) {
         List<MovieDto> movieDtoList = movieService.getMoviesByYear(year);
         return ResponseEntity.ok(movieDtoList);

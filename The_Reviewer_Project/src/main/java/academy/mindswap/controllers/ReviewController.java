@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -23,18 +24,18 @@ public class ReviewController {
      * Getters
      */
 
-    @GetMapping("/reviews")
+    @GetMapping("/reviews")//admin
     public List<ReviewDto> getAllReviews() {
         return reviewService.getAllReviews();
     }
 
-    @GetMapping("/reviews/{movieId}")
+    @GetMapping("/reviews/{movieId}")//ALL
     public ResponseEntity<ReviewDto> getReviewByMovieId(@PathVariable Integer movieId) {
         ReviewDto reviewDto = reviewService.getReviewByMovieId(movieId);
         return ResponseEntity.ok(reviewDto);
     }
 
-    @GetMapping("/review/{reviewId}")
+    @GetMapping("/review/{reviewId}")//ALL
     public ResponseEntity<ReviewDto> getReviewById(@PathVariable Integer reviewId) {
         ReviewDto reviewDto = reviewService.getReviewById(reviewId);
         return ResponseEntity.ok(reviewDto);
@@ -44,10 +45,9 @@ public class ReviewController {
      * Posters
      */
 
-    @PostMapping("/review")
-    public ResponseEntity<ReviewDto> createReview(@RequestBody ReviewDto reviewDto) {
-        ReviewDto reviewDto1 = reviewService.createReviewByMovieId(reviewDto);
-      return  ResponseEntity.ok(reviewDto1);
+    @PostMapping("/review")//ALL
+    public ResponseEntity<ReviewDto> createReview(@RequestBody ReviewDto reviewDto, HttpServletRequest request) {
+      return  ResponseEntity.ok(reviewService.createReviewByMovieId(reviewDto, request));
     }
 
 
@@ -56,12 +56,12 @@ public class ReviewController {
      */
 
 
-    @DeleteMapping("/review/{reviewId}")
-    public void deleteReviewById(@PathVariable Integer reviewId) {
-         reviewService.deleteReview(reviewId);
+    @DeleteMapping("/review/{reviewId}")//ALL
+    public void deleteReviewById(@PathVariable Integer reviewId, HttpServletRequest request) {
+         reviewService.deleteReview(reviewId, request);
     }
 
-    @DeleteMapping("/reviews")
+    @DeleteMapping("/reviews")//ADMIN
     public void deleteAllReviews() {
         reviewService.deleteAllReviews();
     }

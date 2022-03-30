@@ -1,10 +1,13 @@
 package academy.mindswap.services;
 
+import academy.mindswap.commands.MovieDto;
 import academy.mindswap.commands.ReviewDto;
 import academy.mindswap.commands.UserDto;
 import academy.mindswap.converters.MovieConverter;
 import academy.mindswap.converters.ReviewConverter;
 import academy.mindswap.converters.UserConverter;
+import academy.mindswap.persistence.models.Movie;
+import academy.mindswap.persistence.models.Review;
 import academy.mindswap.persistence.models.User;
 import academy.mindswap.persistence.repositories.MovieRepository;
 import academy.mindswap.persistence.repositories.UserRepository;
@@ -12,7 +15,9 @@ import academy.mindswap.persistence.repositories.exceptions.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -35,6 +40,9 @@ public class UserService {
 
     @Autowired
     private MovieConverter movieConverter;
+
+    @Autowired
+    private CookiesService cookiesService;
 
 
     /*public User login(String name, String password) {
@@ -85,11 +93,11 @@ public class UserService {
 
     }
 
-    public UserDto updateUser(UserDto userDto) throws UserNotFoundException {
+    public UserDto updateUser(UserDto userDto, HttpServletRequest request) throws UserNotFoundException{
 
-        //Get ID from Cookie
+        Integer userId = cookiesService.getIdFromCookie(request);
 
-        Optional<User> userOpt = userRepository.findById(userDto.getId());
+        Optional<User> userOpt = userRepository.findById(userId);
 
         if (userOpt.isEmpty()) {
             throw new UserNotFoundException();

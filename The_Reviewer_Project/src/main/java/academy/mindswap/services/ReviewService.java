@@ -4,6 +4,7 @@ import academy.mindswap.commands.ReviewDto;
 import academy.mindswap.converters.ReviewConverter;
 import academy.mindswap.persistence.models.Movie;
 import academy.mindswap.persistence.models.Review;
+import academy.mindswap.persistence.models.User;
 import academy.mindswap.persistence.repositories.MovieRepository;
 import academy.mindswap.persistence.repositories.ReviewRepository;
 import academy.mindswap.persistence.repositories.UserRepository;
@@ -12,6 +13,7 @@ import academy.mindswap.persistence.repositories.exceptions.ReviewNotFoundExcept
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +38,9 @@ public class ReviewService {
     @Autowired
     private MovieDBService movieDBService;
 
+    @Autowired
+    private CookiesService cookiesService;
+
     public List<ReviewDto> getAllReviews() {
         return reviewRepository.findAll()
                 .stream()
@@ -47,11 +52,14 @@ public class ReviewService {
         reviewRepository.deleteAll();
     }
 
-    public ReviewDto createReviewByMovieId(ReviewDto reviewDto) {
+    public ReviewDto createReviewByMovieId(ReviewDto reviewDto, HttpServletRequest request) {
+
+        Integer userId = cookiesService.getIdFromCookie(request);
+        Optional<User> user = userRepository.findById(userId);
 
         Optional<Movie> movieOpt = movieRepository.findByOriginalTitle(reviewDto.getMovieName());
         Review newReview = reviewConverter.convertToEntity(reviewDto);
-        newReview.setUser(userRepository.findByUsername(reviewDto.getUserName()));
+        newReview.setUser(user.get());
 
         if(movieOpt.isPresent()) {
             newReview.setMovie(movieOpt.get());
@@ -85,7 +93,21 @@ public class ReviewService {
         return reviewConverter.convertToDto(reviewOpt.get());
     }
 
-    public void deleteReview(Integer reviewId) {
+    public void deleteReview(Integer reviewId, HttpServletRequest request)
+            throws ReviewNotFoundException, NotEnoughPermissionsExceptions {
+
+        Integer userId = cookiesService.getIdFromCookie(request);
+        Optional<User> user = userRepository.findById(userId);
+
+        Optional<Review> reviewOpt = reviewRepository.findById(reviewId);
+        if (reviewOpt.isEmpty()){
+            throw new ReviewNotFoundException();
+        }
+
+        if(!user.get().getUserId().equals(reviewOpt.get().getUser().getUserId()) /*OR ADMIN*/) {
+            throw new NotEnoughPermissionsExceptions();
+        }
+
         reviewRepository.deleteById(reviewId);
     }
 
