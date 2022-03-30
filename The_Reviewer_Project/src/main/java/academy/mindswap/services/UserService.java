@@ -49,9 +49,9 @@ public class UserService {
         return userRepository.findByEmail(email).get();
     }
 
-    public User findByEmailAndPassword(String email, String password) throws Exception{
+    public User findByEmailAndPassword(String email, String password) throws LoginRequestFailedException{
         return userRepository.findByEmailAndPassword(email, password)
-                .orElseThrow(()->new Exception());
+                .orElseThrow(()->new LoginRequestFailedException());
     }
 
 
@@ -95,7 +95,7 @@ public class UserService {
 
     }
 
-    public UserDto updateUser(UserDto userDto, HttpServletRequest request) throws UserNotFoundException{
+    public UserDto updateUser(UserDto userDto, HttpServletRequest request) throws Exception {
 
         Integer userId = cookiesService.getIdFromCookie(request);
 

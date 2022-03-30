@@ -3,6 +3,7 @@ package academy.mindswap.services;
 import academy.mindswap.commands.*;
 import academy.mindswap.converters.MovieConverter;
 import academy.mindswap.persistence.models.Movie;
+import academy.mindswap.persistence.repositories.exceptions.MovieNotFoundInMovieDBException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
@@ -37,21 +38,21 @@ public class MovieDBService {
 
 
     //@Async
-    private String findMovieDBID(String movieName) throws MovieNotFoundInMovieDB{
+    private String findMovieDBID(String movieName) throws MovieNotFoundInMovieDBException {
 
         String url = getGetIdUrl(movieName);
         MovieIDDto result = restTemplate.getForObject(url, MovieIDDto.class);
         Optional<ResultsDto> resultsDtoOpt =result.getResults().stream().findFirst();
 
         if(resultsDtoOpt.isEmpty()){
-            throw new  MovieNotFoundInMovieDB();
+            throw new  MovieNotFoundInMovieDBException();
         }
 
         return resultsDtoOpt.get().getId();
     }
 
     //@Async
-    private MovieDBTranslationDto findMovieDBTranslations(String movieName) throws MovieNotFoundException{
+    private MovieDBTranslationDto findMovieDBTranslations(String movieName) throws MovieNotFoundInMovieDBException {
 
         String movieID = findMovieDBID(movieName);
         String url = getMovieDBGetRatingsUrl(movieID);
@@ -61,7 +62,7 @@ public class MovieDBService {
         return translationDto;
     }
 
-    public Movie createMovieFromIMDB(String movieName) throws MovieNotFoundException{
+    public Movie createMovieFromIMDB(String movieName) throws MovieNotFoundInMovieDBException {
 
         MovieDBTranslationDto translationDto = findMovieDBTranslations(movieName);
 

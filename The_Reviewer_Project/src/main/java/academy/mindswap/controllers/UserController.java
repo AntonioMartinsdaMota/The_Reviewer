@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -71,8 +72,8 @@ public class UserController {
      */
 
     @PutMapping("/user/settings")//ALL - Precisa de cookie
-    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
-        UserDto user = userService.updateUser(userDto);
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto, HttpServletRequest request) throws Exception {
+        UserDto user = userService.updateUser(userDto, request);
         return ResponseEntity.ok(user);
     }
 

@@ -8,8 +8,7 @@ import academy.mindswap.persistence.models.User;
 import academy.mindswap.persistence.repositories.MovieRepository;
 import academy.mindswap.persistence.repositories.ReviewRepository;
 import academy.mindswap.persistence.repositories.UserRepository;
-import academy.mindswap.persistence.repositories.exceptions.MovieNotFoundException;
-import academy.mindswap.persistence.repositories.exceptions.ReviewNotFoundException;
+import academy.mindswap.persistence.repositories.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +51,8 @@ public class ReviewService {
         reviewRepository.deleteAll();
     }
 
-    public ReviewDto createReviewByMovieId(ReviewDto reviewDto, HttpServletRequest request) {
+    public ReviewDto createReviewByMovieId(ReviewDto reviewDto, HttpServletRequest request)
+            throws MovieNotFoundInMovieDBException, CookieNotFoundException {
 
         Integer userId = cookiesService.getIdFromCookie(request);
         Optional<User> user = userRepository.findById(userId);
@@ -94,7 +94,7 @@ public class ReviewService {
     }
 
     public void deleteReview(Integer reviewId, HttpServletRequest request)
-            throws ReviewNotFoundException, NotEnoughPermissionsExceptions {
+            throws NotEnoughPermissionsException, CookieNotFoundException {
 
         Integer userId = cookiesService.getIdFromCookie(request);
         Optional<User> user = userRepository.findById(userId);
@@ -105,7 +105,7 @@ public class ReviewService {
         }
 
         if(!user.get().getUserId().equals(reviewOpt.get().getUser().getUserId()) /*OR ADMIN*/) {
-            throw new NotEnoughPermissionsExceptions();
+            throw new NotEnoughPermissionsException();
         }
 
         reviewRepository.deleteById(reviewId);

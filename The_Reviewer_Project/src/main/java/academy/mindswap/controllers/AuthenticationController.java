@@ -25,7 +25,7 @@ public class AuthenticationController {
     private CookiesService cookiesService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest) throws Exception {
 
         User user = authService.login(loginRequest);
         if (Objects.isNull(user)) {

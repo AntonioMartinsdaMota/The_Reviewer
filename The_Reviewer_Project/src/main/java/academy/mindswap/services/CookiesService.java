@@ -1,6 +1,7 @@
 package academy.mindswap.services;
 
 import academy.mindswap.persistence.models.User;
+import academy.mindswap.persistence.repositories.exceptions.CookieNotFoundException;
 import org.springframework.http.ResponseCookie;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContext;
@@ -46,7 +47,7 @@ public class CookiesService {
     }
 
     public Integer getIdFromCookie(HttpServletRequest request)
-            throws CookieNotFoundException{
+            throws CookieNotFoundException {
         Cookie[] cookies = request.getCookies();
         Optional<Cookie> optionalCookie = Stream.of(
                         Optional.ofNullable(cookies)

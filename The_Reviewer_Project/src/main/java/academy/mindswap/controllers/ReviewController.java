@@ -46,7 +46,7 @@ public class ReviewController {
      */
 
     @PostMapping("/review")//ALL
-    public ResponseEntity<ReviewDto> createReview(@RequestBody ReviewDto reviewDto, HttpServletRequest request) {
+    public ResponseEntity<ReviewDto> createReview(@RequestBody ReviewDto reviewDto, HttpServletRequest request) throws Exception {
       return  ResponseEntity.ok(reviewService.createReviewByMovieId(reviewDto, request));
     }
 
@@ -57,7 +57,7 @@ public class ReviewController {
 
 
     @DeleteMapping("/review/{reviewId}")//ALL
-    public void deleteReviewById(@PathVariable Integer reviewId, HttpServletRequest request) {
+    public void deleteReviewById(@PathVariable Integer reviewId, HttpServletRequest request) throws Exception {
          reviewService.deleteReview(reviewId, request);
     }
 
