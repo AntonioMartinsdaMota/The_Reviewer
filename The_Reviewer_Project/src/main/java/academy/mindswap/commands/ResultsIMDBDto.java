@@ -3,7 +3,7 @@ package academy.mindswap.commands;
 import lombok.Data;
 
 @Data
-public class ResultsDto {
+public class ResultsIMDBDto {
 
     private String id;
 }

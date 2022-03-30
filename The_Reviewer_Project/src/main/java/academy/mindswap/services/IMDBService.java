@@ -1,9 +1,6 @@
 package academy.mindswap.services;
 
-import academy.mindswap.commands.MovieFullCastDto;
-import academy.mindswap.commands.MovieIDDto;
-import academy.mindswap.commands.MovieRatingDto;
-import academy.mindswap.commands.ResultsDto;
+import academy.mindswap.commands.*;
 import academy.mindswap.converters.MovieConverter;
 import academy.mindswap.persistence.models.Movie;
 import academy.mindswap.persistence.repositories.exceptions.MovieNotFoundException;
@@ -45,14 +42,14 @@ public class IMDBService {
     private String findIMDBID(String movieName) throws MovieNotFoundException {
 
         String url = getGetIdUrl(movieName);
-        MovieIDDto result = restTemplate.getForObject(url, MovieIDDto.class);
-        Optional<ResultsDto> resultsDtoOpt =result.getResults().stream().findFirst();
+        MovieIMDBIDDto result = restTemplate.getForObject(url, MovieIMDBIDDto.class);
+        Optional<ResultsIMDBDto> resultsDtoOpt =result.getResults().stream().findFirst();
 
         if(resultsDtoOpt.isEmpty()){
             throw new MovieNotFoundException();
         }
 
-        return resultsDtoOpt.get().getId();
+        return resultsDtoOpt.get().getId().toString();
     }
 
     //@Async

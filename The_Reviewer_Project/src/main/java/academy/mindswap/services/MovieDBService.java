@@ -32,17 +32,17 @@ public class MovieDBService {
         String movieNameNewFormat = movieName.replaceAll(" ", "%20");
         return String.format(MOVIEDB_GETID_URL, movieNameNewFormat);
     }
-    public String getMovieDBGetRatingsUrl(String movieId) {
+    public String getMovieDBGetTranslationsUrl(String movieId) {
         return String.format(MOVIEDB_GET_TRANSLATIONS_URL, movieId);
     }
 
 
     //@Async
-    private String findMovieDBID(String movieName) throws MovieNotFoundInMovieDBException {
+    private Integer findMovieDBID(String movieName) throws MovieNotFoundInMovieDBException {
 
         String url = getGetIdUrl(movieName);
-        MovieIDDto result = restTemplate.getForObject(url, MovieIDDto.class);
-        Optional<ResultsDto> resultsDtoOpt =result.getResults().stream().findFirst();
+        MovieMovieDBIDDto result = restTemplate.getForObject(url, MovieMovieDBIDDto.class);
+        Optional<ResultsMovieDBDto> resultsDtoOpt =result.getResults().stream().findFirst();
 
         if(resultsDtoOpt.isEmpty()){
             throw new  MovieNotFoundInMovieDBException();
@@ -54,8 +54,8 @@ public class MovieDBService {
     //@Async
     private MovieDBTranslationDto findMovieDBTranslations(String movieName) throws MovieNotFoundInMovieDBException {
 
-        String movieID = findMovieDBID(movieName);
-        String url = getMovieDBGetRatingsUrl(movieID);
+        Integer movieID = findMovieDBID(movieName);
+        String url = getMovieDBGetTranslationsUrl(String.valueOf(movieID));
 
         MovieDBTranslationDto translationDto = restTemplate.getForObject(url, MovieDBTranslationDto.class);
 
