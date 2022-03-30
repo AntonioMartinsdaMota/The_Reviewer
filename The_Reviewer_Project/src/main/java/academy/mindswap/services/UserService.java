@@ -71,7 +71,7 @@ public class UserService {
 
 
 
-    public List<ReviewDto> getReviewsByUserId(int id throws UsernameNotFoundException{
+    public List<ReviewDto> getReviewsByUserId(int id) throws UserNotFoundException{
         if(id < 0) {
             LOGGER.log(Level.WARN, "Unknown user: " + id);
             throw new InvalidUserId(Integer.toString(id));

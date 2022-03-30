@@ -6,6 +6,7 @@ import academy.mindswap.commands.MovieRatingDto;
 import academy.mindswap.commands.ResultsDto;
 import academy.mindswap.converters.MovieConverter;
 import academy.mindswap.persistence.models.Movie;
+import academy.mindswap.persistence.repositories.exceptions.MovieNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
@@ -41,7 +42,7 @@ public class IMDBService {
 
 
     //@Async
-    private String findIMDBID(String movieName) throws MovieNotFoundException{
+    private String findIMDBID(String movieName) throws MovieNotFoundException {
 
         String url = getGetIdUrl(movieName);
         MovieIDDto result = restTemplate.getForObject(url, MovieIDDto.class);

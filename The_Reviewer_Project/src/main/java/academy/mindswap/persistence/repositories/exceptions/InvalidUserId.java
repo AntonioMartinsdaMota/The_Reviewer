@@ -1,4 +1,4 @@
-package academy.mindswap.persistence.repositories;
+package academy.mindswap.persistence.repositories.exceptions;
 
 import java.util.function.IntConsumer;
 
