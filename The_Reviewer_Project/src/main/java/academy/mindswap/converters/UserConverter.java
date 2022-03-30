@@ -24,8 +24,9 @@ public class UserConverter {
         UserDto dto = new UserDto();
         dto.setId(user.getUserId());
         dto.setEmail(user.getEmail());
-        dto.setName(user.getUsername());
+        dto.setUsername(user.getUsername());
         dto.setReviews(user.getReviews());
+        dto.setPassword("************");
         return dto;
     }
 
@@ -33,8 +34,9 @@ public class UserConverter {
         User user = new User();
         user.setUserId(dto.getId());
         user.setEmail(dto.getEmail());
-        user.setUsername(dto.getName());
+        user.setUsername(dto.getUsername());
         user.setReviews(dto.getReviews());
+        user.setPassword(dto.getPassword());
         return user;
     }
 }

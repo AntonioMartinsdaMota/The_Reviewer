@@ -6,6 +6,8 @@ import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Data
@@ -19,6 +21,10 @@ public class UserDto {
     @Email(message = "Invalid email address")
     @NotBlank( message= "Email cannot be empty")
     private String email;
+
+    @NotNull
+    @Size(min = 7)
+    private String password;
 
     private Set<Review> reviews;
 
