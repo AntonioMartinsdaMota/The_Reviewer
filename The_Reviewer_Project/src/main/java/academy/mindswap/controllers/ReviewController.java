@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -30,7 +31,7 @@ public class ReviewController {
     }
 
     @GetMapping("/reviews/{movieId}")//ALL
-    public ResponseEntity<ReviewDto> getReviewByMovieId(@PathVariable Integer movieId) {
+    public ResponseEntity<ReviewDto> getReviewsByMovieId(@PathVariable Integer movieId) {
         ReviewDto reviewDto = reviewService.getReviewByMovieId(movieId);
         return ResponseEntity.ok(reviewDto);
     }
@@ -46,7 +47,7 @@ public class ReviewController {
      */
 
     @PostMapping("/review")//ALL
-    public ResponseEntity<ReviewDto> createReview(@RequestBody ReviewDto reviewDto, HttpServletRequest request) {
+    public ResponseEntity<ReviewDto> createReview(@Valid @RequestBody ReviewDto reviewDto, HttpServletRequest request) {
       return  ResponseEntity.ok(reviewService.createReviewByMovieId(reviewDto, request));
     }
 

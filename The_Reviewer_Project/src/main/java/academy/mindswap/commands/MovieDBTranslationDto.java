@@ -7,6 +7,6 @@ import java.util.List;
 
 @Data
 public class MovieDBTranslationDto {
-    @NotBlank
+
     private List<TranslationsDto> translations;
 }

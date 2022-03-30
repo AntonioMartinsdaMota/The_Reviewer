@@ -22,8 +22,6 @@ public class UserDto {
     @NotBlank( message= "Email cannot be empty")
     private String email;
 
-    @NotNull
-    @Size(min = 7)
     private String password;
 
     private Set<Review> reviews;

@@ -9,6 +9,5 @@ import java.util.List;
 @Data
 public class MovieIMDBIDDto {
 
-    @NotBlank( message= "Persons cannot be empty")
     private List<ResultsIMDBDto> results;
 }

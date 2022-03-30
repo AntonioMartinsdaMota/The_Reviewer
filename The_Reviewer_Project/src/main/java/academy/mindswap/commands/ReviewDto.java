@@ -9,7 +9,6 @@ import javax.validation.constraints.*;
 public class ReviewDto {
     private Integer reviewId;
 
-    @NotBlank( message= "Username cannot be empty")
     private String userName;
 
     @NotBlank( message= "Movie Name cannot be empty")

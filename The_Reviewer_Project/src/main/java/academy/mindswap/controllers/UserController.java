@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -56,7 +57,7 @@ public class UserController {
      */
 
     @PostMapping("/user")//NOT AUTH
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
         UserDto user = userService.createUser(userDto);
         return ResponseEntity.ok(user);
     }
@@ -72,7 +73,7 @@ public class UserController {
      */
 
     @PutMapping("/user/settings")//ALL - Precisa de cookie
-    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto, HttpServletRequest request){
+    public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UserDto userDto, HttpServletRequest request){
         UserDto user = userService.updateUser(userDto, request);
         return ResponseEntity.ok(user);
     }

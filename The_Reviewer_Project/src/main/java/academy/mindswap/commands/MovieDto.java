@@ -12,13 +12,10 @@ public class MovieDto {
    /* @NotBlank( message= "ImdbID cannot be empty")
     private String imDbId;*/
 
-    @NotBlank( message= "Title cannot be empty")
     private String originalTitle;
 
-    @NotBlank( message= "Portuguese Title cannot be empty")
     private String portugueseTitle;
 
-    @NotBlank( message= "Year cannot be empty")
     private Integer year;
 
     private String type;
@@ -29,9 +26,7 @@ public class MovieDto {
 
     private float localRating;
 
-    @NotBlank( message= "Director cannot be empty")
     private String directors;
 
-    @NotBlank( message= "Cast cannot be empty")
     private String cast;
 }

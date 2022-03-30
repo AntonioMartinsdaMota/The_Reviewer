@@ -7,6 +7,6 @@ import java.util.List;
 
 @Data
 public class MovieDBDto {
-    @NotBlank
+
     private List<MovieDBMovieDto> movies;
 }
