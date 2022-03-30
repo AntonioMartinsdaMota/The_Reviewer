@@ -100,7 +100,7 @@ public class UserService {
         Optional<User> userOpt = userRepository.findById(userId);
 
         if (userOpt.isEmpty()) {
-            throw new UserNotFoundException();
+            throw new UserNotFoundException(String.valueOf(userId));
         }
 
         User user = userOpt.get();
