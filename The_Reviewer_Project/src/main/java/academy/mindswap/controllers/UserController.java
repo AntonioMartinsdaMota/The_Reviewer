@@ -72,7 +72,7 @@ public class UserController {
      */
 
     @PutMapping("/user/settings")//ALL - Precisa de cookie
-    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto, HttpServletRequest request) throws Exception {
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto, HttpServletRequest request){
         UserDto user = userService.updateUser(userDto, request);
         return ResponseEntity.ok(user);
     }

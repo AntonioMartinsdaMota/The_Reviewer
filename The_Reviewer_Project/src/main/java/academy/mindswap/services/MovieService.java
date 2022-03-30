@@ -38,7 +38,7 @@ public class MovieService  {
                 .collect(Collectors.toList());
     }
 
-    public MovieDto getMovieByOriginalTitle(String originalTitle) throws MovieNotFoundException {
+    public MovieDto getMovieByOriginalTitle(String originalTitle){
         Optional<Movie> movieOpt = movieRepository.findByOriginalTitle(originalTitle);
         if (movieOpt.isEmpty()){
             throw new MovieNotFoundException();
@@ -47,7 +47,7 @@ public class MovieService  {
 
     }
 
-    public List <MovieDto> getMoviesFromDirector(String director) throws DirectorNotFoundException {
+    public List <MovieDto> getMoviesFromDirector(String director){
         List<Movie> movies = movieRepository.findByDirectorsContaining(director);
         if (movies.isEmpty()) {
            throw new DirectorNotFoundException();
@@ -62,7 +62,7 @@ public class MovieService  {
                 .collect(Collectors.toList());
     }*/
 
-    public List<MovieDto> getMoviesByImdbRating(float rating) throws RatingOutOfRangeException {
+    public List<MovieDto> getMoviesByImdbRating(float rating){
         if (rating < 0 || rating > 10) {
             throw new RatingOutOfRangeException();
         }
@@ -70,7 +70,7 @@ public class MovieService  {
 
     }
 
-    public List<MovieDto> getMoviesByRottenTomatoesRating(Integer rating) throws RatingOutOfRangeException {
+    public List<MovieDto> getMoviesByRottenTomatoesRating(Integer rating){
         if (rating < 0 || rating > 100) {
             throw new RatingOutOfRangeException();
         }
@@ -78,7 +78,7 @@ public class MovieService  {
 
     }
 
-    public List<MovieDto> getMoviesByLocalRating(float rating) throws RatingOutOfRangeException {
+    public List<MovieDto> getMoviesByLocalRating(float rating){
         if (rating < 1 || rating > 5) {
             throw new RatingOutOfRangeException();
         }
@@ -86,7 +86,7 @@ public class MovieService  {
 
     }
 
-    public List<MovieDto> getMoviesByYear(Integer year) throws YearOutOfRangeException {
+    public List<MovieDto> getMoviesByYear(Integer year){
         if (year < 1900 || year > LocalDate.now().getYear()) {
             throw new YearOutOfRangeException();
         }

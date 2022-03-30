@@ -39,7 +39,7 @@ public class IMDBService {
 
 
     //@Async
-    private String findIMDBID(String movieName) throws MovieNotFoundException {
+    private String findIMDBID(String movieName) {
 
         String url = getGetIdUrl(movieName);
         MovieIMDBIDDto result = restTemplate.getForObject(url, MovieIMDBIDDto.class);
@@ -53,7 +53,7 @@ public class IMDBService {
     }
 
     //@Async
-    private MovieRatingDto findIMDBRatings(String movieName) throws MovieNotFoundException{
+    private MovieRatingDto findIMDBRatings(String movieName){
 
         String movieID = findIMDBID(movieName);
         String url = getImdbGetRatingsUrl(movieID);
@@ -64,7 +64,7 @@ public class IMDBService {
     }
 
     //@Async
-   private MovieFullCastDto findIMDBFullCast(String movieName) throws MovieNotFoundException{
+   private MovieFullCastDto findIMDBFullCast(String movieName){
 
         String movieID = findIMDBID(movieName);
         String url = getImdbGetFullCastUrl(movieID);
@@ -74,7 +74,7 @@ public class IMDBService {
         return fullCastDto;
     }
 
-    public Movie createMovieFromIMDB(String movieName) throws MovieNotFoundException{
+    public Movie createMovieFromIMDB(String movieName){
 
         MovieRatingDto movieRatingDto = findIMDBRatings(movieName);
         MovieFullCastDto movieFullCastDto = findIMDBFullCast(movieName);

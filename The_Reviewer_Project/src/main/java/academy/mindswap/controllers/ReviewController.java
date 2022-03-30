@@ -46,8 +46,7 @@ public class ReviewController {
      */
 
     @PostMapping("/review")//ALL
-    public ResponseEntity<ReviewDto> createReview(@RequestBody ReviewDto reviewDto, HttpServletRequest request)
-            throws MovieNotFoundInMovieDBException, CookieNotFoundException {
+    public ResponseEntity<ReviewDto> createReview(@RequestBody ReviewDto reviewDto, HttpServletRequest request) {
       return  ResponseEntity.ok(reviewService.createReviewByMovieId(reviewDto, request));
     }
 
@@ -58,7 +57,7 @@ public class ReviewController {
 
 
     @DeleteMapping("/review/{reviewId}")//ALL
-    public void deleteReviewById(@PathVariable Integer reviewId, HttpServletRequest request) throws Exception {
+    public void deleteReviewById(@PathVariable Integer reviewId, HttpServletRequest request){
          reviewService.deleteReview(reviewId, request);
     }
 

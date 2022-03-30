@@ -12,7 +12,7 @@ public class AuthenticationService {
     @Autowired
     private UserService userService;
 
-    public User login(LoginRequest loginRequest) throws LoginRequestFailedException {
+    public User login(LoginRequest loginRequest){
         return userService.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword());
     }
 

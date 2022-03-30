@@ -9,10 +9,9 @@ import academy.mindswap.converters.UserConverter;
 import academy.mindswap.persistence.models.User;
 import academy.mindswap.persistence.repositories.MovieRepository;
 import academy.mindswap.persistence.repositories.UserRepository;
-import academy.mindswap.exceptions.badRequestExceptions.InvalidUserIdException;
-import academy.mindswap.exceptions.notFoundExceptions.UserNotFoundException;
-import academy.mindswap.exceptions.otherExceptions.LoginRequestFailedException;
-import academy.mindswap.exceptions.otherExceptions.UserAlreadyExistsException;
+import academy.mindswap.exceptions.badRequestExceptions.*;
+import academy.mindswap.exceptions.notFoundExceptions.*;
+import academy.mindswap.exceptions.otherExceptions.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,13 +54,13 @@ public class UserService {
         return userRepository.findByEmail(email).get();
     }
 
-    public User findByEmailAndPassword(String email, String password) throws LoginRequestFailedException {
+    public User findByEmailAndPassword(String email, String password){
         return userRepository.findByEmailAndPassword(email, password)
                 .orElseThrow(()->new LoginRequestFailedException());
     }
 
 
-    public Optional<UserDto> getUserById(int id) throws UserNotFoundException {
+    public Optional<UserDto> getUserById(int id) {
         if(id < 0) {
             //LOGGER.log(Level.WARN, "Unknown user: " + id);
             throw new InvalidUserIdException(Integer.toString(id));
@@ -80,7 +79,7 @@ public class UserService {
 
 
 
-    public List<ReviewDto> getReviewsByUserId(int id) throws UserNotFoundException{
+    public List<ReviewDto> getReviewsByUserId(int id){
         if(id < 0) {
             //LOGGER.log(Level.WARN, "Unknown user: " + id);
             throw new InvalidUserIdException(Integer.toString(id));
@@ -93,7 +92,7 @@ public class UserService {
         return userOpt.get().getReviews().stream().map(r -> reviewConverter.convertToDto(r)).collect(Collectors.toList());
     }
 
-    public UserDto createUser(UserDto userDto) throws UserAlreadyExistsException {
+    public UserDto createUser(UserDto userDto){
         if(userRepository.findByUsername(userDto.getUsername()).isPresent() || userRepository.findByEmail(userDto.getEmail()).isPresent()) {
             throw new UserAlreadyExistsException();
         }
@@ -101,7 +100,7 @@ public class UserService {
 
     }
 
-    public UserDto updateUser(UserDto userDto, HttpServletRequest request) throws Exception {
+    public UserDto updateUser(UserDto userDto, HttpServletRequest request) {
 
         Integer userId = cookiesService.getIdFromCookie(request);
 

@@ -80,7 +80,7 @@ public class ReviewService {
     }
 
 
-    public ReviewDto getReviewByMovieId(Integer movieId) throws MovieNotFoundException {
+    public ReviewDto getReviewByMovieId(Integer movieId){
         Optional<Movie> movieOpt = movieRepository.findById(movieId);
         if (movieOpt.isEmpty()){
             throw new MovieNotFoundException();
@@ -88,7 +88,7 @@ public class ReviewService {
         return reviewConverter.convertToDto(reviewRepository.findByMovie(movieOpt.get()));
     }
 
-    public ReviewDto getReviewById(Integer reviewId) throws ReviewNotFoundException {
+    public ReviewDto getReviewById(Integer reviewId){
 
         Optional<Review> reviewOpt = reviewRepository.findById(reviewId);
         if (reviewOpt.isEmpty()){
@@ -97,8 +97,7 @@ public class ReviewService {
         return reviewConverter.convertToDto(reviewOpt.get());
     }
 
-    public void deleteReview(Integer reviewId, HttpServletRequest request)
-            throws NotEnoughPermissionsException, CookieNotFoundException {
+    public void deleteReview(Integer reviewId, HttpServletRequest request){
 
         Integer userId = cookiesService.getIdFromCookie(request);
         Optional<User> user = userRepository.findById(userId);
