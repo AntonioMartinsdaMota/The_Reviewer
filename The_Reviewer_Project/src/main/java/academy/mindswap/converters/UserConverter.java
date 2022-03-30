@@ -32,7 +32,6 @@ public class UserConverter {
 
     public User toEntity(UserDto dto) {
         User user = new User();
-        user.setUserId(dto.getId());
         user.setEmail(dto.getEmail());
         user.setUsername(dto.getUsername());
         user.setReviews(dto.getReviews());

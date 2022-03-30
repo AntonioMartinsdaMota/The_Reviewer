@@ -18,6 +18,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -40,6 +41,9 @@ public class UserService {
 
     @Autowired
     private MovieConverter movieConverter;
+
+    @Autowired
+    private CookiesService cookiesService;
 
 
     /*public User login(String name, String password) {
@@ -90,9 +94,9 @@ public class UserService {
 
     }
 
-    public UserDto updateUser(UserDto userDto) throws UserNotFoundException{
+    public UserDto updateUser(UserDto userDto, HttpServletRequest request) throws UserNotFoundException{
 
-        //Get ID from Cookie
+        Integer userId = cookiesService.getIdFromCookie(request);
 
         Optional<User> userOpt = userRepository.findById(userId);
 

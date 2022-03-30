@@ -25,19 +25,19 @@ public class UserController {
      * Getters
      */
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/user/{id}")//ALL
     public ResponseEntity<UserDto> getUserById(@PathVariable Integer id) {
         UserDto userDto = userService.getUserById(id).get();
         return ResponseEntity.ok(userDto);
     }
 
-    @GetMapping("/allUsers")
+    @GetMapping("/allUsers")//ALL
     public  ResponseEntity<List<UserDto>> getUsers() {
         List<UserDto> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
-    @GetMapping("/user/{id}/reviews")
+    @GetMapping("/user/{id}/reviews")//ALL
     public ResponseEntity<List<ReviewDto>> getUserReviews(@PathVariable Integer id) {
         List<ReviewDto> reviews = userService.getReviewsByUserId(id);
         return ResponseEntity.ok(reviews);
@@ -54,7 +54,7 @@ public class UserController {
      * Posters
      */
 
-    @PostMapping("/user")
+    @PostMapping("/user")//NOT AUTH
     public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
         UserDto user = userService.createUser(userDto);
         return ResponseEntity.ok(user);
@@ -70,7 +70,7 @@ public class UserController {
      * Updaters
      */
 
-    @PutMapping("/user/settings")
+    @PutMapping("/user/settings")//ALL - Precisa de cookie
     public ResponseEntity<UserDto> updateUser(@RequestBody UserDto userDto) {
         UserDto user = userService.updateUser(userDto);
         return ResponseEntity.ok(user);
@@ -85,7 +85,7 @@ public class UserController {
      * Deleters
      */
 
-    @DeleteMapping("/user/{id}")
+    @DeleteMapping("/user/{id}")//ADMIN
     public ResponseEntity<?> deleteUserById(@PathVariable Integer id) {
        userService.deleteUserByUserId(id);
        return ResponseEntity.ok().build();
@@ -101,7 +101,7 @@ public class UserController {
         return userService.deleteUserByEmail(email);
     }*/
 
-    @DeleteMapping("/users")
+    @DeleteMapping("/users")//OWNER
     public ResponseEntity<?> deleteAllUsers() {
         userService.deleteAllUsers();
         return ResponseEntity.ok().build();
