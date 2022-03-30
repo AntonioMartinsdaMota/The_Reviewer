@@ -2,13 +2,13 @@ package academy.mindswap.persistence.repositories.exceptions;
 
 import java.util.function.IntConsumer;
 
-public class InvalidUserId extends RuntimeException{
+public class InvalidUserIdException extends RuntimeException{
 
     IntConsumer consumer = (int i) -> {
-        throw new InvalidUserId("");
+        throw new InvalidUserIdException("");
     };
 
-    public InvalidUserId(String id) {
+    public InvalidUserIdException(String id) {
         super(String.format(ErrorMessages.INVALID_USER, id));
     }
 }

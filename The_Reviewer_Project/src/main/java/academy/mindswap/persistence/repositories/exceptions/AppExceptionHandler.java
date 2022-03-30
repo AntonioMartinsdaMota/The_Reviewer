@@ -21,7 +21,7 @@ public class AppExceptionHandler {
     }
 
 
-    @ExceptionHandler(value = {InvalidUserId.class})
+    @ExceptionHandler(value = {InvalidUserIdException.class})
     public ResponseEntity<Error>dealWithNegativeId(Exception e, HttpServletRequest request){
         return ResponseEntity
                 .status(BAD_REQUEST)

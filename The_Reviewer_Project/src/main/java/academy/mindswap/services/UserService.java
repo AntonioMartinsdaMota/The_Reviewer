@@ -1,24 +1,17 @@
 package academy.mindswap.services;
 
-import academy.mindswap.commands.MovieDto;
 import academy.mindswap.commands.ReviewDto;
 import academy.mindswap.commands.UserDto;
 import academy.mindswap.converters.MovieConverter;
 import academy.mindswap.converters.ReviewConverter;
 import academy.mindswap.converters.UserConverter;
-import academy.mindswap.persistence.models.Movie;
-import academy.mindswap.persistence.models.Review;
 import academy.mindswap.persistence.models.User;
 import academy.mindswap.persistence.repositories.MovieRepository;
 import academy.mindswap.persistence.repositories.UserRepository;
-
-import academy.mindswap.persistence.repositories.exceptions.UserAlreadyExistsException;
-import academy.mindswap.persistence.repositories.exceptions.UserNotFoundException;
-import org.apache.logging.log4j.Level;
+import academy.mindswap.persistence.repositories.exceptions.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -55,7 +48,7 @@ public class UserService {
     public Optional<UserDto> getUserById(int id) throws UserNotFoundException {
         if(id < 0) {
             //LOGGER.log(Level.WARN, "Unknown user: " + id);
-            throw new InvalidUserId(Integer.toString(id));
+            throw new InvalidUserIdException(Integer.toString(id));
         }
         Optional<User> user = userRepository.findById(id);
 
@@ -71,15 +64,15 @@ public class UserService {
 
 
 
-    public List<ReviewDto> getReviewsByUserId(int id throws UsernameNotFoundException{
+    public List<ReviewDto> getReviewsByUserId(int id) throws UserNotFoundException{
         if(id < 0) {
             //LOGGER.log(Level.WARN, "Unknown user: " + id);
-            throw new InvalidUserId(Integer.toString(id));
+            throw new InvalidUserIdException(Integer.toString(id));
         }
         Optional<User> userOpt = userRepository.findById(id);
 
         if (userOpt.isEmpty()) {
-            throw new UserNotFoundException(id);
+            throw new UserNotFoundException(String.valueOf(id));
         }
         return userOpt.get().getReviews().stream().map(r -> reviewConverter.convertToDto(r)).collect(Collectors.toList());
     }
