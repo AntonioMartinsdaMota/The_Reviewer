@@ -12,6 +12,8 @@ import academy.mindswap.persistence.models.User;
 import academy.mindswap.persistence.repositories.MovieRepository;
 import academy.mindswap.persistence.repositories.UserRepository;
 import academy.mindswap.persistence.repositories.exceptions.InvalidUserId;
+import academy.mindswap.persistence.repositories.exceptions.UserAlreadyExistsException;
+import academy.mindswap.persistence.repositories.exceptions.UserNotFoundException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -82,7 +84,7 @@ public class UserService {
         return userOpt.get().getReviews().stream().map(r -> reviewConverter.convertToDto(r)).collect(Collectors.toList());
     }
 
-    public UserDto createUser(UserDto userDto) throws UserAlreadyExistsException{
+    public UserDto createUser(UserDto userDto) throws UserAlreadyExistsException {
         if(userRepository.findByName(userDto.getUsername()).isPresent() || userRepository.findByEmail(userDto.getEmail()).isPresent()) {
             throw new UserAlreadyExistsException(userDto.getUsername());
         }
@@ -90,7 +92,7 @@ public class UserService {
 
     }
 
-    public UserDto updateUser(UserDto userDto) throws UserNotFoundException{
+    public UserDto updateUser(UserDto userDto) throws UserNotFoundException {
 
         //Get ID from Cookie
 
