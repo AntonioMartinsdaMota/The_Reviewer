@@ -56,7 +56,7 @@ public class UserController {
      * Posters
      */
 
-    @PostMapping("/user")//NOT AUTH
+    @PostMapping("/user/create")//NOT AUTH
     public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userDto) {
         UserDto user = userService.createUser(userDto);
         return ResponseEntity.ok(user);

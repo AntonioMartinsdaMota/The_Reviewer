@@ -96,6 +96,9 @@ public class UserService {
         if(userRepository.findByUsername(userDto.getUsername()).isPresent() || userRepository.findByEmail(userDto.getEmail()).isPresent()) {
             throw new UserAlreadyExistsException();
         }
+        if(userDto.getPassword().length() < 7){
+            throw new InvalidPasswordException();
+        }
         return userconverter.toDto(userRepository.save(userconverter.toEntity(userDto)));
 
     }

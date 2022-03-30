@@ -1,5 +1,6 @@
 package academy.mindswap.exceptions;
 
+import academy.mindswap.exceptions.badRequestExceptions.InvalidPasswordException;
 import academy.mindswap.exceptions.badRequestExceptions.InvalidUserIdException;
 import academy.mindswap.exceptions.badRequestExceptions.RatingOutOfRangeException;
 import academy.mindswap.exceptions.badRequestExceptions.YearOutOfRangeException;
@@ -29,7 +30,8 @@ public class AppExceptionHandler {
     }
 
 
-    @ExceptionHandler(value = {InvalidUserIdException.class, RatingOutOfRangeException.class, YearOutOfRangeException.class})
+    @ExceptionHandler(value = {InvalidUserIdException.class, RatingOutOfRangeException.class,
+            YearOutOfRangeException.class, InvalidPasswordException.class})
     public ResponseEntity<Error>dealWithBadRequest(Exception e, HttpServletRequest request){
         return ResponseEntity
                 .status(BAD_REQUEST)

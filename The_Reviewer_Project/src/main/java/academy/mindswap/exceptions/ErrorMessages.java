@@ -16,6 +16,7 @@ public final class ErrorMessages {
     public static final String COOKIE_NOT_FOUND = "Cookie not found.";
     public static final String LOGIN_FAILED = "Login failed.";
     public static final String NOT_ENOUGH_PERMISSIONS = "Not enough permissions";
+    public static final String INVALID_PASSWORD = "Invalid Password";
 
 
 

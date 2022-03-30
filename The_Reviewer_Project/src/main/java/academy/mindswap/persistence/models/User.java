@@ -20,7 +20,7 @@ public class User {
     private String username;
     @Column
     private String email;
-    @Column
+    @Column()
     private String password;
     @OneToMany (
             cascade = {CascadeType.ALL},
