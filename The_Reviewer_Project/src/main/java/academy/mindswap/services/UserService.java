@@ -54,7 +54,7 @@ public class UserService {
 
     public Optional<UserDto> getUserById(int id) throws UserNotFoundException {
         if(id < 0) {
-            LOGGER.log(Level.WARN, "Unknown user: " + id);
+            //LOGGER.log(Level.WARN, "Unknown user: " + id);
             throw new InvalidUserId(Integer.toString(id));
         }
         Optional<User> user = userRepository.findById(id);
@@ -71,9 +71,9 @@ public class UserService {
 
 
 
-    public List<ReviewDto> getReviewsByUserId(int id throws UsernameNotFoundException{
+    public List<ReviewDto> getReviewsByUserId(int id) throws UsernameNotFoundException{
         if(id < 0) {
-            LOGGER.log(Level.WARN, "Unknown user: " + id);
+            //LOGGER.log(Level.WARN, "Unknown user: " + id);
             throw new InvalidUserId(Integer.toString(id));
         }
         Optional<User> userOpt = userRepository.findById(id);

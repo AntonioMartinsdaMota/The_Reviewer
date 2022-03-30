@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Service
 public class MovieService  {
 
-    private static final Logger LOGGER = LogManager.getLogger(MovieService.class);
+    //private static final Logger LOGGER = LogManager.getLogger(MovieService.class);
 
     @Autowired
     private MovieRepository movieRepository;
