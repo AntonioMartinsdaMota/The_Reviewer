@@ -50,7 +50,7 @@ public class UserService {
         return userRepository.findByEmail(email);
     }*/
 
-    public Optional<UserDto> getUserById(int id) {
+    public Optional<UserDto> getUserById(int id) throws UserNotFoundException {
         if(id < 0) {
             LOGGER.log(Level.WARN, "Unknown user: " + id);
             throw new InvalidUserId(Integer.toString(id));
@@ -58,7 +58,7 @@ public class UserService {
         Optional<User> user = userRepository.findById(id);
 
         if (user.isEmpty()){
-            throw new UsernameNotFoundException((Integer.toString(id)));
+            throw new UserNotFoundException();
         }
         return user.map(userconverter::toDto);
     }
@@ -69,7 +69,7 @@ public class UserService {
 
 
 
-    public List<ReviewDto> getReviewsByUserId(int id){
+    public List<ReviewDto> getReviewsByUserId(int id throws UsernameNotFoundException{
         if(id < 0) {
             LOGGER.log(Level.WARN, "Unknown user: " + id);
             throw new InvalidUserId(Integer.toString(id));
@@ -77,7 +77,7 @@ public class UserService {
         Optional<User> userOpt = userRepository.findById(id);
 
         if (userOpt.isEmpty()) {
-            throw new UsernameNotFoundException("");
+            throw new UserNotFoundException();
         }
         return userOpt.get().getReviews().stream().map(r -> reviewConverter.convertToDto(r)).collect(Collectors.toList());
     }
