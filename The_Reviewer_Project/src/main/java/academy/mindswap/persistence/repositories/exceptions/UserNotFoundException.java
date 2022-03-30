@@ -1,8 +1,10 @@
 package academy.mindswap.persistence.repositories.exceptions;
 
-public class UserNotFoundException extends RuntimeException{
+import academy.mindswap.persistence.models.User;
 
-    public UserNotFoundException (String userId){
+public class UserNotFoundException extends RuntimeException {
+
+    public UserNotFoundException(User id){
         super(ErrorMessages.USER_NOT_FOUND);
     }
 
