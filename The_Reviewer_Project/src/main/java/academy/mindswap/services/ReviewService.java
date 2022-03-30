@@ -1,8 +1,6 @@
 package academy.mindswap.services;
 
-import academy.mindswap.commands.MovieFullCastDto;
 import academy.mindswap.commands.ReviewDto;
-import academy.mindswap.controllers.ReviewController;
 import academy.mindswap.converters.ReviewConverter;
 import academy.mindswap.persistence.models.Movie;
 import academy.mindswap.persistence.models.Review;
@@ -14,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 
 @Service
 public class ReviewService {
