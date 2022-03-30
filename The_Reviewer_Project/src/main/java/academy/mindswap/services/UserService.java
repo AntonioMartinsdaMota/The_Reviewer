@@ -11,7 +11,7 @@ import academy.mindswap.persistence.models.Review;
 import academy.mindswap.persistence.models.User;
 import academy.mindswap.persistence.repositories.MovieRepository;
 import academy.mindswap.persistence.repositories.UserRepository;
-import academy.mindswap.persistence.repositories.exceptions.InvalidUserId;
+
 import academy.mindswap.persistence.repositories.exceptions.UserAlreadyExistsException;
 import academy.mindswap.persistence.repositories.exceptions.UserNotFoundException;
 import org.apache.logging.log4j.Level;
@@ -60,7 +60,7 @@ public class UserService {
         Optional<User> user = userRepository.findById(id);
 
         if (user.isEmpty()){
-            throw new UserNotFoundException();
+            throw new UserNotFoundException(Integer.toString(id));
         }
         return user.map(userconverter::toDto);
     }
@@ -71,7 +71,7 @@ public class UserService {
 
 
 
-    public List<ReviewDto> getReviewsByUserId(int id) throws UsernameNotFoundException{
+    public List<ReviewDto> getReviewsByUserId(int id throws UsernameNotFoundException{
         if(id < 0) {
             //LOGGER.log(Level.WARN, "Unknown user: " + id);
             throw new InvalidUserId(Integer.toString(id));
@@ -79,7 +79,7 @@ public class UserService {
         Optional<User> userOpt = userRepository.findById(id);
 
         if (userOpt.isEmpty()) {
-            throw new UserNotFoundException();
+            throw new UserNotFoundException(id);
         }
         return userOpt.get().getReviews().stream().map(r -> reviewConverter.convertToDto(r)).collect(Collectors.toList());
     }
@@ -96,7 +96,7 @@ public class UserService {
 
         //Get ID from Cookie
 
-        Optional<User> userOpt = userRepository.findById(userId);
+        Optional<User> userOpt = userRepository.findById(userDto.getId());
 
         if (userOpt.isEmpty()) {
             throw new UserNotFoundException();

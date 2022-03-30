@@ -1,6 +1,5 @@
 package academy.mindswap.persistence.repositories.exceptions;
 
-import academy.mindswap.persistence.repositories.InvalidUserId;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -27,7 +26,7 @@ public class AppExceptionHandler {
         return ResponseEntity
                 .status(BAD_REQUEST)
                 .header(ErrorMessages.INVALID_USER)
-                .body(buildError(e, request, BAD_REQUEST.toString()))
+                .body(buildError(e, request, BAD_REQUEST.toString()));
     }
 
 

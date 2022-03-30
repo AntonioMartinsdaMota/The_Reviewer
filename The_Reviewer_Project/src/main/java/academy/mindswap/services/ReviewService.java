@@ -7,6 +7,8 @@ import academy.mindswap.persistence.models.Review;
 import academy.mindswap.persistence.repositories.MovieRepository;
 import academy.mindswap.persistence.repositories.ReviewRepository;
 import academy.mindswap.persistence.repositories.UserRepository;
+import academy.mindswap.persistence.repositories.exceptions.MovieNotFoundException;
+import academy.mindswap.persistence.repositories.exceptions.ReviewNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -66,7 +68,7 @@ public class ReviewService {
     }
 
 
-    public ReviewDto getReviewByMovieId(Integer movieId) throws MovieNotFoundException{
+    public ReviewDto getReviewByMovieId(Integer movieId) throws MovieNotFoundException {
         Optional<Movie> movieOpt = movieRepository.findById(movieId);
         if (movieOpt.isEmpty()){
             throw new MovieNotFoundException();
