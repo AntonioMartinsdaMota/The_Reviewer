@@ -20,6 +20,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.CookieStore;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -43,14 +45,23 @@ public class UserService {
     @Autowired
     private MovieConverter movieConverter;
 
+    @Autowired
+    private CookieService cookieService;
 
-    /*public User login(String name, String password) {
+
+    public User login(String name, String password) {
         return userRepository.findByNameAndPassword(name, password);
     }
 
     public User validate(String email) {
-        return userRepository.findByEmail(email);
-    }*/
+        return userRepository.findByEmail(email).get();
+    }
+
+    public User findByEmailAndPassword(String email, String password) {
+        return userRepository.findByEmailAndPassword(email, password)
+                .orElseThrow(()->new UserNotFoundException());
+    }
+
 
     public Optional<UserDto> getUserById(int id) throws UserNotFoundException {
         if(id < 0) {
@@ -71,7 +82,7 @@ public class UserService {
 
 
 
-    public List<ReviewDto> getReviewsByUserId(int id) throws UsernameNotFoundException{
+    public List<ReviewDto> getReviewsByUserId(int id) throws UsernNotFoundException{
         if(id < 0) {
             //LOGGER.log(Level.WARN, "Unknown user: " + id);
             throw new InvalidUserId(Integer.toString(id));
@@ -92,9 +103,11 @@ public class UserService {
 
     }
 
-    public UserDto updateUser(UserDto userDto) throws UserNotFoundException {
+    public UserDto updateUser(UserDto userDto, HttpServletRequest request) throws UserNotFoundException {
 
         //Get ID from Cookie
+
+        Integer userId = cookieService.getUserIdFromCookie(request);
 
         Optional<User> userOpt = userRepository.findById(userId);
 

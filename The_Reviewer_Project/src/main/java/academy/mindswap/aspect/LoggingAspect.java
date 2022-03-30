@@ -13,13 +13,13 @@ import java.util.Optional;
 @Component
 public class LoggingAspect {
 
-    @AfterReturning(value = "execution(* academy.mindswap.service.UserService.getUser(..))", returning = "result")
+    @AfterReturning(value = "execution(* academy.mindswap.controller..getUser(..))", returning = "result")
     public void logAfterReturning(JoinPoint joinPoint, Optional result) {
         if (result.isPresent()) {
             System.out.println("After returning from " + joinPoint.getSignature().getName() + " with result " + result.get());
         }
     }
-    @AfterReturning(value = "execution(* academy.mindswap.service.MovieService.getMovie(..))", returning = "result")
+    @AfterReturning(value = "execution(* academy.mindswap.services.MovieService.getMovie(..))", returning = "result")
     public void logAfterReturning(JoinPoint joinPoint, Object result) {
         System.out.println("After returning from " + joinPoint.getSignature().getName() + " with result " + result);
     }
