@@ -2,9 +2,7 @@ package academy.mindswap.controllers;
 
 
 import academy.mindswap.commands.ReviewDto;
-import academy.mindswap.persistence.models.Review;
-import academy.mindswap.persistence.repositories.exceptions.CookieNotFoundException;
-import academy.mindswap.persistence.repositories.exceptions.MovieNotFoundInMovieDBException;
+import academy.mindswap.exceptions.notFoundExceptions.CookieNotFoundException;
 import academy.mindswap.services.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,8 +2,7 @@ package academy.mindswap.services;
 
 import academy.mindswap.commands.LoginRequest;
 import academy.mindswap.persistence.models.User;
-import academy.mindswap.persistence.repositories.exceptions.LoginRequestFailedException;
-import lombok.extern.java.Log;
+import academy.mindswap.exceptions.otherExceptions.LoginRequestFailedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

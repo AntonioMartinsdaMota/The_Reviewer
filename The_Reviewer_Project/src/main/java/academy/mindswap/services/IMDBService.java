@@ -3,7 +3,7 @@ package academy.mindswap.services;
 import academy.mindswap.commands.*;
 import academy.mindswap.converters.MovieConverter;
 import academy.mindswap.persistence.models.Movie;
-import academy.mindswap.persistence.repositories.exceptions.MovieNotFoundException;
+import academy.mindswap.exceptions.notFoundExceptions.MovieNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;

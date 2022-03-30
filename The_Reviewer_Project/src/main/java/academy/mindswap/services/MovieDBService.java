@@ -3,7 +3,6 @@ package academy.mindswap.services;
 import academy.mindswap.commands.*;
 import academy.mindswap.converters.MovieConverter;
 import academy.mindswap.persistence.models.Movie;
-import academy.mindswap.persistence.repositories.exceptions.MovieNotFoundInMovieDBException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
@@ -38,23 +37,26 @@ public class MovieDBService {
 
 
     //@Async
-    private Integer findMovieDBID(String movieName) throws MovieNotFoundInMovieDBException {
+    private Integer findMovieDBID(String movieName) {
 
         String url = getGetIdUrl(movieName);
         MovieMovieDBIDDto result = restTemplate.getForObject(url, MovieMovieDBIDDto.class);
         Optional<ResultsMovieDBDto> resultsDtoOpt =result.getResults().stream().findFirst();
 
         if(resultsDtoOpt.isEmpty()){
-            throw new  MovieNotFoundInMovieDBException();
+            return 0;
         }
 
         return resultsDtoOpt.get().getId();
     }
 
     //@Async
-    private MovieDBTranslationDto findMovieDBTranslations(String movieName) throws MovieNotFoundInMovieDBException {
+    private MovieDBTranslationDto findMovieDBTranslations(String movieName) {
 
         Integer movieID = findMovieDBID(movieName);
+        if (movieID.equals(0)){
+            return null;
+        }
         String url = getMovieDBGetTranslationsUrl(String.valueOf(movieID));
 
         MovieDBTranslationDto translationDto = restTemplate.getForObject(url, MovieDBTranslationDto.class);
@@ -62,10 +64,13 @@ public class MovieDBService {
         return translationDto;
     }
 
-    public Movie createMovieFromMovieDB(String movieName) throws MovieNotFoundInMovieDBException {
+    public Movie createMovieFromMovieDB(String movieName) {
 
         MovieDBTranslationDto translationDto = findMovieDBTranslations(movieName);
 
+        if (translationDto == null){
+            return new Movie();
+        }
         Movie movie = movieConverter.createMovieDBMovie(translationDto);
 
         return movie;

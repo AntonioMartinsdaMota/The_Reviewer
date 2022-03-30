@@ -1,4 +1,4 @@
-package academy.mindswap.persistence.repositories.exceptions;
+package academy.mindswap.exceptions;
 
 public final class ErrorMessages {
 
@@ -13,6 +13,10 @@ public final class ErrorMessages {
     public static final String RATING_OUT_OF_RANGE = "The rating selected is out of range.";
     public static final String YEAR_OUT_OF_RANGE = "The year selected is out of range.";
     public static final String REVIEW_NOT_FOUND = "Can´t find any review with the id %d.";
+    public static final String COOKIE_NOT_FOUND = "Cookie not found.";
+    public static final String LOGIN_FAILED = "Login failed.";
+    public static final String NOT_ENOUGH_PERMISSIONS = "Not enough permissions";
+
 
 
 

@@ -8,7 +8,10 @@ import academy.mindswap.persistence.models.User;
 import academy.mindswap.persistence.repositories.MovieRepository;
 import academy.mindswap.persistence.repositories.ReviewRepository;
 import academy.mindswap.persistence.repositories.UserRepository;
-import academy.mindswap.persistence.repositories.exceptions.*;
+import academy.mindswap.exceptions.notFoundExceptions.CookieNotFoundException;
+import academy.mindswap.exceptions.notFoundExceptions.MovieNotFoundException;
+import academy.mindswap.exceptions.notFoundExceptions.ReviewNotFoundException;
+import academy.mindswap.exceptions.otherExceptions.NotEnoughPermissionsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,7 +55,7 @@ public class ReviewService {
     }
 
     public ReviewDto createReviewByMovieId(ReviewDto reviewDto, HttpServletRequest request)
-            throws MovieNotFoundInMovieDBException, CookieNotFoundException {
+            throws CookieNotFoundException {
 
         Integer userId = cookiesService.getIdFromCookie(request);
 

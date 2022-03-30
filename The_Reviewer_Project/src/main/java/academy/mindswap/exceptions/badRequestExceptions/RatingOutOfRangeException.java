@@ -1,4 +1,6 @@
-package academy.mindswap.persistence.repositories.exceptions;
+package academy.mindswap.exceptions.badRequestExceptions;
+
+import academy.mindswap.exceptions.ErrorMessages;
 
 public class RatingOutOfRangeException extends RuntimeException{
 

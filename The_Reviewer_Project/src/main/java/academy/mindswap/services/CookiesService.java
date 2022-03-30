@@ -1,7 +1,7 @@
 package academy.mindswap.services;
 
 import academy.mindswap.persistence.models.User;
-import academy.mindswap.persistence.repositories.exceptions.CookieNotFoundException;
+import academy.mindswap.exceptions.notFoundExceptions.CookieNotFoundException;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Service;
 import javax.servlet.http.Cookie;

@@ -9,7 +9,10 @@ import academy.mindswap.converters.UserConverter;
 import academy.mindswap.persistence.models.User;
 import academy.mindswap.persistence.repositories.MovieRepository;
 import academy.mindswap.persistence.repositories.UserRepository;
-import academy.mindswap.persistence.repositories.exceptions.*;
+import academy.mindswap.exceptions.badRequestExceptions.InvalidUserIdException;
+import academy.mindswap.exceptions.notFoundExceptions.UserNotFoundException;
+import academy.mindswap.exceptions.otherExceptions.LoginRequestFailedException;
+import academy.mindswap.exceptions.otherExceptions.UserAlreadyExistsException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +55,7 @@ public class UserService {
         return userRepository.findByEmail(email).get();
     }
 
-    public User findByEmailAndPassword(String email, String password) throws LoginRequestFailedException{
+    public User findByEmailAndPassword(String email, String password) throws LoginRequestFailedException {
         return userRepository.findByEmailAndPassword(email, password)
                 .orElseThrow(()->new LoginRequestFailedException());
     }
@@ -92,7 +95,7 @@ public class UserService {
 
     public UserDto createUser(UserDto userDto) throws UserAlreadyExistsException {
         if(userRepository.findByUsername(userDto.getUsername()).isPresent() || userRepository.findByEmail(userDto.getEmail()).isPresent()) {
-            throw new UserAlreadyExistsException(userDto.getUsername());
+            throw new UserAlreadyExistsException();
         }
         return userconverter.toDto(userRepository.save(userconverter.toEntity(userDto)));
 
