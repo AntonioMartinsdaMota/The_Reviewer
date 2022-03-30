@@ -1,17 +1,15 @@
 package academy.mindswap.services;
 
-import academy.mindswap.commands.MovieDto;
 import academy.mindswap.commands.ReviewDto;
 import academy.mindswap.commands.UserDto;
 import academy.mindswap.converters.MovieConverter;
 import academy.mindswap.converters.ReviewConverter;
 import academy.mindswap.converters.UserConverter;
-import academy.mindswap.persistence.models.Movie;
-import academy.mindswap.persistence.models.Review;
 import academy.mindswap.persistence.models.User;
 import academy.mindswap.persistence.repositories.MovieRepository;
 import academy.mindswap.persistence.repositories.UserRepository;
-import academy.mindswap.persistence.repositories.exceptions.InvalidUserId;
+import academy.mindswap.persistence.repositories.InvalidUserId;
+import academy.mindswap.persistence.repositories.exceptions.UserNotFoundException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -90,7 +88,7 @@ public class UserService {
 
     }
 
-    public UserDto updateUser(UserDto userDto) throws UserNotFoundException{
+    public UserDto updateUser(UserDto userDto) throws UserNotFoundException {
 
         //Get ID from Cookie
 
