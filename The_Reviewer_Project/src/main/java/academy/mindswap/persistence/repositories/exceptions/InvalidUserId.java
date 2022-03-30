@@ -1,4 +1,4 @@
-package academy.mindswap.persistence.repositories;
+package academy.mindswap.persistence.repositories.exceptions;
 
 import java.util.function.IntConsumer;
 
@@ -9,6 +9,6 @@ public class InvalidUserId extends RuntimeException{
     };
 
     public InvalidUserId(String id) {
-        super(String.format("This user %s can't be found around here.", id));
+        super(String.format(ErrorMessages.INVALID_USER, id));
     }
 }

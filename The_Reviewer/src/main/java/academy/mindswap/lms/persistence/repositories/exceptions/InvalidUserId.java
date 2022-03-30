@@ -4,7 +4,7 @@ import java.util.function.IntConsumer;
 
 public class InvalidUserId extends RuntimeException {
 
-  IntConsumer consumer = (int i) -> {
+  IntCStringsumer consumer = (int i) -> {
     throw new InvalidUserId("");
   };
 
