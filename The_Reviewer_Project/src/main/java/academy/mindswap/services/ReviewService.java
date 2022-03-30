@@ -31,6 +31,12 @@ public class ReviewService {
     @Autowired
     private ReviewConverter reviewConverter;
 
+    @Autowired
+    private IMDBService imdbService;
+
+    @Autowired
+    private MovieDBService movieDBService;
+
     public List<ReviewDto> getAllReviews() {
         return reviewRepository.findAll()
                 .stream()
@@ -55,7 +61,7 @@ public class ReviewService {
             return reviewConverter.convertToDto(reviewRepository.save(newReview));
         }
 
-        CompletableFuture<Movie> futureIMDBMovie = IMDBService.findMovie(reviewDto.getMovieName());
+        Movie newIMDBMovie = imdbService.createMovieFromIMDB(reviewDto.getMovieName());
         CompletableFuture<Movie> futureMovieDBMovie = MovieDBService.findMovie(reviewDto.getMovieName());
 
         Movie IMDBMovie = futureIMDBMovie.get();

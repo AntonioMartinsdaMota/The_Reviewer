@@ -8,43 +8,39 @@ import academy.mindswap.converters.MovieConverter;
 import academy.mindswap.persistence.models.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.text.RBTableBuilder;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 
 @Service
-public class IMDBService {
+public class MovieDBService {
 
-    private static final String IMDB_GETID_URL = "https://imdb-api.com/en/API/SearchMovie/k_lxas8bq6/%s";
-    private static final String IMDB_GETRATINGS_URL = "https://imdb-api.com/en/API/Ratings/k_lxas8bq6/%s";
-    private static final String IMDB_GETFULLCAST_URL = "https://imdb-api.com/en/API/FullCast/k_lxas8bq6/%s";
+    private static final String MOVIEDB_GETID_URL =
+            "https://api.themoviedb.org/3/search/movie?api_key=fdd6b150993a41798542135c559aba0a&query=%s";
+    private static final String MOVIEDB_GET_TRANSLATIONS_URL =
+            "https://api.themoviedb.org/3/movie/%s/translations?api_key=fdd6b150993a41798542135c559aba0a";
 
     private final RestTemplate restTemplate;
 
     @Autowired
     private MovieConverter movieConverter;
 
-    public IMDBService(RestTemplateBuilder restTemplateBuilder) {
+    public MovieDBService(RestTemplateBuilder restTemplateBuilder) {
         this.restTemplate = restTemplateBuilder.build();
     }
 
     public String getGetIdUrl(String movieName) {
-        return String.format(IMDB_GETID_URL, movieName);
+        movieName.replaceAll(" ", "%20");
+        return String.format(MOVIEDB_GETID_URL, movieName);
     }
-    public String getImdbGetRatingsUrl(String movieId) {
-        return String.format(IMDB_GETRATINGS_URL, movieId);
-    }
-    public String getImdbGetFullCastUrl(String movieId) {
-        return String.format(IMDB_GETFULLCAST_URL, movieId);
+    public String getMovieDBGetRatingsUrl(String movieId) {
+        return String.format(MOVIEDB_GET_TRANSLATIONS_URL, movieId);
     }
 
 
     //@Async
-    private String findIMDBID(String movieName) throws MovieNotFoundException{
+    private String findMovieDBID(String movieName) throws MovieNotFoundException{
 
         String url = getGetIdUrl(movieName);
         MovieIDDto result = restTemplate.getForObject(url, MovieIDDto.class);
@@ -69,7 +65,7 @@ public class IMDBService {
     }
 
     //@Async
-   private MovieFullCastDto findIMDBFullCast(String movieName) throws MovieNotFoundException{
+    private MovieFullCastDto findIMDBFullCast(String movieName) throws MovieNotFoundException{
 
         String movieID = findIMDBID(movieName);
         String url = getImdbGetFullCastUrl(movieID);
