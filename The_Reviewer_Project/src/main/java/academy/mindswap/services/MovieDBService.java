@@ -1,9 +1,6 @@
 package academy.mindswap.services;
 
-import academy.mindswap.commands.MovieFullCastDto;
-import academy.mindswap.commands.MovieIDDto;
-import academy.mindswap.commands.MovieRatingDto;
-import academy.mindswap.commands.ResultsDto;
+import academy.mindswap.commands.*;
 import academy.mindswap.converters.MovieConverter;
 import academy.mindswap.persistence.models.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,46 +37,35 @@ public class MovieDBService {
 
 
     //@Async
-    private String findMovieDBID(String movieName) throws MovieNotFoundException{
+    private String findMovieDBID(String movieName) throws MovieNotFoundInMovieDB{
 
         String url = getGetIdUrl(movieName);
         MovieIDDto result = restTemplate.getForObject(url, MovieIDDto.class);
         Optional<ResultsDto> resultsDtoOpt =result.getResults().stream().findFirst();
 
         if(resultsDtoOpt.isEmpty()){
-            throw new MovieNotFoundException();
+            throw new  MovieNotFoundInMovieDB();
         }
 
         return resultsDtoOpt.get().getId();
     }
 
     //@Async
-    private MovieRatingDto findIMDBRatings(String movieName) throws MovieNotFoundException{
+    private MovieDBTranslationDto findMovieDBTranslations(String movieName) throws MovieNotFoundException{
 
-        String movieID = findIMDBID(movieName);
-        String url = getImdbGetRatingsUrl(movieID);
+        String movieID = findMovieDBID(movieName);
+        String url = getMovieDBGetRatingsUrl(movieID);
 
-        MovieRatingDto ratingDto = restTemplate.getForObject(url, MovieRatingDto.class);
+        MovieDBTranslationDto translationDto = restTemplate.getForObject(url, MovieDBTranslationDto.class);
 
-        return ratingDto;
-    }
-
-    //@Async
-    private MovieFullCastDto findIMDBFullCast(String movieName) throws MovieNotFoundException{
-
-        String movieID = findIMDBID(movieName);
-        String url = getImdbGetFullCastUrl(movieID);
-
-        MovieFullCastDto fullCastDto = restTemplate.getForObject(url, MovieFullCastDto.class);
-
-        return fullCastDto;
+        return translationDto;
     }
 
     public Movie createMovieFromIMDB(String movieName) throws MovieNotFoundException{
 
-        MovieRatingDto movieRatingDto = findIMDBRatings(movieName);
-        MovieFullCastDto movieFullCastDto = findIMDBFullCast(movieName);
-        Movie movie = movieConverter.createIMDBMovie(movieFullCastDto, movieRatingDto);
+        MovieDBTranslationDto translationDto = findMovieDBTranslations(movieName);
+
+        Movie movie = movieConverter.createMovieDBMovie(translationDto);
 
         return movie;
     }

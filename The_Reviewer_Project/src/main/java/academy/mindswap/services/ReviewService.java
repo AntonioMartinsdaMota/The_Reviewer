@@ -51,24 +51,21 @@ public class ReviewService {
     public ReviewDto createReviewByMovieId(ReviewDto reviewDto) {
 
         Optional<Movie> movieOpt = movieRepository.findByOriginalTitle(reviewDto.getMovieName());
+        Review newReview = reviewConverter.convertToEntity(reviewDto);
+        newReview.setUser(userRepository.findByUsername(reviewDto.getUserName()));
 
         if(movieOpt.isPresent()) {
-            Review newReview = reviewConverter.convertToEntity(reviewDto);
-
-            newReview.setUser(userRepository.findByUsername(reviewDto.getUserName()));
             newReview.setMovie(movieOpt.get());
-
             return reviewConverter.convertToDto(reviewRepository.save(newReview));
         }
 
         Movie newIMDBMovie = imdbService.createMovieFromIMDB(reviewDto.getMovieName());
-        CompletableFuture<Movie> futureMovieDBMovie = MovieDBService.findMovie(reviewDto.getMovieName());
+        Movie newMovieDBMovie = movieDBService.createMovieFromIMDB(reviewDto.getMovieName());
 
-        Movie IMDBMovie = futureIMDBMovie.get();
-        Movie MovieDBMovie = futureMovieDBMovie.get();
+        newIMDBMovie.setPortugueseTitle(newMovieDBMovie.getPortugueseTitle());
 
-        return userGit;
-
+        newReview.setMovie(movieRepository.save(newIMDBMovie));
+        return reviewConverter.convertToDto(reviewRepository.save(newReview));
     }
 
 
