@@ -11,10 +11,10 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MariaDB103Dialect
     hibernate:
-      ddl-auto: ${HIBERNATE_DDL_AUTO:create-drop}
+      ddl-auto: ${HIBERNATE_DDL_AUTO:update}
       show-sql: true
   datasource:
-    url: ${MARIADB_URL:jdbc:mariadb://localhost:3306/lms}
+    url: ${MARIADB_URL:jdbc:mariadb://localhost:3306/reviewer}
     username: ${MARIADB_USER:root}
     password: ${MARIADB_PASSWORD:mypass}
 

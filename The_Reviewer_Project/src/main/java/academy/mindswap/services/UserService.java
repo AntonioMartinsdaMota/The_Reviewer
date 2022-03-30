@@ -1,13 +1,11 @@
 package academy.mindswap.services;
 
-import academy.mindswap.commands.MovieDto;
+
 import academy.mindswap.commands.ReviewDto;
 import academy.mindswap.commands.UserDto;
 import academy.mindswap.converters.MovieConverter;
 import academy.mindswap.converters.ReviewConverter;
 import academy.mindswap.converters.UserConverter;
-import academy.mindswap.persistence.models.Movie;
-import academy.mindswap.persistence.models.Review;
 import academy.mindswap.persistence.models.User;
 import academy.mindswap.persistence.repositories.MovieRepository;
 import academy.mindswap.persistence.repositories.UserRepository;
@@ -15,8 +13,6 @@ import academy.mindswap.persistence.repositories.exceptions.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +38,7 @@ public class UserService {
     private MovieConverter movieConverter;
 
     @Autowired
-    private CookieService cookieService;
+    private CookiesService cookiesService;
 
 
     public User login(String name, String password) {
@@ -53,9 +49,9 @@ public class UserService {
         return userRepository.findByEmail(email).get();
     }
 
-    public User findByEmailAndPassword(String email, String password) {
+    public User findByEmailAndPassword(String email, String password) throws Exception{
         return userRepository.findByEmailAndPassword(email, password)
-                .orElseThrow(()->new UserNotFoundException());
+                .orElseThrow(()->new Exception());
     }
 
 
