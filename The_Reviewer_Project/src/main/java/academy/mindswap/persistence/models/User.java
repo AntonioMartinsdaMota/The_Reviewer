@@ -30,7 +30,7 @@ public class User {
     )
     private Set<Review> reviews;
     @Column
-    private Integer securityRoleId;
+    private String securityRole;
 
     public User() {
         this.reviews = new HashSet<>();
