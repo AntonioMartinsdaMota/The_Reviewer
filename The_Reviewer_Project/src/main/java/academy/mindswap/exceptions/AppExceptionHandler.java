@@ -5,6 +5,7 @@ import academy.mindswap.exceptions.badRequestExceptions.InvalidUserIdException;
 import academy.mindswap.exceptions.badRequestExceptions.RatingOutOfRangeException;
 import academy.mindswap.exceptions.badRequestExceptions.YearOutOfRangeException;
 import academy.mindswap.exceptions.notFoundExceptions.*;
+import academy.mindswap.exceptions.otherExceptions.AlreadyLoggedInException;
 import academy.mindswap.exceptions.otherExceptions.LoginRequestFailedException;
 import academy.mindswap.exceptions.otherExceptions.NotEnoughPermissionsException;
 import academy.mindswap.exceptions.otherExceptions.UserAlreadyExistsException;
@@ -52,7 +53,7 @@ public class AppExceptionHandler {
                 .body(buildError(e, request, e.getMessage()));
     }
 
-    @ExceptionHandler(value = {UserAlreadyExistsException.class})
+    @ExceptionHandler(value = {UserAlreadyExistsException.class, AlreadyLoggedInException.class})
     public ResponseEntity<Error>dealWithUserAlreadyExists(Exception e, HttpServletRequest request){
         return ResponseEntity
                 .status(CONFLICT)

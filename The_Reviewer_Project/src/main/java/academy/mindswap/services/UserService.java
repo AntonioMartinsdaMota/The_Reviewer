@@ -55,8 +55,11 @@ public class UserService {
     }
 
     public User findByEmailAndPassword(String email, String password){
-        return userRepository.findByEmailAndPassword(email, password)
-                .orElseThrow(()->new LoginRequestFailedException());
+        Optional<User> user = userRepository.findByEmailAndPassword(email, password);
+        if(user.isEmpty()){
+            throw new LoginRequestFailedException();
+        }
+        return user.get();
     }
 
 

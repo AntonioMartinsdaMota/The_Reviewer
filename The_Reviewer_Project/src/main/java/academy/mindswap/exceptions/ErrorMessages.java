@@ -18,6 +18,7 @@ public final class ErrorMessages {
     public static final String NOT_ENOUGH_PERMISSIONS = "Not enough permissions";
     public static final String INVALID_PASSWORD = "Invalid Password";
     public static final String REVIEW_ALREADY_EXISTS = "You already made a review for this movie";
+    public static final String ALREADY_LOGGED_IN = "Already logged in.";
 
 
 

@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Objects;
 
@@ -25,9 +27,9 @@ public class AuthenticationController {
     private CookiesService cookiesService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest){
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest, HttpServletRequest request){
 
-        User user = authService.login(loginRequest);
+        User user = authService.login(loginRequest, request);
         if (Objects.isNull(user)) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }

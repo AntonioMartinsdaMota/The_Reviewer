@@ -8,6 +8,7 @@ import academy.mindswap.persistence.models.User;
 import academy.mindswap.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,13 +31,15 @@ public class UserController {
     @GetMapping("/user/{id}")//ALL
     public ResponseEntity<UserDto> getUserById(@PathVariable Integer id) {
         UserDto userDto = userService.getUserById(id).get();
-        return ResponseEntity.ok(userDto);
+        return new ResponseEntity<>(userDto, HttpStatus.CREATED);
+
     }
 
     @GetMapping("/allUsers")//ALL
-    public  ResponseEntity<List<UserDto>> getUsers() {
+    public  ResponseEntity<String> getUsers() {
         List<UserDto> users = userService.getAllUsers();
-        return ResponseEntity.ok(users);
+        return new ResponseEntity<>(users.toString(), HttpStatus.ACCEPTED);
+
     }
 
     @GetMapping("/user/{id}/reviews")//ALL

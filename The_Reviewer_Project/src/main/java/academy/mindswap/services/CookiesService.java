@@ -38,8 +38,7 @@ public class CookiesService {
         return cookie;
     }
 
-    public Integer getIdFromCookie(HttpServletRequest request)
-            throws CookieNotFoundException {
+    public Integer getIdFromCookie(HttpServletRequest request){
         Cookie[] cookies = request.getCookies();
         Optional<Cookie> optionalCookie = Stream.of(
                         Optional.ofNullable(cookies)
@@ -54,4 +53,17 @@ public class CookiesService {
 
         return Integer.parseInt( optionalCookie.get().getValue());
     }
+
+    public Optional<Cookie> getReviewerCookie(HttpServletRequest request) {
+        Cookie[] cookies = request.getCookies();
+       return Stream.of(
+                        Optional.ofNullable(cookies)
+                                .orElse(new Cookie[0])
+                )
+                .filter(cookie -> cookie.getName().equals(AUTH_COOKIE))
+                .findFirst();
+
+
+    }
+
 }

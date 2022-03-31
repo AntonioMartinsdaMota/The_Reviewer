@@ -63,7 +63,7 @@ public class MovieController {
         return ResponseEntity.ok(movieDtoList);
     }
 
-    @GetMapping("/movie/{year}")//ALL
+    @GetMapping("/movie")//ALL
     public ResponseEntity<List<MovieDto>> getMoviesByYear(@RequestParam(value = "year") Integer year) {
         List<MovieDto> movieDtoList = movieService.getMoviesByYear(year);
         return ResponseEntity.ok(movieDtoList);
