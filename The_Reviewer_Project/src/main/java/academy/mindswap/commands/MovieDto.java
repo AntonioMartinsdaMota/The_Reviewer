@@ -28,5 +28,5 @@ public class MovieDto {
 
     private String directors;
 
-    private String cast;
+    private String actors;
 }

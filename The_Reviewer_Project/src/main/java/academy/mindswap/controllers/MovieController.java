@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.OneToMany;
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequestMapping("/api")
@@ -30,14 +31,14 @@ public class MovieController {
         return movieService.getAllMovies();
     }
 
-    @GetMapping("/movie/{originalTitle}")//ALL
+    @GetMapping("/movie/search/{originalTitle}")//ALL
     public ResponseEntity<MovieDto> getMoviesByOriginalTitle(@PathVariable String originalTitle) {
-        MovieDto movieDto = movieService.getMovieByOriginalTitle(originalTitle);
+        MovieDto movieDto = movieService.getMovieByOriginalTitle(originalTitle.toUpperCase());
         return ResponseEntity.ok(movieDto);
     }
 
-    @GetMapping("/movies/{director}")//ALL
-    public List<MovieDto> getMovieByDirector(String director) {
+    @GetMapping("/movies/search/{director}")//ALL
+    public List<MovieDto> getMovieByDirector(@PathVariable String director) {
         return movieService.getMoviesFromDirector(director);
     }
 
