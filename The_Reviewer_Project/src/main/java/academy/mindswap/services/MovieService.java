@@ -32,10 +32,16 @@ public class MovieService  {
     }
 
     public List<MovieDto> getAllMovies() {
-        return movieRepository.findAll()
+        List<MovieDto> list = movieRepository.findAll()
                 .stream()
-                .map(movieConverter::convertToDto)
+                .map(m -> movieConverter.convertToDto(m))
                 .collect(Collectors.toList());
+
+
+
+        System.out.println(list)
+        ;
+        return list;
     }
 
     public MovieDto getMovieByOriginalTitle(String originalTitle){

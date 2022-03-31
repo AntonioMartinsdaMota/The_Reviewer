@@ -56,8 +56,7 @@ public class ReviewService {
         reviewRepository.deleteAll();
     }
 
-    public ReviewDto createReviewByMovieId(ReviewDto reviewDto, HttpServletRequest request)
-            throws CookieNotFoundException {
+    public ReviewDto createReviewByMovieId(ReviewDto reviewDto, HttpServletRequest request) {
 
         Integer userId = cookiesService.getIdFromCookie(request);
 
@@ -73,20 +72,31 @@ public class ReviewService {
             }
 
             newReview.setMovie(movieOpt.get());
-            return reviewConverter.convertToDto(reviewRepository.save(newReview));
+
+        }else {
+
+            Movie newIMDBMovie = imdbService.createMovieFromIMDB(reviewDto.getMovieName());
+            Movie newMovieDBMovie = movieDBService.createMovieFromMovieDB(newIMDBMovie.getOriginalTitle());
+
+            if (newMovieDBMovie.getPortugueseTitle().equalsIgnoreCase("")) {
+                newMovieDBMovie.setPortugueseTitle(newIMDBMovie.getOriginalTitle());
+            }
+
+            newIMDBMovie.setPortugueseTitle(newMovieDBMovie.getPortugueseTitle());
+
+            newReview.setMovie(movieRepository.save(newIMDBMovie));
         }
+        reviewRepository.save(newReview);
 
-        Movie newIMDBMovie = imdbService.createMovieFromIMDB(reviewDto.getMovieName());
-        Movie newMovieDBMovie = movieDBService.createMovieFromMovieDB(newIMDBMovie.getOriginalTitle());
+        System.out.println(newReview.getUser().getUsername());
+        System.out.println(newReview.getMovie().getOriginalTitle());
+        Movie movie = newReview.getMovie();
+        float movieLocalRating = (float)movie.getReviews().stream()
+                .mapToDouble(Review::getLocalRating).average().orElse(0);
+        movie.setLocalRating(movieLocalRating);
+        movieRepository.save(movie);
 
-        if(newMovieDBMovie.getPortugueseTitle().equalsIgnoreCase("")){
-            newMovieDBMovie.setPortugueseTitle(newIMDBMovie.getOriginalTitle());
-        }
-
-        newIMDBMovie.setPortugueseTitle(newMovieDBMovie.getPortugueseTitle());
-
-        newReview.setMovie(movieRepository.save(newIMDBMovie));
-        return reviewConverter.convertToDto(reviewRepository.save(newReview));
+        return reviewConverter.convertToDto(newReview);
     }
 
 
