@@ -12,32 +12,22 @@ public class UserConverter {
     @Autowired
     private ModelMapper modelMapper;
 
-    public UserDto convertToDto(User user) {
-       return modelMapper.map(user, UserDto.class);
-    }
-
-    public User convertToEntity (UserDto userDto) {
-        return modelMapper.map(userDto, User.class);
-    }
-
     public UserDto toDto(User user) {
-        return modelMapper.map(user,UserDto.class);
-        /*UserDto dto = new UserDto();
+        UserDto dto = new UserDto();
         dto.setId(user.getUserId());
         dto.setEmail(user.getEmail());
         dto.setUsername(user.getUsername());
         dto.setReviews(user.getReviews());
         dto.setPassword("************");
-        return dto;*/
+        return dto;
     }
 
     public User toEntity(UserDto dto) {
-        return modelMapper.map(dto, User.class);
-        /*User user = new User();
+        User user = new User();
         user.setEmail(dto.getEmail());
         user.setUsername(dto.getUsername());
         user.setReviews(dto.getReviews());
         user.setPassword(dto.getPassword());
-        return user;*/
+        return user;
     }
 }
