@@ -2,16 +2,22 @@ package academy.mindswap.persistence.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name="movies")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie {
+
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

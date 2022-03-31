@@ -7,6 +7,9 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name="users")
 @JsonIgnoreProperties(ignoreUnknown = true)

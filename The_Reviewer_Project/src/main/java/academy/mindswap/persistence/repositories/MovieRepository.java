@@ -13,9 +13,9 @@ import java.util.Optional;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
-
-   /* @Query("Select m from Movie m where m.originalTitle = :originalTitle")
-    Movie findByOriginalTitle(@Param("originalTitle") String originalTitle);
+/*
+   @Query("Select m from Movie m where m.originalTitle = :originalTitle")
+    Optional<Movie> findByOriginalTitle(@Param("originalTitle") String originalTitle);
 
     @Query("Select m from Movie m where m.director = :director")
     List<Movie> findByDirector(@Param("director") String director);
