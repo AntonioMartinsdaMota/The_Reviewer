@@ -21,7 +21,7 @@ public class ReviewConverter {
     }
 
     public Review convertToEntity(ReviewDto reviewDto) {
-         Review entity = new Review();
+        Review entity = new Review();
         entity.setDescription(reviewDto.getDescription());
         entity.setLocalRating(reviewDto.getLocalRating());
         return entity;
