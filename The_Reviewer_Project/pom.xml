@@ -11,7 +11,7 @@
     <groupId>academy.mindswap</groupId>
     <artifactId>reviewer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>lms</name>
+    <name>reviewer</name>
     <description>second project for mindswap academy 2022.1</description>
     <properties>
         <java.version>17</java.version>

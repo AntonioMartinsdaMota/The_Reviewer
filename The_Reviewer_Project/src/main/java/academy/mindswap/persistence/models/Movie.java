@@ -5,7 +5,7 @@ import lombok.*;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -43,11 +43,33 @@ public class Movie {
     private Integer rottenTomatoesRating;
     @Column
     private float localRating;
+
     @OneToMany (
             cascade = {CascadeType.ALL},
             orphanRemoval = true,
-            mappedBy = "user"
+            mappedBy = "movie"
     )
+    @Column
     private Set<Review> reviews;
 
+    public Movie() {
+        this.reviews = new HashSet<>();
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "movieId=" + movieId +
+                ", imDbId='" + imDbId + '\'' +
+                ", originalTitle='" + originalTitle + '\'' +
+                ", portugueseTitle='" + portugueseTitle + '\'' +
+                ", directors='" + directors + '\'' +
+                ", actors='" + actors + '\'' +
+                ", year=" + year +
+                ", type='" + type + '\'' +
+                ", IMDBRating=" + IMDBRating +
+                ", rottenTomatoesRating=" + rottenTomatoesRating +
+                ", localRating=" + localRating +
+                '}';
+    }
 }

@@ -27,8 +27,10 @@ public class MovieController {
      */
 
     @GetMapping("/movies")//ALL
-    public List<MovieDto> getAllMovies() {
-        return movieService.getAllMovies();
+    public ResponseEntity<List<MovieDto>> getAllMovies() {
+        List<MovieDto> movies = movieService.getAllMovies();
+        System.out.println(movies);
+        return ResponseEntity.ok(movies);
     }
 
     @GetMapping("/movie/search/{originalTitle}")//ALL
