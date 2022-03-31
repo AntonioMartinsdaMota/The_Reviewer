@@ -2,6 +2,7 @@ package academy.mindswap.services;
 
 import academy.mindswap.commands.ReviewDto;
 import academy.mindswap.converters.ReviewConverter;
+import academy.mindswap.exceptions.otherExceptions.ReviewAlreadyExistsException;
 import academy.mindswap.persistence.models.Movie;
 import academy.mindswap.persistence.models.Review;
 import academy.mindswap.persistence.models.User;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -61,11 +63,15 @@ public class ReviewService {
 
         Optional<User> user = userRepository.findById(userId);
 
-        Optional<Movie> movieOpt = movieRepository.findByOriginalTitle(reviewDto.getMovieName());
+        Optional<Movie> movieOpt = movieRepository.findByOriginalTitle(reviewDto.getMovieName().toUpperCase());
         Review newReview = reviewConverter.convertToEntity(reviewDto);
         newReview.setUser(user.get());
 
         if(movieOpt.isPresent()) {
+            if(reviewRepository.findByUserAndMovie(user.get(), movieOpt.get()) != null){
+                throw new ReviewAlreadyExistsException();
+            }
+
             newReview.setMovie(movieOpt.get());
             return reviewConverter.convertToDto(reviewRepository.save(newReview));
         }

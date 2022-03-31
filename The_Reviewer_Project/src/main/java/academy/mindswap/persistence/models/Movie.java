@@ -21,7 +21,7 @@ public class Movie {
     private String imDbId;
     @Column(nullable = false, unique = true)
     private String originalTitle;
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
     private String portugueseTitle;
     @Column(nullable = false)
     private String directors;

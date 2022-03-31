@@ -8,6 +8,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 @Service
@@ -41,7 +42,8 @@ public class MovieDBService {
 
         String url = getGetIdUrl(movieName);
         MovieMovieDBIDDto result = restTemplate.getForObject(url, MovieMovieDBIDDto.class);
-        Optional<ResultsMovieDBDto> resultsDtoOpt =result.getResults().stream().findFirst();
+        Optional<ResultsMovieDBDto> resultsDtoOpt = result.getResults().stream()
+                .filter(r -> r.getOriginal_title().equalsIgnoreCase(movieName)).findFirst();
 
         if(resultsDtoOpt.isEmpty()){
             return 0;

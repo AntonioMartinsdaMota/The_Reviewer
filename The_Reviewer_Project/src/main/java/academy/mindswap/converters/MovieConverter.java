@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Component
@@ -30,7 +31,7 @@ public class MovieConverter {
         Movie movie = new Movie();
 
         movie.setImDbId(movieRatingDto.getImDbId());
-        movie.setOriginalTitle(movieRatingDto.getTitle());
+        movie.setOriginalTitle(movieRatingDto.getTitle().toUpperCase());
         movie.setDirectors(movieFullCastDto.getDirectors().getItems().stream().map(d -> d.getName()).collect(Collectors.joining(" ,")));
         movie.setActors(movieFullCastDto.getActors().stream().limit(5).map(a -> a.getName()).collect(Collectors.joining(" ,")));
         movie.setYear(movieRatingDto.getYear());

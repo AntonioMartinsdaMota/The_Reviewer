@@ -43,7 +43,8 @@ public class IMDBService {
 
         String url = getGetIdUrl(movieName);
         MovieIMDBIDDto result = restTemplate.getForObject(url, MovieIMDBIDDto.class);
-        Optional<ResultsIMDBDto> resultsDtoOpt =result.getResults().stream().findFirst();
+        Optional<ResultsIMDBDto> resultsDtoOpt =result.getResults().stream()
+                .filter(r -> r.getTitle().equalsIgnoreCase(movieName)).findFirst();
 
         if(resultsDtoOpt.isEmpty()){
             throw new MovieNotFoundException();
@@ -53,9 +54,8 @@ public class IMDBService {
     }
 
     //@Async
-    private MovieRatingDto findIMDBRatings(String movieName){
+    private MovieRatingDto findIMDBRatings(String movieID){
 
-        String movieID = findIMDBID(movieName);
         String url = getImdbGetRatingsUrl(movieID);
 
         MovieRatingDto ratingDto = restTemplate.getForObject(url, MovieRatingDto.class);
@@ -64,9 +64,8 @@ public class IMDBService {
     }
 
     //@Async
-   private MovieFullCastDto findIMDBFullCast(String movieName){
+   private MovieFullCastDto findIMDBFullCast(String movieID){
 
-        String movieID = findIMDBID(movieName);
         String url = getImdbGetFullCastUrl(movieID);
 
         MovieFullCastDto fullCastDto = restTemplate.getForObject(url, MovieFullCastDto.class);
@@ -76,8 +75,9 @@ public class IMDBService {
 
     public Movie createMovieFromIMDB(String movieName){
 
-        MovieRatingDto movieRatingDto = findIMDBRatings(movieName);
-        MovieFullCastDto movieFullCastDto = findIMDBFullCast(movieName);
+        String movieID = findIMDBID(movieName);
+        MovieRatingDto movieRatingDto = findIMDBRatings(movieID);
+        MovieFullCastDto movieFullCastDto = findIMDBFullCast(movieID);
         Movie movie = movieConverter.createIMDBMovie(movieFullCastDto, movieRatingDto);
 
         return movie;

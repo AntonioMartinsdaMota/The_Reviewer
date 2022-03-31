@@ -6,4 +6,5 @@ import lombok.Data;
 public class ResultsIMDBDto {
 
     private String id;
+    private String title;
 }
