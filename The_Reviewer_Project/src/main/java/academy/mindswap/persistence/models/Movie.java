@@ -9,15 +9,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
 @Table(name="movies")
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Movie {
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
