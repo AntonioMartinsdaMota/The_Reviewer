@@ -12,6 +12,7 @@ import academy.mindswap.persistence.repositories.UserRepository;
 import academy.mindswap.exceptions.badRequestExceptions.*;
 import academy.mindswap.exceptions.notFoundExceptions.*;
 import academy.mindswap.exceptions.otherExceptions.*;
+import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +25,15 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private static final Logger LOGGER = LogManager.getLogger(UserService.class);
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private UserConverter userconverter;
+
+    private final UserConverter userconverter;
 
     @Autowired
     private ReviewConverter reviewConverter;

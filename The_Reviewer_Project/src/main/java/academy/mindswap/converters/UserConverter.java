@@ -2,15 +2,17 @@ package academy.mindswap.converters;
 
 import academy.mindswap.commands.UserDto;
 import academy.mindswap.persistence.models.User;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class UserConverter {
 
-    @Autowired
-    private ModelMapper modelMapper;
+
+    private final ModelMapper modelMapper;
 
     public UserDto convertToDto(User user) {
        return modelMapper.map(user, UserDto.class);
@@ -26,7 +28,7 @@ public class UserConverter {
         dto.setEmail(user.getEmail());
         dto.setUsername(user.getUsername());
         dto.setReviews(user.getReviews());
-        dto.setPassword("************");
+        dto.setPassword(user.getPassword());
         return dto;
     }
 

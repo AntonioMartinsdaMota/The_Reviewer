@@ -2,8 +2,10 @@ package academy.mindswap.mockdata;
 
 
 import academy.mindswap.commands.MovieDto;
+import academy.mindswap.commands.UserDto;
 import academy.mindswap.persistence.models.Movie;
 import academy.mindswap.persistence.models.Review;
+import academy.mindswap.persistence.models.User;
 
 import java.util.HashSet;
 import java.util.List;
@@ -25,26 +27,28 @@ public class MockedData {
                 .year(2008)
                 .rottenTomatoesRating(85)
                 .imDbId("tt0468569")
-                .reviews(new HashSet<>())
+                //.reviews(new HashSet<>())
                 .build();
 
 
     }
 
-    public  static MovieDto getMockedMovieDto(Movie movie) {
+    public static MovieDto getMockedMovieDto(Movie movie) {
         return MovieDto.builder()
-                .movieID(1)
-                .actors("Tony")
-                .directors("Steven")
-                .originalTitle("KNIGHT")
-                .portugueseTitle("Trevas")
-                .IMDBRating(8)
-                .localRating(5)
-                .type("Action")
-                .year(2008)
-                .rottenTomatoesRating(85)
-                //.numberOfReviews(0)
+                .movieID(movie.getMovieId())
+                .actors(movie.getActors())
+                .directors(movie.getDirectors())
+                .originalTitle(movie.getOriginalTitle())
+                .portugueseTitle(movie.getPortugueseTitle())
+                .IMDBRating(movie.getIMDBRating())
+                .localRating(movie.getLocalRating())
+                .type(movie.getType())
+                .year(movie.getYear())
+                .rottenTomatoesRating(movie.getRottenTomatoesRating())
                 .build();
+
+        //.numberOfReviews(0)
+
     }
 
     public static List<Movie> getMockedMovies() {
@@ -91,7 +95,7 @@ public class MockedData {
                         .type("Action")
                         .year(2008)
                         .rottenTomatoesRating(85)
-                        .numberOfReviews(0)
+                        //.numberOfReviews(0)
                         .build(),
                 MovieDto.builder()
                         .movieID(2)
@@ -104,7 +108,26 @@ public class MockedData {
                         .type("Adult")
                         .year(2020)
                         .rottenTomatoesRating(90)
-                        .numberOfReviews(0).build());
+                        //.numberOfReviews(0)
+                        .build());
 
+    }
+
+    public static User getMockedUser() {
+        return User.builder()
+                .userId(1)
+                .username("user1")
+                .password("123")
+                .email("j@123.pt").build();
+        //.reviews(new HashSet<>());
+    }
+
+    public static UserDto getMockedUserDto(User user) {
+        return UserDto.builder()
+                .id(user.getUserId())
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .email(user.getEmail())
+                .build();
     }
 }

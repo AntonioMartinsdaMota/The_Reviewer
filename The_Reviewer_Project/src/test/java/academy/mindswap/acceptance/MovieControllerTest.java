@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -33,7 +35,7 @@ public class MovieControllerTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void test_getAllMovies_shouldReturn_200() {
+    public void test_getMovie_By_Title_ShouldReturn_200() {
         //Given
 
         Movie movie = MockedData.getMockedMovie();
@@ -49,11 +51,65 @@ public class MovieControllerTest {
                 MovieDto.class);
 
         //Then
-        verify(movieRepository,times(1)).findByOriginalTitle(movie.getOriginalTitle());
+        verify(movieRepository, times(1)).findByOriginalTitle(movie.getOriginalTitle());
 
         MovieDto expected = MockedData.getMockedMovieDto(movie);
         assertEquals(expected, response.getBody());
 
     }
+
+    @Test
+    public void test_getAllMovies_shouldReturn_200() {
+        //Given
+
+        List<Movie> movieList = MockedData.getMockedMovies();
+        when(movieRepository.findAll()).thenReturn(movieList);
+        String url = "/api/movies";
+
+
+        //When
+        ResponseEntity<List<MovieDto>> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                HttpEntity.EMPTY,
+                new ParameterizedTypeReference<List<MovieDto>>() {
+                });
+
+                //Then
+                verify(movieRepository, times(1)).findAll();
+
+        List<MovieDto> expected = MockedData.getMockedMoviesDto(movieList);
+        assertEquals(expected, response.getBody());
+
+    }
+
+    @Test
+    public void test_getMovies_By_Director_ShouldReturn_200() {
+        //Given
+        Movie movie = MockedData.getMockedMovie();
+        List<Movie> movieList = MockedData.getMockedMovies();
+        when(movieRepository.findByDirectorsContaining(movie.getDirectors())).thenReturn(movieList);
+        String url = "/movies/search/Steven";
+
+
+        //When
+        ResponseEntity<List<MovieDto>> response = restTemplate.exchange(
+                url,
+                HttpMethod.GET,
+                HttpEntity.EMPTY,
+                new ParameterizedTypeReference<List<MovieDto>>() {
+                });
+
+        //Then
+        verify(movieRepository, times(1)).findAll();
+
+        List<MovieDto> expected = MockedData.getMockedMoviesDto(movieList);
+        assertEquals(expected, response.getBody());
+
+    }
+
+
+
+
 
 }
