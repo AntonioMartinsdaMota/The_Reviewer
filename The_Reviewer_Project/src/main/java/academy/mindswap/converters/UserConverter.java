@@ -21,21 +21,23 @@ public class UserConverter {
     }
 
     public UserDto toDto(User user) {
-        UserDto dto = new UserDto();
+        return modelMapper.map(user,UserDto.class);
+        /*UserDto dto = new UserDto();
         dto.setId(user.getUserId());
         dto.setEmail(user.getEmail());
         dto.setUsername(user.getUsername());
         dto.setReviews(user.getReviews());
         dto.setPassword("************");
-        return dto;
+        return dto;*/
     }
 
     public User toEntity(UserDto dto) {
-        User user = new User();
+        return modelMapper.map(dto, User.class);
+        /*User user = new User();
         user.setEmail(dto.getEmail());
         user.setUsername(dto.getUsername());
         user.setReviews(dto.getReviews());
         user.setPassword(dto.getPassword());
-        return user;
+        return user;*/
     }
 }

@@ -20,7 +20,8 @@ public class MovieConverter {
     private ModelMapper modelMapper;
 
     public MovieDto convertToDto(Movie movie) {
-        MovieDto dto = new MovieDto();
+        return modelMapper.map(movie,MovieDto.class);
+        /*MovieDto dto = new MovieDto();
 
         dto.setMovieID(movie.getMovieId());
         dto.setOriginalTitle(movie.getOriginalTitle());
@@ -32,7 +33,7 @@ public class MovieConverter {
         dto.setDirectors(movie.getDirectors());
         dto.setActors(movie.getActors());
         dto.setNumberOfReviews(movie.getReviews().size());
-        return dto;
+        return dto;*/
     }
 
     public Movie convertToEntity(MovieDto movieDto) {

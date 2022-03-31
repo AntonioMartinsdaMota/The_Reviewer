@@ -1,5 +1,6 @@
 package academy.mindswap.persistence.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
@@ -20,9 +21,11 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private User user;
     @ManyToOne
     @JoinColumn(name = "movie_id")
+    @JsonIgnore
     private Movie movie;
 
     @Column(nullable = false)
@@ -36,11 +39,11 @@ public class Review {
         if (this == o) return true;
         if (!(o instanceof Review)) return false;
         Review review = (Review) o;
-        return Objects.equals(getUser(), review.getUser()) && Objects.equals(getMovie(), review.getMovie());
+        return Objects.equals(getReviewId(), review.getReviewId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUser(), getMovie());
+        return Objects.hash(getReviewId());
     }
 }
