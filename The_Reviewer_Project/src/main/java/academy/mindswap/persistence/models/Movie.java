@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -39,8 +40,11 @@ public class Movie {
     @OneToMany (
             cascade = {CascadeType.ALL},
             orphanRemoval = true,
-            mappedBy = "user"
+            mappedBy = "movie"
     )
     private Set<Review> reviews;
 
+    public Movie() {
+        this.reviews = new HashSet<>();
+    }
 }

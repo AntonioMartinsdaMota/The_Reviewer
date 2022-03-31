@@ -19,8 +19,10 @@ public class Review {
     private Integer reviewId;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
     @ManyToOne
+    @JoinColumn(name = "movie_id")
     private Movie movie;
 
     @Column(nullable = false)

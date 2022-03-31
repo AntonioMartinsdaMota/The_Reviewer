@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -31,4 +32,7 @@ public class User {
     @Column
     private Integer securityRoleId;
 
+    public User() {
+        this.reviews = new HashSet<>();
+    }
 }

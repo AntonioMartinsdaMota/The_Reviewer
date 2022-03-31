@@ -88,9 +88,8 @@ public class ReviewService {
         }
         reviewRepository.save(newReview);
 
-        System.out.println(newReview.getUser().getUsername());
-        System.out.println(newReview.getMovie().getOriginalTitle());
         Movie movie = newReview.getMovie();
+        System.out.println(movie.getReviews());
         float movieLocalRating = (float)movie.getReviews().stream()
                 .mapToDouble(Review::getLocalRating).average().orElse(0);
         movie.setLocalRating(movieLocalRating);
