@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -77,7 +78,14 @@ public class UserService {
     }
 
     public List<UserDto> getAllUsers() {
-        return userRepository.findAll().stream().map(userconverter::toDto).collect(Collectors.toList());
+
+        List<User> users = userRepository.findAll();
+        List<UserDto> usersDto = new ArrayList<>();
+
+        for (User u:users) {
+            usersDto.add(userconverter.toDto(u));
+        }
+        return usersDto;
     }
 
 

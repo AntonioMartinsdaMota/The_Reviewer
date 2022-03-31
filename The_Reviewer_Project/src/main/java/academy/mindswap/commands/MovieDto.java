@@ -29,4 +29,6 @@ public class MovieDto {
     private String directors;
 
     private String actors;
+
+    private Integer numberOfReviews;
 }
