@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -45,11 +46,18 @@ public class MovieConverter {
 
     public Movie createMovieDBMovie(MovieDBTranslationDto movieDBTranslationDto){
         Movie movie = new Movie();
+        String portugueseTitle="";
 
-        movie.setPortugueseTitle(movieDBTranslationDto.getTranslations().stream()
+        Optional<TranslationsDto> translationsDto = movieDBTranslationDto.getTranslations().stream()
                 .filter(t -> t.getIso_639_1().equalsIgnoreCase("pt"))
                 .filter(t -> t.getIso_3166_1().equalsIgnoreCase("pt"))
-                .findFirst().get().getData().stream().findFirst().get().getTitle());
+                .findFirst();
+
+        if(translationsDto.isPresent()){
+            portugueseTitle = translationsDto.get().getData().getTitle();
+        }
+
+        movie.setPortugueseTitle(portugueseTitle);
         return movie;
     }
 }

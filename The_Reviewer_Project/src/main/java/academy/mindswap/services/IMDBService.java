@@ -14,9 +14,9 @@ import java.util.Optional;
 @Service
 public class IMDBService {
 
-    private static final String IMDB_GETID_URL = "https://imdb-api.com/en/API/SearchMovie/k_lxas8bq6/%s";
-    private static final String IMDB_GETRATINGS_URL = "https://imdb-api.com/en/API/Ratings/k_lxas8bq6/%s";
-    private static final String IMDB_GETFULLCAST_URL = "https://imdb-api.com/en/API/FullCast/k_lxas8bq6/%s";
+    private static final String IMDB_GETID_URL = "https://imdb-api.com/en/API/SearchMovie/k_bp8xu9i2/%s";
+    private static final String IMDB_GETRATINGS_URL = "https://imdb-api.com/en/API/Ratings/k_bp8xu9i2/%s";
+    private static final String IMDB_GETFULLCAST_URL = "https://imdb-api.com/en/API/FullCast/k_bp8xu9i2/%s";
 
     private final RestTemplate restTemplate;
 
@@ -50,7 +50,7 @@ public class IMDBService {
             throw new MovieNotFoundException();
         }
 
-        return resultsDtoOpt.get().getId().toString();
+        return resultsDtoOpt.get().getId();
     }
 
     //@Async

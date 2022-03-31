@@ -12,5 +12,5 @@ public class TranslationsDto {
 
     private String iso_639_1;
 
-    private List<DataDto> data;
+    private DataDto data;
 }

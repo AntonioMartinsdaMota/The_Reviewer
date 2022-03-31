@@ -79,6 +79,10 @@ public class ReviewService {
         Movie newIMDBMovie = imdbService.createMovieFromIMDB(reviewDto.getMovieName());
         Movie newMovieDBMovie = movieDBService.createMovieFromMovieDB(newIMDBMovie.getOriginalTitle());
 
+        if(newMovieDBMovie.getPortugueseTitle().equalsIgnoreCase("")){
+            newMovieDBMovie.setPortugueseTitle(newIMDBMovie.getOriginalTitle());
+        }
+
         newIMDBMovie.setPortugueseTitle(newMovieDBMovie.getPortugueseTitle());
 
         newReview.setMovie(movieRepository.save(newIMDBMovie));

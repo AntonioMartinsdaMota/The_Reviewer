@@ -57,7 +57,7 @@ public class MovieDBService {
 
         Integer movieID = findMovieDBID(movieName);
         if (movieID.equals(0)){
-            return null;
+            movieID=597;
         }
         String url = getMovieDBGetTranslationsUrl(String.valueOf(movieID));
 
