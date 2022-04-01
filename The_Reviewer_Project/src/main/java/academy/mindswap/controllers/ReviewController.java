@@ -14,7 +14,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/review")
 @RequiredArgsConstructor
 public class ReviewController {
 
@@ -25,18 +25,18 @@ public class ReviewController {
      * Getters
      */
 
-    @GetMapping("/reviews")//admin
-    public List<ReviewDto> getAllReviews() {
-        return reviewService.getAllReviews();
+    @GetMapping("/allreviews")//admin
+    public ResponseEntity<List<ReviewDto>> getAllReviews() {
+        return ResponseEntity.ok(reviewService.getAllReviews());
     }
 
-    @GetMapping("/reviews/{movieId}")//ALL
+    @GetMapping("/searchmovie/{movieId}")//ALL
     public ResponseEntity<List<ReviewDto>> getReviewsByMovieId(@PathVariable Integer movieId) {
         List<ReviewDto> reviewDto = reviewService.getReviewByMovieId(movieId);
         return ResponseEntity.ok(reviewDto);
     }
 
-    @GetMapping("/review/{reviewId}")//ALL
+    @GetMapping("/searchid/{reviewId}")//ALL
     public ResponseEntity<ReviewDto> getReviewById(@PathVariable Integer reviewId) {
         ReviewDto reviewDto = reviewService.getReviewById(reviewId);
         return ResponseEntity.ok(reviewDto);
@@ -46,7 +46,7 @@ public class ReviewController {
      * Posters
      */
 
-    @PostMapping("/review")//ALL
+    @PostMapping("/create")//ALL
     public ResponseEntity<ReviewDto> createReview(@Valid @RequestBody ReviewDto reviewDto, HttpServletRequest request) {
       return  ResponseEntity.ok(reviewService.createReviewByMovieId(reviewDto, request));
     }
@@ -57,12 +57,12 @@ public class ReviewController {
      */
 
 
-    @DeleteMapping("/review/{reviewId}")//ALL
+    @DeleteMapping("/delete/{reviewId}")//ALL
     public void deleteReviewById(@PathVariable Integer reviewId, HttpServletRequest request){
          reviewService.deleteReview(reviewId, request);
     }
 
-    @DeleteMapping("/reviews")//ADMIN
+    @DeleteMapping("/deleteall")//ADMIN
     public void deleteAllReviews() {
         reviewService.deleteAllReviews();
     }

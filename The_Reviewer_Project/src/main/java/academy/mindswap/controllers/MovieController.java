@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Locale;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/movie")
 @RequiredArgsConstructor
 public class MovieController {
 
@@ -33,36 +33,40 @@ public class MovieController {
         return ResponseEntity.ok(movies);
     }
 
-    @GetMapping("/movie/search/{originalTitle}")//ALL
+    @GetMapping("/searchtitle/{originalTitle}")//ALL
     public ResponseEntity<MovieDto> getMoviesByOriginalTitle(@PathVariable String originalTitle) {
         MovieDto movieDto = movieService.getMovieByOriginalTitle(originalTitle.toUpperCase());
         return ResponseEntity.ok(movieDto);
     }
 
-    @GetMapping("/movies/search/{director}")//ALL
-    public List<MovieDto> getMoviesByDirector(@PathVariable String director) {
-        return movieService.getMoviesFromDirector(director);
+    @GetMapping("/searchdirector/{director}")//ALL
+    public ResponseEntity<List<MovieDto>> getMoviesByDirector(@PathVariable String director) {
+        return ResponseEntity.ok(movieService.getMoviesFromDirector(director));
     }
 
-    @GetMapping("/movies/imdb")//ALL
+    //SEARCHBYACTORS
+
+    @GetMapping("/imdb")//ALL
     public ResponseEntity<List<MovieDto>> getMoviesByImdb(@RequestParam(value = "rating") float rating) {
         List<MovieDto> movieDtoList = movieService.getMoviesByImdbRating(rating);
         return ResponseEntity.ok(movieDtoList);
     }
-    @GetMapping("/movies/rottentomatoes")//ALL
+    @GetMapping("/rottentomatoes")//ALL
     public ResponseEntity<List<MovieDto>> getMoviesByRottenTomatoes(@RequestParam(value = "rating") Integer rating) {
         List<MovieDto> movieDtoList = movieService.getMoviesByRottenTomatoesRating(rating);
         return ResponseEntity.ok(movieDtoList);
     }
-    @GetMapping("/movies/localrating")//ALL
+    @GetMapping("/localrating")//ALL
     public ResponseEntity<List<MovieDto>> getMoviesByLocalRating(@RequestParam(value = "rating") float rating) {
         List<MovieDto> movieDtoList = movieService.getMoviesByLocalRating(rating);
         return ResponseEntity.ok(movieDtoList);
     }
 
-    @GetMapping("/movies")//ALL
+    @GetMapping("/searchyear")//ALL
     public ResponseEntity<List<MovieDto>> getMoviesByYear(@RequestParam(value = "year") Integer year) {
         List<MovieDto> movieDtoList = movieService.getMoviesByYear(year);
         return ResponseEntity.ok(movieDtoList);
     }
+
+    //SESSÕES
 }
