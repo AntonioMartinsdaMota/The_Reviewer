@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
@@ -27,6 +28,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final BCryptPasswordEncoder passwordEncoder;
 
+    private static final String[] AUTH_LIST = {
+            // -- swagger ui
+            "**/swagger-resources/**",
+            "/swagger-ui.html",
+            "/v2/api-docs",
+            "/webjars/**"
+    };
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
@@ -39,10 +48,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
+        http.authorizeRequests().antMatchers(AUTH_LIST).authenticated()
+                .and()
+                .httpBasic().authenticationEntryPoint(swaggerAuthenticationEntryPoint());
         http.authorizeRequests()
                 .antMatchers("/auth/login, /api/user/create", "api/user/token/refresh").permitAll()
                 .antMatchers("/api/user/deleteall", "/api/review/deleteall").hasAnyAuthority("OWNER")
-                .antMatchers("/api/**").hasAnyAuthority("USER", "OWNER")
+                .antMatchers("/api/").hasAnyAuthority("USER", "OWNER")
                 .anyRequest().authenticated();
         http.addFilter(authenticationFilter);
         http.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
@@ -52,5 +64,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception{
         return super.authenticationManagerBean() ;
+    }
+
+    @Bean
+    public BasicAuthenticationEntryPoint swaggerAuthenticationEntryPoint() {
+        BasicAuthenticationEntryPoint entryPoint = new BasicAuthenticationEntryPoint();
+        entryPoint.setRealmName("Swagger Realm");
+        return entryPoint;
     }
 }
