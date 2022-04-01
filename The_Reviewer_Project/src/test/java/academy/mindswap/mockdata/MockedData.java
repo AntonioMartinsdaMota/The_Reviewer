@@ -2,11 +2,13 @@ package academy.mindswap.mockdata;
 
 
 import academy.mindswap.commands.MovieDto;
+import academy.mindswap.commands.ReviewDto;
 import academy.mindswap.commands.UserDto;
 import academy.mindswap.persistence.models.Movie;
 import academy.mindswap.persistence.models.Review;
 import academy.mindswap.persistence.models.User;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -116,17 +118,17 @@ public class MockedData {
     }
 
     //USERS
-    public static User getMockedUser1() {
+    public static User getMockedUser() {
 
-       Set<Review> mockedListReviewsUser1 = new HashSet<>();
-       mockedListReviewsUser1.add(Review.builder().reviewId(1).build());
+       Set<Review> mockedListReviewsUser = new HashSet<>();
+       mockedListReviewsUser.add(Review.builder().reviewId(1).build());
 
         return User.builder()
                 .userId(1)
                 .username("user1")
                 .password("123")
                 .email("j@123.pt")
-                .reviews(mockedListReviewsUser1)
+                .reviews(mockedListReviewsUser)
                 .build();
     }
 
@@ -155,8 +157,8 @@ public class MockedData {
 
     public static List<User> getMockedUsers(){
 
-        Set<Review> mockedListReviewsUser1 = new HashSet<>();
-        mockedListReviewsUser1.add(Review.builder().reviewId(1).build());
+        Set<Review> mockedListReviewsUser = new HashSet<>();
+        mockedListReviewsUser.add(Review.builder().reviewId(1).build());
 
         Set<Review> mockedListReviewsUser2 = new HashSet<>();
         mockedListReviewsUser2.add(Review.builder().reviewId(1).build());
@@ -167,7 +169,7 @@ public class MockedData {
                     .username("user1")
                     .password("123")
                     .email("j@123.pt")
-                    .reviews(mockedListReviewsUser1)
+                    .reviews(mockedListReviewsUser)
                     .build(),
                 User.builder()
                         .userId(2)
@@ -201,4 +203,56 @@ public class MockedData {
 
     }
 
+
+    //REVIEWS
+
+    public static Review getMockedReview(){
+
+        User user = getMockedUser();
+        Movie movie = getMockedMovie();
+
+        return Review.builder()
+                .reviewId(1)
+                .user(user)
+                .movie(movie)
+                .description("Too long...")
+                .localRating(3)
+                .build();
+    }
+
+    public static ReviewDto getMockedReviewDto(Review review){
+
+        return ReviewDto.builder()
+              .reviewId(review.getReviewId())
+              .userName(review.getUser())
+              .movieName(review.getMovie())
+              .description(review.getDescription())
+              .localRating(review.getLocalRating())
+              .build();
+    }
+
+
+    /*return UserDto.builder()
+            .id(user.getUserId())
+            .username(user.getUsername())
+            .password(user.getPassword())
+            .email(user.getEmail())
+            .numberOfReviews(user.getReviews().size())
+            .build();*/
+
+
+    public static List<Review> getMockedUserReviews(){
+
+        //Set<Review> mockedListReviewsUser = new HashSet<>();
+        //mockedListReviewsUser.add(Review.builder().reviewId(1).build());
+        User user = getMockedUser();
+        Review review = getMockedReview();
+
+        List<Review> mockedListReviewUser = new ArrayList<>();
+        mockedListReviewUser.add(Review.builder().reviewId())
+
+        return List.of(
+                Review.builder().
+        )
+    }
 }

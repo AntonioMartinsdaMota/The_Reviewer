@@ -1,11 +1,13 @@
 package academy.mindswap.commands;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Column;
 import javax.validation.constraints.*;
 
 @Data
+@Builder
 public class ReviewDto {
     private Integer reviewId;
 
@@ -21,4 +23,5 @@ public class ReviewDto {
     @Max(5)
     @Min(1)
     private Float localRating;
+
 }

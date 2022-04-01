@@ -2,6 +2,7 @@ package academy.mindswap.acceptance;
 
 import academy.mindswap.commands.UserDto;
 import academy.mindswap.mockdata.MockedData;
+import academy.mindswap.persistence.models.Review;
 import academy.mindswap.persistence.models.User;
 import academy.mindswap.persistence.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -40,7 +41,7 @@ public class UserControllerTest {
 
         //Given
 
-        User user= MockedData.getMockedUser1();
+        User user= MockedData.getMockedUser();
         when(userRepository.findById(user.getUserId())).thenReturn(Optional.of(user));
         String url = "/api/user/searchid/" + user.getUserId();
 
@@ -97,8 +98,9 @@ public class UserControllerTest {
     public void test_getUserReviews_shouldReturn_success(){
 
         //Given
-
-
+        User user = MockedData.getMockedUser();
+        List<Review> reviewList = MockedData.getMockedUserReviews(user);
+        when(reviewRepository.
 
 
 
