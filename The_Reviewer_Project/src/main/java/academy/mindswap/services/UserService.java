@@ -125,7 +125,9 @@ public class UserService {
 
         String encryptedPassword = passwordEncoder.encode(userDto.getPassword());
         userDto.setPassword(encryptedPassword);
-        return userconverter.toDto(userRepository.save(userconverter.toEntity(userDto)));
+        User user = userconverter.toEntity(userDto);
+        user.setRoles(List.of(roleRepository.findByRole("USER")));
+        return userconverter.toDto(userRepository.save(user));
 
     }
 
