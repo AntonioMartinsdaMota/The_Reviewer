@@ -1,5 +1,5 @@
 package academy.mindswap.acceptance;
-
+/*
 
 import academy.mindswap.commands.MovieDto;
 import academy.mindswap.commands.ReviewDto;
@@ -66,7 +66,7 @@ public class UserControllerTest {
      * Test for getAllUsers
      */
 
-    @Test
+   /* @Test
     public void test_getAllUsers_shouldReturn_success() {
 
         //Given
@@ -121,6 +121,6 @@ public class UserControllerTest {
 
         assertEquals(expected, actual);
     }
-}
+}*/
 
 

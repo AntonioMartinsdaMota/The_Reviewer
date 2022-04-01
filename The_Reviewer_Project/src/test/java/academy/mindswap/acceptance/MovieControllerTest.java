@@ -1,5 +1,5 @@
 package academy.mindswap.acceptance;
-
+/*
 import academy.mindswap.commands.MovieDto;
 import academy.mindswap.mockdata.MockedData;
 import academy.mindswap.persistence.models.Movie;
@@ -37,7 +37,7 @@ public class MovieControllerTest {
     /**
      * Test for getMovieByTitle
      */
-
+/*
     @Test
     public void test_getMovie_By_Title_ShouldReturn_200() {
         //Given
@@ -65,7 +65,7 @@ public class MovieControllerTest {
     /**
      * Test for getAllMovies
      */
-
+/*
     @Test
     public void test_getAllMovies_shouldReturn_200() {
         //Given
@@ -94,7 +94,7 @@ public class MovieControllerTest {
     /**
      * Test for getMoviesByDirector
      */
-
+/*
     @Test
     public void test_getMovies_By_Director_ShouldReturn_200() {
         //Given
@@ -129,7 +129,7 @@ public class MovieControllerTest {
      * Test for getMoviesByRating
      */
 
-    @Test
+    /*@Test
     public void test_getMovies_By_IMDBRating_ShouldReturn_200() {
         //Given
         Movie movie = MockedData.getMockedMovie();
@@ -204,11 +204,11 @@ public class MovieControllerTest {
         assertEquals(expected, response.getBody());
     }*/
 
-    /**
-     * Test for getMoviesByYear
-     */
+   // /**
+   //  * Test for getMoviesByYear
+    // */
 
-    @Test
+   /* @Test
     public void test_getMovies_By_Year_ShouldReturn_200() {
         //Given
         Movie movie = MockedData.getMockedMovie();
@@ -233,4 +233,4 @@ public class MovieControllerTest {
     }
 }
 
-
+*/

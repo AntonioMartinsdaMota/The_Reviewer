@@ -7,15 +7,10 @@ import academy.mindswap.commands.UserDto;
 import academy.mindswap.persistence.models.Movie;
 import academy.mindswap.persistence.models.Review;
 import academy.mindswap.persistence.models.User;
-import org.springframework.http.ResponseCookie;
-
 import javax.servlet.http.Cookie;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
-
-import static academy.mindswap.services.CookiesService.AUTH_COOKIE;
 
 public class MockedData {
 
@@ -239,7 +234,7 @@ public class MockedData {
         );
     }
 
-    /*public static Set<Review> getMockedReviewSet() {
+    public static Set<Review> getMockedReviewSet() {
 
         return Set.of(
                 Review.builder()
@@ -293,7 +288,7 @@ public class MockedData {
                         .localRating(1)
                         .build()
         );
-    }*/
+    }
 
     public static ReviewDto getMockedReviewDto(Review review) {
         return ReviewDto.builder()
@@ -324,11 +319,11 @@ public class MockedData {
         );
     }
 
-    public static Cookie getMockedCookie() {
+    /*public static Cookie getMockedCookie() {
         Cookie cookie = new Cookie(AUTH_COOKIE, "1");
         return cookie;
 
-    }
+    }*/
 
 
     public static List<User> getMockedUsers() {
