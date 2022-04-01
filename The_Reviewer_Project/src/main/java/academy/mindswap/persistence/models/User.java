@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
+
+import static javax.persistence.FetchType.EAGER;
 
 @Data
 @AllArgsConstructor
@@ -26,6 +26,8 @@ public class User {
     private String email;
     @Column()
     private String password;
+    @ManyToMany(fetch= EAGER)
+    private Collection<Role> roles = new ArrayList<>();
     @OneToMany (
             cascade = {CascadeType.ALL},
             orphanRemoval = true,
@@ -33,8 +35,6 @@ public class User {
     )
     @Column
     private Set<Review> reviews;
-    @Column
-    private String securityRole;
 
     public User() {
         this.reviews = new HashSet<>();
@@ -60,7 +60,6 @@ public class User {
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", securityRole='" + securityRole + '\'' +
                 '}';
     }
 }

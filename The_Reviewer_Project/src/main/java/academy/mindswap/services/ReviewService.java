@@ -9,7 +9,6 @@ import academy.mindswap.persistence.models.User;
 import academy.mindswap.persistence.repositories.MovieRepository;
 import academy.mindswap.persistence.repositories.ReviewRepository;
 import academy.mindswap.persistence.repositories.UserRepository;
-import academy.mindswap.exceptions.notFoundExceptions.CookieNotFoundException;
 import academy.mindswap.exceptions.notFoundExceptions.MovieNotFoundException;
 import academy.mindswap.exceptions.notFoundExceptions.ReviewNotFoundException;
 import academy.mindswap.exceptions.otherExceptions.NotEnoughPermissionsException;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -44,7 +42,7 @@ public class ReviewService {
     private MovieDBService movieDBService;
 
     @Autowired
-    private CookiesService cookiesService;
+    private TokenService tokenService;
 
     public List<ReviewDto> getAllReviews() {
         return reviewRepository.findAll()
@@ -59,9 +57,9 @@ public class ReviewService {
 
     public ReviewDto createReviewByMovieId(ReviewDto reviewDto, HttpServletRequest request) {
 
-        Integer userId = cookiesService.getIdFromCookie(request);
+        String email = tokenService.getEmailFromToken(request);
 
-        Optional<User> user = userRepository.findById(userId);
+        Optional<User> user = userRepository.findByEmail(email);
 
         Optional<Movie> movieOpt = movieRepository.findByOriginalTitle(reviewDto.getMovieName().toUpperCase());
         Review newReview = reviewConverter.convertToEntity(reviewDto);
@@ -125,8 +123,8 @@ public class ReviewService {
 
     public void deleteReview(Integer reviewId, HttpServletRequest request){
 
-        Integer userId = cookiesService.getIdFromCookie(request);
-        Optional<User> user = userRepository.findById(userId);
+        String userEmail = tokenService.getEmailFromToken(request);
+        Optional<User> user = userRepository.findByEmail(userEmail);
 
         Optional<Review> reviewOpt = reviewRepository.findById(reviewId);
         if (reviewOpt.isEmpty()){
