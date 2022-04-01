@@ -20,5 +20,5 @@ public class ReviewDto {
     @NotNull
     @Max(5)
     @Min(1)
-    private Integer localRating;
+    private Float localRating;
 }

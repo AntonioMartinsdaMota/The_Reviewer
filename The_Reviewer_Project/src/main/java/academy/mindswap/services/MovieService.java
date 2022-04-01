@@ -68,7 +68,7 @@ public class MovieService  {
                 .collect(Collectors.toList());
     }*/
 
-    public List<MovieDto> getMoviesByImdbRating(float rating){
+    public List<MovieDto> getMoviesByImdbRating(Float rating){
         if (rating < 0 || rating > 10) {
             throw new RatingOutOfRangeException();
         }
@@ -84,7 +84,7 @@ public class MovieService  {
 
     }
 
-    public List<MovieDto> getMoviesByLocalRating(float rating){
+    public List<MovieDto> getMoviesByLocalRating(Float rating){
         if (rating < 1 || rating > 5) {
             throw new RatingOutOfRangeException();
         }
