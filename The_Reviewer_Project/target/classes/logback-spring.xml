@@ -39,9 +39,9 @@
     </root>
 
     <!-- LOG "com.baeldung*" at TRACE level -->
-    <logger name="academy.mindswap" level="trace" additivity="false">
-        <appender-ref ref="RollingFile" />
-        <appender-ref ref="Console" />
-    </logger>
+    <!--<logger name="academy.mindswap" level="trace" additivity="false">-->
+    <!--    <appender-ref ref="RollingFile" />-->
+    <!--    <appender-ref ref="Console" />-->
+    <!--</logger>-->
 
 </configuration>
