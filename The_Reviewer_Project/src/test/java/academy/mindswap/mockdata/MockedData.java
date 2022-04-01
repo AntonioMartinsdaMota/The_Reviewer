@@ -41,6 +41,26 @@ public class MockedData {
 
 
     }
+    public static Movie getMockedMovie1() {
+
+
+        return Movie.builder()
+                .movieId(1)
+                .actors("Tony")
+                .directors("Johny")
+                .originalTitle("HAPPY")
+                .portugueseTitle("Feliz")
+                .IMDBRating(5)
+                .localRating(2)
+                // .type("Action")
+                .year(2020)
+                .rottenTomatoesRating(65)
+                .imDbId("tt0468888")
+                .reviews(new HashSet<>())
+                .build();
+
+
+    }
 
     public static Movie getMockedMovie2() {
         return Movie.builder()
@@ -73,11 +93,25 @@ public class MockedData {
                 .rottenTomatoesRating(movie.getRottenTomatoesRating())
                 .build();
 
-        //.numberOfReviews(0)
 
     }
 
-    public static List<Movie> getMockedMovies() {
+    public static MovieDto getMockedMovieDto1(Movie movie) {
+        return MovieDto.builder()
+                .movieID(movie.getMovieId())
+                .actors(movie.getActors())
+                .directors(movie.getDirectors())
+                .originalTitle(movie.getOriginalTitle())
+                .portugueseTitle(movie.getPortugueseTitle())
+                .IMDBRating(movie.getIMDBRating())
+                .localRating(movie.getLocalRating())
+                .year(movie.getYear())
+                .rottenTomatoesRating(movie.getRottenTomatoesRating())
+                .numberOfReviews(0)
+                .build();
+
+    }
+        public static List<Movie> getMockedMovies() {
         return List.of(
                 Movie.builder()
                         .movieId(1)
