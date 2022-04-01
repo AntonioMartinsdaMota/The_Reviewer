@@ -105,7 +105,6 @@ public class ReviewService {
         return reviewConverter.convertToDto(newReview);
     }
 
-
     public List<ReviewDto> getReviewByMovieId(Integer movieId){
         Optional<Movie> movieOpt = movieRepository.findById(movieId);
         if (movieOpt.isEmpty()){
