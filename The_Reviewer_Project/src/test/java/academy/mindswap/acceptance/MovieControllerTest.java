@@ -42,9 +42,9 @@ public class MovieControllerTest {
     public void test_getMovie_By_Title_ShouldReturn_200() {
         //Given
 
-        Movie movie = MockedData.getMockedMovie();
+        Movie movie = MockedData.getMockedMovie1();
         when(movieRepository.findByOriginalTitle(movie.getOriginalTitle())).thenReturn(Optional.of(movie));
-        String url = "/api/movie/search/KNIGHT";
+        String url = "/api/movie/searchtitle/" + movie.getOriginalTitle();
 
 
         //When
@@ -57,7 +57,7 @@ public class MovieControllerTest {
         //Then
         verify(movieRepository, times(1)).findByOriginalTitle(movie.getOriginalTitle());
 
-        MovieDto expected = MockedData.getMockedMovieDto(movie);
+        MovieDto expected = MockedData.getMockedMovieDto1(movie);
         assertEquals(expected, response.getBody());
 
     }
@@ -72,7 +72,7 @@ public class MovieControllerTest {
 
         List<Movie> movieList = MockedData.getMockedMovies();
         when(movieRepository.findAll()).thenReturn(movieList);
-        String url = "/api/movies";
+        String url = "/api/movie/allmovies";
 
 
         //When
@@ -104,7 +104,7 @@ public class MovieControllerTest {
 
         when(movieRepository.findByDirectorsContaining(movie.getDirectors())).thenReturn(movieList);
 
-        String url1 = "/api/movies/search/Steven";
+        String url1 = "/api/movie/searchdirector/" + movie.getDirectors();
 
 
         //When
@@ -135,7 +135,7 @@ public class MovieControllerTest {
         Movie movie = MockedData.getMockedMovie();
         List<Movie> movieList = MockedData.getMockedMovies();
         when(movieRepository.findByImdbRating(movie.getIMDBRating())).thenReturn(movieList);
-        String url1 = "/api/movies/imdb?rating=8";
+        String url1 = "/api/movie/imdb?rating=8";
 
         //When
         ResponseEntity<List<MovieDto>> response = restTemplate.exchange(
@@ -162,7 +162,7 @@ public class MovieControllerTest {
         Movie movie = MockedData.getMockedMovie();
         List<Movie> movieList = MockedData.getMockedMovies();
         when(movieRepository.findByRottenTomatoesRating(movie.getRottenTomatoesRating())).thenReturn(movieList);
-        String url1 = "/api/movies/rottentomatoes?rating=85";
+        String url1 = "/api/movie/rottentomatoes?rating=85";
 
         //When
         ResponseEntity<List<MovieDto>> response = restTemplate.exchange(
@@ -214,7 +214,7 @@ public class MovieControllerTest {
         Movie movie = MockedData.getMockedMovie();
         List<Movie> movieList = MockedData.getMockedMovies();
         when(movieRepository.findByYear(movie.getYear())).thenReturn(movieList);
-        String url1 = "/api/movies?year=2008";
+        String url1 = "/api/movie/searchyear?year=2008";
 
         //When
         ResponseEntity<List<MovieDto>> response = restTemplate.exchange(
