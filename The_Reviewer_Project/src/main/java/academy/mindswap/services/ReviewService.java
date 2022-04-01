@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewService {
@@ -78,20 +79,26 @@ public class ReviewService {
             Movie newIMDBMovie = imdbService.createMovieFromIMDB(reviewDto.getMovieName());
             Movie newMovieDBMovie = movieDBService.createMovieFromMovieDB(newIMDBMovie.getOriginalTitle());
 
-            if (newMovieDBMovie.getPortugueseTitle().equalsIgnoreCase("")) {
-                newMovieDBMovie.setPortugueseTitle(newIMDBMovie.getOriginalTitle());
+            if (newMovieDBMovie.getPortugueseTitle().equalsIgnoreCase("") || newMovieDBMovie.getPortugueseTitle() == null) {
+                newMovieDBMovie.setPortugueseTitle("");
             }
 
             newIMDBMovie.setPortugueseTitle(newMovieDBMovie.getPortugueseTitle());
+            newIMDBMovie.setLocalRating(newReview.getLocalRating());
 
-            newReview.setMovie(movieRepository.save(newIMDBMovie));
+            Movie newMovie = movieRepository.save(newIMDBMovie);
+            newReview.setMovie(newMovie);
         }
-        reviewRepository.save(newReview);
 
-        Movie movie = newReview.getMovie();
-        System.out.println(movie.getReviews());
-        float movieLocalRating = (float)movie.getReviews().stream()
+
+        Review savedReview = reviewRepository.save(newReview);
+
+        Movie movie = movieRepository.findById(savedReview.getMovie().getMovieId()).get();
+        List<Review> movieReviews = reviewRepository.findByMovie(movie);
+
+        float movieLocalRating = (float) movieReviews.stream()
                 .mapToDouble(Review::getLocalRating).average().orElse(0);
+
         movie.setLocalRating(movieLocalRating);
         movieRepository.save(movie);
 
@@ -99,12 +106,13 @@ public class ReviewService {
     }
 
 
-    public ReviewDto getReviewByMovieId(Integer movieId){
+    public List<ReviewDto> getReviewByMovieId(Integer movieId){
         Optional<Movie> movieOpt = movieRepository.findById(movieId);
         if (movieOpt.isEmpty()){
             throw new MovieNotFoundException();
         }
-        return reviewConverter.convertToDto(reviewRepository.findByMovie(movieOpt.get()));
+        return reviewRepository.findByMovie(movieOpt.get()).stream()
+                .map(r -> reviewConverter.convertToDto(r)).collect(Collectors.toList());
     }
 
     public ReviewDto getReviewById(Integer reviewId){

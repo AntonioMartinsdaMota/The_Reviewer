@@ -31,7 +31,7 @@ public class UserDto {
 
     private String password;
 
-    private Set<Review> reviews;
+    private Integer numberOfReviews;
 
     @Override
     public String toString() {
@@ -39,7 +39,7 @@ public class UserDto {
                 "id=" + id +
                 ", name='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", reviews=" + reviews +
+                ", numberOfReviews=" + numberOfReviews +
                 '}';
     }
 }

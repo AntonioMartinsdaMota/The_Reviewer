@@ -44,7 +44,7 @@ public class UserServiceTest {
     public void setUp() {
 
         modelMapper = new ModelMapper();
-        userConverter = new UserConverter(modelMapper);
+        userConverter = new UserConverter();
         userService = new UserService(userRepository, userConverter);
 
     }

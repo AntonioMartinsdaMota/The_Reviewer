@@ -37,7 +37,7 @@ public class Review {
     private String description;
 
     @Column
-    private Integer localRating;
+    private float localRating;
 
     @Override
     public boolean equals(Object o) {

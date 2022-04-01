@@ -31,8 +31,8 @@ public class ReviewController {
     }
 
     @GetMapping("/reviews/{movieId}")//ALL
-    public ResponseEntity<ReviewDto> getReviewsByMovieId(@PathVariable Integer movieId) {
-        ReviewDto reviewDto = reviewService.getReviewByMovieId(movieId);
+    public ResponseEntity<List<ReviewDto>> getReviewsByMovieId(@PathVariable Integer movieId) {
+        List<ReviewDto> reviewDto = reviewService.getReviewByMovieId(movieId);
         return ResponseEntity.ok(reviewDto);
     }
 
