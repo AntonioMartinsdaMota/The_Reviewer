@@ -50,7 +50,7 @@ public class UserService {
     private MovieConverter movieConverter;
 
     @Autowired
-    private CookiesService cookiesService;
+    private TokenService tokenService;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -131,7 +131,7 @@ public class UserService {
 
     public UserDto updateUser(UserDto userDto, HttpServletRequest request) {
 
-        String userEmail = cookiesService.getEmailFromCookie(request);
+        String userEmail = tokenService.getEmailFromToken(request);
 
         Optional<User> userOpt = userRepository.findByEmail(userEmail);
 

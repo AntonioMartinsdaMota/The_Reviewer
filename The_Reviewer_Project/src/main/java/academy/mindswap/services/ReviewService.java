@@ -42,7 +42,7 @@ public class ReviewService {
     private MovieDBService movieDBService;
 
     @Autowired
-    private CookiesService cookiesService;
+    private TokenService tokenService;
 
     public List<ReviewDto> getAllReviews() {
         return reviewRepository.findAll()
@@ -57,7 +57,7 @@ public class ReviewService {
 
     public ReviewDto createReviewByMovieId(ReviewDto reviewDto, HttpServletRequest request) {
 
-        String email = cookiesService.getEmailFromCookie(request);
+        String email = tokenService.getEmailFromToken(request);
 
         Optional<User> user = userRepository.findByEmail(email);
 
@@ -124,7 +124,7 @@ public class ReviewService {
 
     public void deleteReview(Integer reviewId, HttpServletRequest request){
 
-        String userEmail = cookiesService.getEmailFromCookie(request);
+        String userEmail = tokenService.getEmailFromToken(request);
         Optional<User> user = userRepository.findByEmail(userEmail);
 
         Optional<Review> reviewOpt = reviewRepository.findById(reviewId);
