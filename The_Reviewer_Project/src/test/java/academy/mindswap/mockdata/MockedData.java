@@ -13,6 +13,7 @@ import java.util.Set;
 
 public class MockedData {
 
+    //MOVIES
 
     public static Movie getMockedMovie() {
         return Movie.builder()
@@ -114,21 +115,90 @@ public class MockedData {
 
     }
 
-    public static User getMockedUser() {
+    //USERS
+    public static User getMockedUser1() {
+
+       Set<Review> mockedListReviewsUser1 = new HashSet<>();
+       mockedListReviewsUser1.add(Review.builder().reviewId(1).build());
+
         return User.builder()
                 .userId(1)
                 .username("user1")
                 .password("123")
-                .email("j@123.pt").build();
-        //.reviews(new HashSet<>());
+                .email("j@123.pt")
+                .reviews(mockedListReviewsUser1)
+                .build();
     }
 
+    public static User getMockedUser2() {
+
+        Set<Review> mockedListReviewsUser2 = new HashSet<>();
+        mockedListReviewsUser2.add(Review.builder().reviewId(1).build());
+
+        return User.builder()
+                .userId(2)
+                .username("user2")
+                .password("456")
+                .email("j@456.pt")
+                .reviews(mockedListReviewsUser2)
+                .build();
+    }
     public static UserDto getMockedUserDto(User user) {
         return UserDto.builder()
                 .id(user.getUserId())
                 .username(user.getUsername())
                 .password(user.getPassword())
                 .email(user.getEmail())
+                .numberOfReviews(user.getReviews().size())
                 .build();
     }
+
+    public static List<User> getMockedUsers(){
+
+        Set<Review> mockedListReviewsUser1 = new HashSet<>();
+        mockedListReviewsUser1.add(Review.builder().reviewId(1).build());
+
+        Set<Review> mockedListReviewsUser2 = new HashSet<>();
+        mockedListReviewsUser2.add(Review.builder().reviewId(1).build());
+
+        return List.of(
+                User.builder()
+                    .userId(1)
+                    .username("user1")
+                    .password("123")
+                    .email("j@123.pt")
+                    .reviews(mockedListReviewsUser1)
+                    .build(),
+                User.builder()
+                        .userId(2)
+                        .username("user2")
+                        .password("456")
+                        .email("j@456.pt")
+                        .reviews(mockedListReviewsUser2)
+                        .build()
+        );
+
+    }
+
+    public static List<UserDto> getMockedUsersDto(List<User> userList){
+
+                return List.of(
+                    UserDto.builder()
+                            .id(userList.get(0).getUserId())
+                            .username(userList.get(0).getUsername())
+                            .password(userList.get(0).getPassword())
+                            .email(userList.get(0).getEmail())
+                            .numberOfReviews(1)
+                            .build(),
+                    UserDto.builder()
+                            .id(userList.get(1).getUserId())
+                            .username(userList.get(1).getUsername())
+                            .password(userList.get(1).getPassword())
+                            .email(userList.get(1).getEmail())
+                            .numberOfReviews(1)
+                            .build()
+                );
+
+    }
+
 }

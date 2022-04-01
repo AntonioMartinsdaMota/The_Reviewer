@@ -52,7 +52,7 @@ public class UserServiceTest {
     @Test
     public void test_getUserById_Should_Return_Success() {
         //Given
-        User user = MockedData.getMockedUser();
+        User user = MockedData.getMockedUser1();
 
         when(userRepository.findById(user.getUserId())).thenReturn(Optional.of(user));
 //        when(userConverter.convertToDto(user)).thenReturn(MockedData.getMockedUserDto(user));
