@@ -34,6 +34,10 @@ public class MovieControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    /**
+     * Test for getMovieByTitle
+     */
+
     @Test
     public void test_getMovie_By_Title_ShouldReturn_200() {
         //Given
@@ -58,6 +62,10 @@ public class MovieControllerTest {
 
     }
 
+    /**
+     * Test for getAllMovies
+     */
+
     @Test
     public void test_getAllMovies_shouldReturn_200() {
         //Given
@@ -65,31 +73,6 @@ public class MovieControllerTest {
         List<Movie> movieList = MockedData.getMockedMovies();
         when(movieRepository.findAll()).thenReturn(movieList);
         String url = "/api/movies";
-
-
-        //When
-        ResponseEntity<List<MovieDto>> response = restTemplate.exchange(
-                url,
-                HttpMethod.GET,
-                HttpEntity.EMPTY,
-                new ParameterizedTypeReference<List<MovieDto>>() {
-                });
-
-                //Then
-                verify(movieRepository, times(1)).findAll();
-
-        List<MovieDto> expected = MockedData.getMockedMoviesDto(movieList);
-        assertEquals(expected, response.getBody());
-
-    }
-
-    @Test
-    public void test_getMovies_By_Director_ShouldReturn_200() {
-        //Given
-        Movie movie = MockedData.getMockedMovie();
-        List<Movie> movieList = MockedData.getMockedMovies();
-        when(movieRepository.findByDirectorsContaining(movie.getDirectors())).thenReturn(movieList);
-        String url = "/movies/search/Steven";
 
 
         //When
@@ -108,8 +91,146 @@ public class MovieControllerTest {
 
     }
 
+    /**
+     * Test for getMoviesByDirector
+     */
+
+    @Test
+    public void test_getMovies_By_Director_ShouldReturn_200() {
+        //Given
+
+        Movie movie = MockedData.getMockedMovie();
+        List<Movie> movieList = MockedData.getMockedMovies();
+
+        when(movieRepository.findByDirectorsContaining(movie.getDirectors())).thenReturn(movieList);
+
+        String url1 = "/api/movies/search/Steven";
 
 
+        //When
+        ResponseEntity<List<MovieDto>> response = restTemplate.exchange(
+                url1,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<MovieDto>>() {
+                }
+        );
+
+        //Then
+        verify(movieRepository, times(1)).findByDirectorsContaining(movie.getDirectors());
+
+        List<MovieDto> expected = MockedData.getMockedMoviesDto(movieList);
+        assertEquals(expected, response.getBody());
+
+    }
 
 
+    /**
+     * Test for getMoviesByRating
+     */
+
+    @Test
+    public void test_getMovies_By_IMDBRating_ShouldReturn_200() {
+        //Given
+        Movie movie = MockedData.getMockedMovie();
+        List<Movie> movieList = MockedData.getMockedMovies();
+        when(movieRepository.findByImdbRating(movie.getIMDBRating())).thenReturn(movieList);
+        String url1 = "/api/movies/imdb?rating=8";
+
+        //When
+        ResponseEntity<List<MovieDto>> response = restTemplate.exchange(
+                url1,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<MovieDto>>() {
+                }
+        );
+
+        //Then
+        verify(movieRepository, times(1)).findByImdbRating(movie.getIMDBRating());
+
+        List<MovieDto> expected = MockedData.getMockedMoviesDto(movieList);
+        assertEquals(expected, response.getBody());
+
+
+    }
+
+
+    @Test
+    public void test_getMovies_By_RottenTomatoesRating_ShouldReturn_200() {
+        //Given
+        Movie movie = MockedData.getMockedMovie();
+        List<Movie> movieList = MockedData.getMockedMovies();
+        when(movieRepository.findByRottenTomatoesRating(movie.getRottenTomatoesRating())).thenReturn(movieList);
+        String url1 = "/api/movies/rottentomatoes?rating=85";
+
+        //When
+        ResponseEntity<List<MovieDto>> response = restTemplate.exchange(
+                url1,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<MovieDto>>() {
+                }
+        );
+
+        //Then
+        verify(movieRepository, times(1)).findByRottenTomatoesRating(movie.getRottenTomatoesRating());
+
+        List<MovieDto> expected = MockedData.getMockedMoviesDto(movieList);
+        assertEquals(expected, response.getBody());
+    }
+
+    /*@Test
+    public void test_getMovies_By_LocalRating_Should_Return_200(){
+        //Given
+        Movie movie = MockedData.getMockedMovie();
+        List<Movie> movieList = MockedData.getMockedMovies();
+        when(movieRepository.findByLocalRating(movie.getLocalRating())).thenReturn(movieList);
+        String url1 = "/api/movies/localrating?rating=4";
+
+        //When
+        ResponseEntity<List<MovieDto>> response = restTemplate.exchange(
+                url1,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<MovieDto>>() {
+                }
+        );
+
+        //Then
+        verify(movieRepository, times(1)).findByLocalRating(movie.getLocalRating());
+
+        List<MovieDto> expected = MockedData.getMockedMoviesDto(movieList);
+        assertEquals(expected, response.getBody());
+    }*/
+
+    /**
+     * Test for getMoviesByYear
+     */
+
+    @Test
+    public void test_getMovies_By_Year_ShouldReturn_200() {
+        //Given
+        Movie movie = MockedData.getMockedMovie();
+        List<Movie> movieList = MockedData.getMockedMovies();
+        when(movieRepository.findByYear(movie.getYear())).thenReturn(movieList);
+        String url1 = "/api/movies?year=2008";
+
+        //When
+        ResponseEntity<List<MovieDto>> response = restTemplate.exchange(
+                url1,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<List<MovieDto>>() {
+                }
+        );
+
+        //Then
+        verify(movieRepository, times(1)).findByYear(movie.getYear());
+
+        List<MovieDto> expected = MockedData.getMockedMoviesDto(movieList);
+        assertEquals(expected, response.getBody());
+    }
 }
+
+

@@ -49,9 +49,6 @@ public class UserServiceTest {
 
     }
 
-
-
-
     @Test
     public void test_getUserById_Should_Return_Success() {
         //Given

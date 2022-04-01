@@ -26,7 +26,7 @@ public class MovieController {
      * Getters
      */
 
-    @GetMapping("/movies")//ALL
+    @GetMapping("/allmovies")//ALL
     public ResponseEntity<List<MovieDto>> getAllMovies() {
         List<MovieDto> movies = movieService.getAllMovies();
         System.out.println(movies);
@@ -40,32 +40,27 @@ public class MovieController {
     }
 
     @GetMapping("/movies/search/{director}")//ALL
-    public List<MovieDto> getMovieByDirector(@PathVariable String director) {
+    public List<MovieDto> getMoviesByDirector(@PathVariable String director) {
         return movieService.getMoviesFromDirector(director);
     }
 
-   /* @GetMapping("/movie/{gender}")
-    public ResponseEntity<Movie> getMovieByGenre(String gender) {
-        return movieService.getMovieByGender(gender);
-    }*/
-
-    @GetMapping("/movie/imdb")//ALL
+    @GetMapping("/movies/imdb")//ALL
     public ResponseEntity<List<MovieDto>> getMoviesByImdb(@RequestParam(value = "rating") float rating) {
         List<MovieDto> movieDtoList = movieService.getMoviesByImdbRating(rating);
         return ResponseEntity.ok(movieDtoList);
     }
-    @GetMapping("/movie/rottenTomatoes")//ALL
+    @GetMapping("/movies/rottentomatoes")//ALL
     public ResponseEntity<List<MovieDto>> getMoviesByRottenTomatoes(@RequestParam(value = "rating") Integer rating) {
         List<MovieDto> movieDtoList = movieService.getMoviesByRottenTomatoesRating(rating);
         return ResponseEntity.ok(movieDtoList);
     }
-    @GetMapping("/movie/localRating")//ALL
+    @GetMapping("/movies/localrating")//ALL
     public ResponseEntity<List<MovieDto>> getMoviesByLocalRating(@RequestParam(value = "rating") float rating) {
         List<MovieDto> movieDtoList = movieService.getMoviesByLocalRating(rating);
         return ResponseEntity.ok(movieDtoList);
     }
 
-    @GetMapping("/movie")//ALL
+    @GetMapping("/movies")//ALL
     public ResponseEntity<List<MovieDto>> getMoviesByYear(@RequestParam(value = "year") Integer year) {
         List<MovieDto> movieDtoList = movieService.getMoviesByYear(year);
         return ResponseEntity.ok(movieDtoList);
