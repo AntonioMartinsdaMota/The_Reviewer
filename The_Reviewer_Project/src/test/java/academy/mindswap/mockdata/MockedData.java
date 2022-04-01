@@ -20,7 +20,6 @@ import static academy.mindswap.services.CookiesService.AUTH_COOKIE;
 public class MockedData {
 
 
-
     public static Movie getMockedMovie() {
 
 
@@ -41,6 +40,7 @@ public class MockedData {
 
 
     }
+
     public static Movie getMockedMovie1() {
 
 
@@ -111,7 +111,8 @@ public class MockedData {
                 .build();
 
     }
-        public static List<Movie> getMockedMovies() {
+
+    public static List<Movie> getMockedMovies() {
         return List.of(
                 Movie.builder()
                         .movieId(1)
@@ -182,7 +183,8 @@ public class MockedData {
                 .username("user1")
                 .password("123")
                 .email("j@123.pt")
-                .reviews(mockedListReviews).build();
+                .reviews(mockedListReviews)
+                .build();
     }
 
     public static User getMockedUser2() {
@@ -329,6 +331,52 @@ public class MockedData {
     }
 
 
+    public static List<User> getMockedUsers() {
+
+        Set<Review> mockedListReviewsUser = new HashSet<>();
+        mockedListReviewsUser.add(Review.builder().reviewId(1).build());
+
+        Set<Review> mockedListReviewsUser2 = new HashSet<>();
+        mockedListReviewsUser2.add(Review.builder().reviewId(1).build());
+
+        return List.of(
+                User.builder()
+                        .userId(1)
+                        .username("user1")
+                        .password("123")
+                        .email("j@123.pt")
+                        .reviews(mockedListReviewsUser)
+                        .build(),
+                User.builder()
+                        .userId(2)
+                        .username("user2")
+                        .password("456")
+                        .email("j@456.pt")
+                        .reviews(mockedListReviewsUser2)
+                        .build()
+        );
+
+    }
+
+    public static List<UserDto> getMockedUsersDto(List<User> userList) {
+
+        return List.of(
+                UserDto.builder()
+                        .id(userList.get(0).getUserId())
+                        .username(userList.get(0).getUsername())
+                        .password(userList.get(0).getPassword())
+                        .email(userList.get(0).getEmail())
+                        .numberOfReviews(1)
+                        .build(),
+                UserDto.builder()
+                        .id(userList.get(1).getUserId())
+                        .username(userList.get(1).getUsername())
+                        .password(userList.get(1).getPassword())
+                        .email(userList.get(1).getEmail())
+                        .numberOfReviews(1)
+                        .build()
+        );
+    }
 }
 
 
