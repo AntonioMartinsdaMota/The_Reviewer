@@ -6,8 +6,10 @@ import academy.mindswap.commands.UserDto;
 import academy.mindswap.converters.MovieConverter;
 import academy.mindswap.converters.ReviewConverter;
 import academy.mindswap.converters.UserConverter;
+import academy.mindswap.persistence.models.Role;
 import academy.mindswap.persistence.models.User;
 import academy.mindswap.persistence.repositories.MovieRepository;
+import academy.mindswap.persistence.repositories.RoleRepository;
 import academy.mindswap.persistence.repositories.UserRepository;
 import academy.mindswap.exceptions.badRequestExceptions.*;
 import academy.mindswap.exceptions.notFoundExceptions.*;
@@ -16,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,9 +34,10 @@ public class UserService {
     private static final Logger LOGGER = LogManager.getLogger(UserService.class);
 
 
+    @Autowired
     private final UserRepository userRepository;
 
-
+    @Autowired
     private final UserConverter userconverter;
 
     @Autowired
@@ -47,6 +51,12 @@ public class UserService {
 
     @Autowired
     private CookiesService cookiesService;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
 
 
     public User login(String name, String password) {
@@ -112,6 +122,9 @@ public class UserService {
         if(userDto.getPassword().length() < 7 || userDto.getPassword() == null){
             throw new InvalidPasswordException();
         }
+
+        String encryptedPassword = passwordEncoder.encode(userDto.getPassword());
+        userDto.setPassword(encryptedPassword);
         return userconverter.toDto(userRepository.save(userconverter.toEntity(userDto)));
 
     }
@@ -146,6 +159,37 @@ public class UserService {
     public void deleteAllUsers() {
         userRepository.deleteAll();
     }
+
+    public void createRoles(){
+        List<Role> roles = roleRepository.findAll();
+
+        if(roles.isEmpty()) {
+            roleRepository.save(new Role(null, "OWNER"));
+            roleRepository.save(new Role(null, "ADMIN"));
+            roleRepository.save(new Role(null, "USER"));
+        }
+    }
+
+    public void createOwner(){
+        Optional<User> user = userRepository.findById(1);
+
+        if(user.isEmpty()) {
+            User newUser =
+                    User.builder()
+                            .userId(null)
+                            .username("owner")
+                            .email("owner@owner")
+                            .roles(new ArrayList<>())
+                            .password(passwordEncoder.encode("owner123"))
+                            .build();
+
+            newUser.getRoles().add(roleRepository.findByRole("OWNER"));
+
+            userRepository.save(newUser);
+        }
+    }
+
+
 
 /*
     public List<UserDto> deleteAllUsers(){

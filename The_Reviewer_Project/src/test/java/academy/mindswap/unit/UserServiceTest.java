@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
@@ -40,12 +41,15 @@ public class UserServiceTest {
     @Mock
     private ModelMapper modelMapper;
 
+    @Mock
+    private PasswordEncoder passwordEncoder;
+
     @BeforeEach
     public void setUp() {
 
         modelMapper = new ModelMapper();
         userConverter = new UserConverter();
-        userService = new UserService(userRepository, userConverter);
+        userService = new UserService(userRepository, userConverter, passwordEncoder);
 
     }
 
