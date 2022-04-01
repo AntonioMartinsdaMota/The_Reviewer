@@ -21,25 +21,21 @@ public class AuthenticationService {
     @Autowired
     private CookiesService cookiesService;
 
-    public User login(LoginRequest loginRequest, HttpServletRequest request){
+    public User login( HttpServletRequest request){
         Optional<Cookie> cookies = cookiesService.getReviewerCookie(request);
         if (cookies.isPresent()){
             throw new AlreadyLoggedInException();
         }
-        return userService.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword());
-    }
 
-    public void logout(){
-    }
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
 
+        return userService.findByEmailAndPassword(email, password);
+    }
 
     public User validate(String email) {
         return userService.validate(email);
     }
 
-    /*@Autowired
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }*/
 }
 

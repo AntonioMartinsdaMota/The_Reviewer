@@ -131,12 +131,12 @@ public class UserService {
 
     public UserDto updateUser(UserDto userDto, HttpServletRequest request) {
 
-        Integer userId = cookiesService.getIdFromCookie(request);
+        String userEmail = cookiesService.getEmailFromCookie(request);
 
-        Optional<User> userOpt = userRepository.findById(userId);
+        Optional<User> userOpt = userRepository.findByEmail(userEmail);
 
         if (userOpt.isEmpty()) {
-            throw new UserNotFoundException(String.valueOf(userId));
+            throw new UserNotFoundException(userEmail);
         }
 
         User user = userOpt.get();
@@ -187,6 +187,10 @@ public class UserService {
 
             userRepository.save(newUser);
         }
+    }
+
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
 

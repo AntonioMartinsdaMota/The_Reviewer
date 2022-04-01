@@ -23,11 +23,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> userOpt = userRepository.findByUsername(username);
+    public UserDetails loadUserByUsername(String email) {
+        Optional<User> userOpt = userRepository.findByEmail(email);
 
         if(userOpt.isEmpty()){
-            throw new UserNotFoundException(username);
+            throw new UserNotFoundException(email);
         }
 
         User user = userOpt.get();
@@ -36,6 +36,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         user.getRoles().forEach(role -> { authorities.add(new SimpleGrantedAuthority(role.getRole()));});
 
         return new org.springframework.security
-                .core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+                .core.userdetails.User(user.getEmail(), user.getPassword(), authorities);
     }
 }

@@ -27,9 +27,9 @@ public class AuthenticationController {
     private CookiesService cookiesService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest loginRequest, HttpServletRequest request){
+    public ResponseEntity<?> login(HttpServletRequest request){
 
-        User user = authService.login(loginRequest, request);
+        User user = authService.login(request);
         if (Objects.isNull(user)) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
@@ -46,7 +46,6 @@ public class AuthenticationController {
 
         ResponseCookie cookie = cookiesService.createLogOutCookie();
 
-        authService.logout();
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE,cookie.toString())
                 .build();
