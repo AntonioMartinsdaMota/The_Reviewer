@@ -203,8 +203,8 @@ public class UserService {
                 user.getRoles().contains(roleRepository.findByRole("OWNER"))) {
             throw new InvalidAssertAuthoritiesException();
         }
-        List<Role> roles = List.of(roleRepository.findByRole("ADMIN"));
-        user.setRoles(roles);
+
+        user.getRoles().add(roleRepository.findByRole("ADMIN"));
         return userconverter.toDto(userRepository.save(user));
     }
 
