@@ -21,19 +21,4 @@ public class Application {
 				//.start();
 	}
 
-	/*@Bean
-	CommandLineRunner run(UserService userService) {
-		return args -> {
-			userService.createRoles();
-			userService.createOwner();
-		};
-	}
-
-	@Bean
-	PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}*/
-
-
-
 }

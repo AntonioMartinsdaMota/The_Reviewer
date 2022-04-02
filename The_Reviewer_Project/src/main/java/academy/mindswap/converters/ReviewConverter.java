@@ -10,20 +10,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReviewConverter {
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     public ReviewDto convertToDto(Review review) {
-        ReviewDto dto = new ReviewDto();
-        dto.setReviewId(review.getReviewId());
+        ReviewDto dto = modelMapper.map(review, ReviewDto.class);
         dto.setUserName(review.getUser().getUsername());
         dto.setMovieName(review.getMovie().getOriginalTitle());
-        dto.setDescription(review.getDescription());
-        dto.setLocalRating(review.getLocalRating());
         return dto;
     }
 
     public Review convertToEntity(ReviewDto reviewDto) {
-        Review entity = new Review();
-        entity.setDescription(reviewDto.getDescription());
-        entity.setLocalRating(reviewDto.getLocalRating());
-        return entity;
+        Review review = modelMapper.map(reviewDto, Review.class);
+        review.setReviewId(null);
+        return review;
     }
 }

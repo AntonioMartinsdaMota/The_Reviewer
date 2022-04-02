@@ -11,21 +11,17 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UserConverter {
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     public UserDto toDto(User user) {
-        UserDto dto = new UserDto();
-        dto.setId(user.getUserId());
-        dto.setEmail(user.getEmail());
-        dto.setUsername(user.getUsername());
+        UserDto dto = modelMapper.map(user, UserDto.class);
         dto.setNumberOfReviews(user.getReviews().size());
         dto.setPassword("*********");
         return dto;
     }
 
     public User toEntity(UserDto dto) {
-        User user = new User();
-        user.setEmail(dto.getEmail());
-        user.setUsername(dto.getUsername());
-        user.setPassword(dto.getPassword());
-        return user;
+        return modelMapper.map(dto, User.class);
     }
 }

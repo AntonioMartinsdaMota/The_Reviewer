@@ -33,8 +33,6 @@ public class Movie {
     @Column(nullable = false)
     private Integer year;
     @Column
-    private String type;
-    @Column
     private float IMDBRating;
     @Column
     private Integer rottenTomatoesRating;
@@ -63,7 +61,6 @@ public class Movie {
                 ", directors='" + directors + '\'' +
                 ", actors='" + actors + '\'' +
                 ", year=" + year +
-                ", type='" + type + '\'' +
                 ", IMDBRating=" + IMDBRating +
                 ", rottenTomatoesRating=" + rottenTomatoesRating +
                 ", localRating=" + localRating +

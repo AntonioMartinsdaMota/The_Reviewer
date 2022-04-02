@@ -15,16 +15,11 @@ public class MovieDto {
 
     private Integer movieID;
 
-   /* @NotBlank( message= "ImdbID cannot be empty")
-    private String imDbId;*/
-
     private String originalTitle;
 
     private String portugueseTitle;
 
     private Integer year;
-
-    private String type;
 
     private float IMDBRating;
 

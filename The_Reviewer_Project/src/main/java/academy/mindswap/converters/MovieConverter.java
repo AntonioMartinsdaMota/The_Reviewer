@@ -20,17 +20,8 @@ public class MovieConverter {
     private ModelMapper modelMapper;
 
     public MovieDto convertToDto(Movie movie) {
-        MovieDto dto = new MovieDto();
 
-        dto.setMovieID(movie.getMovieId());
-        dto.setOriginalTitle(movie.getOriginalTitle());
-        dto.setPortugueseTitle(movie.getPortugueseTitle());
-        dto.setYear(movie.getYear());
-        dto.setIMDBRating(movie.getIMDBRating());
-        dto.setRottenTomatoesRating(movie.getRottenTomatoesRating());
-        dto.setLocalRating(movie.getLocalRating());
-        dto.setDirectors(movie.getDirectors());
-        dto.setActors(movie.getActors());
+        MovieDto dto = modelMapper.map(movie, MovieDto.class);
         dto.setNumberOfReviews(movie.getReviews().size());
         return dto;
     }
