@@ -144,14 +144,14 @@ public class UserService {
         User user = userOpt.get();
 
         if(userDto.getUsername() == null) {
-            userDto.setUsername(user.getUsername());
+            user.setUsername(userDto.getUsername());
         }
 
         if(userDto.getEmail() == null) {
-            userDto.setEmail(user.getEmail());
+            user.setEmail(userDto.getEmail());
         }
 
-        return userconverter.toDto(userRepository.save(userconverter.toEntity(userDto)));
+        return userconverter.toDto(userRepository.save(user));
     }
 
     public void deleteUserByUserId(int id) {

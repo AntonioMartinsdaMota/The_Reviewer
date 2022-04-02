@@ -19,6 +19,7 @@ public final class ErrorMessages {
     public static final String INVALID_PASSWORD = "Invalid Password";
     public static final String REVIEW_ALREADY_EXISTS = "You already made a review for this movie";
     public static final String ALREADY_LOGGED_IN = "Already logged in.";
+    public static final String INVALID_PASSWORD_CHANGE_REQUEST = "Password change failed";
 
 
 

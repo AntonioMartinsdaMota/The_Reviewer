@@ -1,51 +1,52 @@
 package academy.mindswap.services;
 
 import academy.mindswap.commands.PasswordDto;
+import academy.mindswap.exceptions.badRequestExceptions.InvalidPasswordChangeRequestException;
+import academy.mindswap.exceptions.badRequestExceptions.InvalidPasswordException;
 import academy.mindswap.persistence.models.User;
 import academy.mindswap.persistence.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Service
 public class PasswordService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private TokenService tokenService;
 
 
-    private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+    public void changePassword(PasswordDto passwordDto, HttpServletRequest request) {
 
-    private boolean validatePassword(String password) {
-        return password.matches(PASSWORD_PATTERN);
-    }
+        String userEmail = tokenService.getEmailFromToken(request);
+        User user = userRepository.findByEmail(userEmail).get();
 
-    private boolean isValidPassword(String password, String confirmPassword, String oldPassword, Integer userId) {
-        User temp = new User();
-        temp.setPassword("");
-        return password.equals(confirmPassword)
-                &&
-                password.length() > 5
-                &&
-                userRepository.findById(userId)
-                        .orElse(temp)
-                        .getPassword()
-                        .equals(oldPassword);
-    }
-
-    public boolean changePassword(PasswordDto passwordDto) {
-        Integer userId = passwordDto.getIdUser();
-        String password = passwordDto.getNewPassword();
+        String newPassword = passwordDto.getNewPassword();
         String confirmPassword = passwordDto.getNewPasswordConfirm();
         String oldPassword = passwordDto.getOldPassword();
-        if (isValidPassword(password, confirmPassword, oldPassword, userId)) {
-            User user = userRepository.findById(userId).orElse(null);
-            if (user != null) {
-                user.setPassword(password);
-                userRepository.save(user);
-                return true;
-            }
+
+        if (newPassword.length() < 7) {
+            throw new InvalidPasswordException();
         }
-        return false;
+
+        if (!newPassword.equals(confirmPassword)) {
+            throw new InvalidPasswordChangeRequestException();
+        }
+
+        if (passwordEncoder.matches(oldPassword, user.getPassword())) {
+            throw new InvalidPasswordChangeRequestException();
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
     }
 
 

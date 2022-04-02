@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 @RestController
@@ -15,16 +16,10 @@ public class PasswordController {
     @Autowired
     private PasswordService passwordService;
 
-    @PutMapping("{id}/password")
-    public ResponseEntity<String> changePassword(@PathVariable("id") Integer id, @RequestBody PasswordDto passwordDto) {
+    @PutMapping("/changepassword")
+    public ResponseEntity<String> changePassword(@RequestBody PasswordDto passwordDto, HttpServletRequest request) {
 
-        if(!Objects.equals(id, passwordDto.getIdUser())) {
-            return ResponseEntity.badRequest().body("Ids do not match");
-        }
-        if(passwordService.changePassword(passwordDto)) {
-            return ResponseEntity.ok("Password changed successfully");
-        }
-
-        return ResponseEntity.unprocessableEntity().body("Password change failed");
+        passwordService.changePassword(passwordDto, request);
+        return ResponseEntity.ok("Password changed successfully");
     }
 }

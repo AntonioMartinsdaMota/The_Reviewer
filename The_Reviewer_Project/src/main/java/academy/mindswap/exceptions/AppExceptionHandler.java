@@ -1,9 +1,6 @@
 package academy.mindswap.exceptions;
 
-import academy.mindswap.exceptions.badRequestExceptions.InvalidPasswordException;
-import academy.mindswap.exceptions.badRequestExceptions.InvalidUserIdException;
-import academy.mindswap.exceptions.badRequestExceptions.RatingOutOfRangeException;
-import academy.mindswap.exceptions.badRequestExceptions.YearOutOfRangeException;
+import academy.mindswap.exceptions.badRequestExceptions.*;
 import academy.mindswap.exceptions.notFoundExceptions.*;
 import academy.mindswap.exceptions.otherExceptions.*;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +26,7 @@ public class AppExceptionHandler {
 
 
     @ExceptionHandler(value = {InvalidUserIdException.class, RatingOutOfRangeException.class,
-            YearOutOfRangeException.class, InvalidPasswordException.class})
+            YearOutOfRangeException.class, InvalidPasswordException.class, InvalidPasswordChangeRequestException.class})
     public ResponseEntity<Error>dealWithBadRequest(Exception e, HttpServletRequest request){
         return ResponseEntity
                 .status(BAD_REQUEST)
