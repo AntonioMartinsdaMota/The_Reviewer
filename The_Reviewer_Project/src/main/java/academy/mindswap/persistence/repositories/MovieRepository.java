@@ -13,18 +13,6 @@ import java.util.Optional;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
-/*
-   @Query("Select m from Movie m where m.originalTitle = :originalTitle")
-    Optional<Movie> findByOriginalTitle(@Param("originalTitle") String originalTitle);
-
-    @Query("Select m from Movie m where m.director = :director")
-    List<Movie> findByDirector(@Param("director") String director);
-
-    @Query("Select m from Movie m where m.gender = :gender")
-    List<Movie> findByGender(@Param("genre") String gender);
-
-    @Query("Select m from Movie m where m.year = :year")
-    List<Movie> findByYear(@Param("year") int year);*/
 
     @Query("Select m from Movie m where m.IMDBRating >= :IMDBRating")
     List<Movie> findByImdbRating(@Param("IMDBRating") float IMDBRating);
@@ -42,5 +30,6 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     List<Movie> findByYear(Integer year);
 
+    List<Movie> findByActorContaining(String actor);
 }
 

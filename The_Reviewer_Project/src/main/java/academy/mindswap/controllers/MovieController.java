@@ -45,7 +45,10 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getMoviesFromDirector(director));
     }
 
-    //SEARCHBYACTORS
+    @GetMapping("/searchactor/{director}")//ALL
+    public ResponseEntity<List<MovieDto>> getMoviesByActor(@PathVariable String actor) {
+        return ResponseEntity.ok(movieService.getMoviesFromActor(actor));
+    }
 
     @GetMapping("/imdb")//ALL
     public ResponseEntity<List<MovieDto>> getMoviesByImdb(@RequestParam(value = "rating") float rating) {

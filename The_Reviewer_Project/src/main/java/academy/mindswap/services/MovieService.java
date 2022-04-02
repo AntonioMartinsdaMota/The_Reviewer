@@ -62,12 +62,6 @@ public class MovieService  {
         return movies.stream().map(m -> movieConverter.convertToDto(m)).collect(Collectors.toList());
     }
 
-    /*public List <MovieDto> getMoviesByGender(String gender){
-        return movieRepository.findByGender(gender)
-                .stream()
-                .map(movieConverter::convertToDto)
-                .collect(Collectors.toList());
-    }*/
 
     public List<MovieDto> getMoviesByImdbRating(Float rating){
         if (rating < 0 || rating > 10) {
@@ -133,4 +127,11 @@ public class MovieService  {
     }
 
 
+    public List<MovieDto> getMoviesFromActor(String actor) {
+        List<Movie> movies = movieRepository.findByActorContaining(actor);
+        if (movies.isEmpty()) {
+            throw new DirectorNotFoundException();
+        }
+        return movies.stream().map(m -> movieConverter.convertToDto(m)).collect(Collectors.toList());
+    }
 }
