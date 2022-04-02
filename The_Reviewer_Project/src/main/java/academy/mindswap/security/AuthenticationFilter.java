@@ -1,15 +1,14 @@
 package academy.mindswap.security;
 
-import academy.mindswap.persistence.repositories.UserRepository;
+import academy.mindswap.exceptions.otherExceptions.LoginRequestFailedException;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -20,6 +19,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,19 +32,27 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private UserRepository userRepository;
-
     public AuthenticationFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email, password);
-        return authenticationManager.authenticate(authenticationToken);
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) {
+        if (request.getContentType().equals(MediaType.APPLICATION_JSON_VALUE)) {
+            ObjectMapper mapper = new ObjectMapper();
+            UsernamePasswordAuthenticationToken authRequest = null;
+            try (InputStream is = request.getInputStream()) {
+                Map<String, String> authenticationBean = mapper.readValue(is, Map.class);
+                authRequest = new UsernamePasswordAuthenticationToken(authenticationBean.get("email"), authenticationBean.get("password"));
+            } catch (IOException e) {
+                authRequest = new UsernamePasswordAuthenticationToken("", "");
+            } finally {
+                setDetails(request, authRequest);
+                return authenticationManager.authenticate(authRequest);
+            }
+        } else {
+            throw new LoginRequestFailedException();
+        }
     }
 
     @Override
@@ -75,3 +83,4 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     }
 }
+
