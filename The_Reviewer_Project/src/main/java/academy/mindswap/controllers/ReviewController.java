@@ -2,8 +2,6 @@ package academy.mindswap.controllers;
 
 
 import academy.mindswap.commands.ReviewDto;
-import academy.mindswap.commands.UserDto;
-import academy.mindswap.exceptions.notFoundExceptions.CookieNotFoundException;
 import academy.mindswap.services.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

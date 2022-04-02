@@ -41,7 +41,7 @@ public class PasswordService {
             throw new InvalidPasswordChangeRequestException();
         }
 
-        if (passwordEncoder.matches(oldPassword, user.getPassword())) {
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
             throw new InvalidPasswordChangeRequestException();
         }
 

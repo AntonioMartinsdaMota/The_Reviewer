@@ -17,7 +17,7 @@ import static org.springframework.http.HttpStatus.*;
 @ControllerAdvice
 public class AppExceptionHandler {
 
-    @ExceptionHandler(value = {UserNotFoundException.class, CookieNotFoundException.class, DirectorNotFoundException.class,
+    @ExceptionHandler(value = {UserNotFoundException.class, DirectorNotFoundException.class,
             MovieNotFoundException.class, ReviewNotFoundException.class})
     public ResponseEntity<Error> dealWithNotFound(Exception e, HttpServletRequest request){
         return ResponseEntity.status(NOT_FOUND)

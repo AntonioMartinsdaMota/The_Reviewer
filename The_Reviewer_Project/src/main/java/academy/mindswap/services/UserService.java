@@ -144,10 +144,6 @@ public class UserService {
             user.setUsername(userDto.getUsername());
         }
 
-        if (userDto.getEmail() != null) {
-            user.setEmail(userDto.getEmail());
-        }
-
         return userconverter.toDto(userRepository.save(user));
     }
 
