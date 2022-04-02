@@ -67,7 +67,7 @@ public class ReviewService {
         newReview.setUser(user.get());
 
         if(movieOpt.isPresent()) {
-            if(reviewRepository.findByUserAndMovie(user.get(), movieOpt.get()) != null){
+            if(reviewRepository.findByUserAndMovie(user.get(), movieOpt.get()).isPresent()){
                 throw new ReviewAlreadyExistsException();
             }
 
