@@ -2,6 +2,7 @@ package academy.mindswap.services;
 
 import academy.mindswap.commands.MovieDto;
 import academy.mindswap.converters.MovieConverter;
+import academy.mindswap.exceptions.otherExceptions.SessionsNotAvailableException;
 import academy.mindswap.persistence.models.Movie;
 import academy.mindswap.persistence.repositories.MovieRepository;
 import academy.mindswap.exceptions.notFoundExceptions.DirectorNotFoundException;
@@ -11,6 +12,9 @@ import academy.mindswap.exceptions.badRequestExceptions.YearOutOfRangeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -110,9 +114,25 @@ public class MovieService  {
             portugueseTitle = movieOpt.get().getOriginalTitle();
         }
 
+        String urlConverted = urlBase.replaceAll("movie", urlConverterToCinemaNos(portugueseTitle));
 
-        return urlBase.replaceAll("movie", urlConverterToCinemaNos(portugueseTitle));
+        try {
+            if(!checkUrlAnswer(urlConverted)){
+                throw new SessionsNotAvailableException();
+            }
+        } catch (IOException e) {
+        }
+
+        return urlConverted;
     }
+
+    private Boolean checkUrlAnswer(String convertedUrl) throws IOException {
+        URL url = new URL(convertedUrl);
+        HttpURLConnection huc = (HttpURLConnection) url.openConnection();
+        int responseCode = huc.getResponseCode();
+        return ( responseCode == HttpURLConnection.HTTP_OK);
+    }
+
 
     private String urlConverterToCinemaNos(String title) {
 

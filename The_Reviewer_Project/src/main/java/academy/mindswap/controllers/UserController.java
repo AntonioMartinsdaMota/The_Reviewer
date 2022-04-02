@@ -1,11 +1,9 @@
 package academy.mindswap.controllers;
 
 
-import academy.mindswap.commands.LoginRequest;
 import academy.mindswap.commands.ReviewDto;
 import academy.mindswap.commands.UserDto;
 import academy.mindswap.exceptions.notFoundExceptions.UserNotFoundException;
-import academy.mindswap.persistence.models.Review;
 import academy.mindswap.persistence.models.Role;
 import academy.mindswap.persistence.models.User;
 import academy.mindswap.services.UserService;
@@ -18,10 +16,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;

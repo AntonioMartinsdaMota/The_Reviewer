@@ -56,6 +56,13 @@ public class AppExceptionHandler {
                 .body(buildError(e, request, e.getMessage()));
     }
 
+    @ExceptionHandler(value = {SessionsNotAvailableException.class})
+    public ResponseEntity<Error>dealWithServiceUnavailable(Exception e, HttpServletRequest request){
+        return ResponseEntity
+                .status(SERVICE_UNAVAILABLE)
+                .body(buildError(e, request, e.getMessage()));
+    }
+
 
     private Error buildError(Exception e, HttpServletRequest request, String statusCode){
         return Error.builder()

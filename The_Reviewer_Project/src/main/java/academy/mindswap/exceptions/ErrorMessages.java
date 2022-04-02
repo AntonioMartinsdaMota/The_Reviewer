@@ -20,9 +20,7 @@ public final class ErrorMessages {
     public static final String REVIEW_ALREADY_EXISTS = "You already made a review for this movie";
     public static final String ALREADY_LOGGED_IN = "Already logged in.";
     public static final String INVALID_PASSWORD_CHANGE_REQUEST = "Password change failed";
-    public static final String INVALID_ASSERT_AUTHORITIES = "User has already OWNER or ADMIN authority;";
-
-
-
+    public static final String INVALID_ASSERT_AUTHORITIES = "User has already OWNER or ADMIN authority";
+    public static final String SESSIONS_NOT_AVAILABLE = "Sessions not available for this movie";
 
 }
