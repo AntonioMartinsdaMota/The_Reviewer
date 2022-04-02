@@ -2,6 +2,7 @@ package academy.mindswap.services;
 
 import academy.mindswap.commands.ReviewDto;
 import academy.mindswap.converters.ReviewConverter;
+import academy.mindswap.exceptions.notFoundExceptions.UserNotFoundException;
 import academy.mindswap.exceptions.otherExceptions.ReviewAlreadyExistsException;
 import academy.mindswap.persistence.models.Movie;
 import academy.mindswap.persistence.models.Review;
@@ -149,5 +150,27 @@ public class ReviewService {
 
 
 
+    }
+
+    public ReviewDto updateReview(ReviewDto reviewDto, HttpServletRequest request, Integer movieID) {
+        String userEmail = tokenService.getEmailFromToken(request);
+        User user = userRepository.findByEmail(userEmail).get();
+        Optional<Movie> movieOpt = movieRepository.findById(movieID);
+        if (movieOpt.isEmpty()){
+            throw new MovieNotFoundException();
+        }
+        Movie movie = movieOpt.get();
+        Optional<Review> reviewOpt = reviewRepository.findByUserAndMovie(user, movieOpt.get());
+        if (reviewOpt.isEmpty()){
+            throw new ReviewNotFoundException();
+        }
+        Review review = reviewOpt.get();
+        if(reviewDto.getLocalRating() != null) {
+            review.setLocalRating(reviewDto.getLocalRating());
+        }
+        if(reviewDto.getDescription() != null) {
+            review.setDescription(reviewDto.getDescription());
+        }
+        return reviewConverter.convertToDto(reviewRepository.save(review));
     }
 }

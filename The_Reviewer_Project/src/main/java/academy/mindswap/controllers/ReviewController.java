@@ -2,6 +2,7 @@ package academy.mindswap.controllers;
 
 
 import academy.mindswap.commands.ReviewDto;
+import academy.mindswap.commands.UserDto;
 import academy.mindswap.exceptions.notFoundExceptions.CookieNotFoundException;
 import academy.mindswap.services.ReviewService;
 import lombok.RequiredArgsConstructor;
@@ -50,6 +51,17 @@ public class ReviewController {
     public ResponseEntity<ReviewDto> createReview(@Valid @RequestBody ReviewDto reviewDto, HttpServletRequest request) {
       return  ResponseEntity.ok(reviewService.createReviewByMovieId(reviewDto, request));
     }
+
+    /**
+     * Updaters
+     */
+
+    @PutMapping("/{movieId}/update")//ALL
+    public ResponseEntity<ReviewDto> updateReview(@PathVariable Integer movieId,
+                                                  @Valid @RequestBody ReviewDto reviewDto, HttpServletRequest request){
+        return ResponseEntity.ok(reviewService.updateReview(reviewDto, request, movieId));
+    }
+
 
 
     /**
