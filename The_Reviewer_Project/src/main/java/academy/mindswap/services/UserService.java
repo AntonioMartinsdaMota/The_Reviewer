@@ -140,11 +140,11 @@ public class UserService {
 
         User user = userOpt.get();
 
-        if (userDto.getUsername() == null) {
+        if (userDto.getUsername() != null) {
             user.setUsername(userDto.getUsername());
         }
 
-        if (userDto.getEmail() == null) {
+        if (userDto.getEmail() != null) {
             user.setEmail(userDto.getEmail());
         }
 
