@@ -129,7 +129,14 @@ public class ReviewService {
             throw new ReviewNotFoundException();
         }
 
+        Integer movieID = reviewOpt.get().getMovie().getMovieId();
         reviewRepository.deleteById(reviewId);
+        Movie movie = movieRepository.findById(movieID).get();
+
+        float movieLocalRating = (float) movie.getReviews().stream()
+                .mapToDouble(Review::getLocalRating).average().orElse(0);
+        movie.setLocalRating(movieLocalRating);
+        movieRepository.save(movie);
     }
 
     public void deleteOwnReview(Integer movieId, HttpServletRequest request) {
@@ -146,9 +153,14 @@ public class ReviewService {
             throw new ReviewNotFoundException();
         }
 
+        Integer movieID = reviewOpt.get().getMovie().getMovieId();
         reviewRepository.deleteById(reviewOpt.get().getReviewId());
+        Movie movie = movieRepository.findById(movieID).get();
 
-
+        float movieLocalRating = (float) movie.getReviews().stream()
+                .mapToDouble(Review::getLocalRating).average().orElse(0);
+        movie.setLocalRating(movieLocalRating);
+        movieRepository.save(movie);
 
     }
 
@@ -171,6 +183,15 @@ public class ReviewService {
         if(reviewDto.getDescription() != null) {
             review.setDescription(reviewDto.getDescription());
         }
-        return reviewConverter.convertToDto(reviewRepository.save(review));
+
+        Review newReview = reviewRepository.save(review);
+
+        Movie reviewMovie = newReview.getMovie();
+        float movieLocalRating = (float) movie.getReviews().stream()
+                .mapToDouble(Review::getLocalRating).average().orElse(0);
+        movie.setLocalRating(movieLocalRating);
+        movieRepository.save(movie);
+
+        return reviewConverter.convertToDto(newReview);
     }
 }

@@ -1,6 +1,5 @@
 package academy.mindswap.services;
 
-
 import academy.mindswap.commands.ReviewDto;
 import academy.mindswap.commands.UserDto;
 import academy.mindswap.converters.MovieConverter;
@@ -32,7 +31,6 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private static final Logger LOGGER = LogManager.getLogger(UserService.class);
-
 
     @Autowired
     private final UserRepository userRepository;
@@ -67,9 +65,9 @@ public class UserService {
         return userRepository.findByEmail(email).get();
     }
 
-    public User findByEmailAndPassword(String email, String password){
+    public User findByEmailAndPassword(String email, String password) {
         Optional<User> user = userRepository.findByEmailAndPassword(email, password);
-        if(user.isEmpty()){
+        if (user.isEmpty()) {
             throw new LoginRequestFailedException();
         }
         return user.get();
@@ -77,13 +75,13 @@ public class UserService {
 
 
     public Optional<UserDto> getUserById(int id) {
-        if(id < 0) {
+        if (id < 0) {
             //LOGGER.log(Level.WARN, "Unknown user: " + id);
             throw new InvalidUserIdException(Integer.toString(id));
         }
         Optional<User> user = userRepository.findById(id);
 
-        if (user.isEmpty()){
+        if (user.isEmpty()) {
             throw new UserNotFoundException(Integer.toString(id));
         }
         return user.map(userconverter::toDto);
@@ -94,16 +92,15 @@ public class UserService {
         List<User> users = userRepository.findAll();
         List<UserDto> usersDto = new ArrayList<>();
 
-        for (User u:users) {
+        for (User u : users) {
             usersDto.add(userconverter.toDto(u));
         }
         return usersDto;
     }
 
 
-
-    public List<ReviewDto> getReviewsByUserId(int id){
-        if(id < 0) {
+    public List<ReviewDto> getReviewsByUserId(int id) {
+        if (id < 0) {
             //LOGGER.log(Level.WARN, "Unknown user: " + id);
             throw new InvalidUserIdException(Integer.toString(id));
         }
@@ -115,11 +112,11 @@ public class UserService {
         return userOpt.get().getReviews().stream().map(r -> reviewConverter.convertToDto(r)).collect(Collectors.toList());
     }
 
-    public UserDto createUser(UserDto userDto){
-        if(userRepository.findByUsername(userDto.getUsername()).isPresent() || userRepository.findByEmail(userDto.getEmail()).isPresent()) {
+    public UserDto createUser(UserDto userDto) {
+        if (userRepository.findByUsername(userDto.getUsername()).isPresent() || userRepository.findByEmail(userDto.getEmail()).isPresent()) {
             throw new UserAlreadyExistsException();
         }
-        if(userDto.getPassword().length() < 7 || userDto.getPassword() == null){
+        if (userDto.getPassword().length() < 7 || userDto.getPassword() == null) {
             throw new InvalidPasswordException();
         }
 
@@ -143,11 +140,11 @@ public class UserService {
 
         User user = userOpt.get();
 
-        if(userDto.getUsername() == null) {
+        if (userDto.getUsername() == null) {
             user.setUsername(userDto.getUsername());
         }
 
-        if(userDto.getEmail() == null) {
+        if (userDto.getEmail() == null) {
             user.setEmail(userDto.getEmail());
         }
 
@@ -162,20 +159,20 @@ public class UserService {
         userRepository.deleteAll();
     }
 
-    public void createRoles(){
+    public void createRoles() {
         List<Role> roles = roleRepository.findAll();
 
-        if(roles.isEmpty()) {
+        if (roles.isEmpty()) {
             roleRepository.save(new Role(null, "OWNER"));
             roleRepository.save(new Role(null, "ADMIN"));
             roleRepository.save(new Role(null, "USER"));
         }
     }
 
-    public void createOwner(){
+    public void createOwner() {
         Optional<User> user = userRepository.findById(1);
 
-        if(user.isEmpty()) {
+        if (user.isEmpty()) {
             User newUser =
                     User.builder()
                             .userId(null)
@@ -197,50 +194,18 @@ public class UserService {
 
     public UserDto turnAdmin(Integer userId) {
         Optional<User> userOpt = userRepository.findById(userId);
-        if (userOpt.isEmpty()){
+        if (userOpt.isEmpty()) {
             throw new UserNotFoundException(userId.toString());
         }
-        User user =userOpt.get();
+        User user = userOpt.get();
 
-        if(user.getRoles().contains(roleRepository.findByRole("ADMIN")) ||
-                user.getRoles().contains(roleRepository.findByRole("OWNER"))){
+        if (user.getRoles().contains(roleRepository.findByRole("ADMIN")) ||
+                user.getRoles().contains(roleRepository.findByRole("OWNER"))) {
             throw new InvalidAssertAuthoritiesException();
         }
         List<Role> roles = List.of(roleRepository.findByRole("ADMIN"));
         user.setRoles(roles);
         return userconverter.toDto(userRepository.save(user));
     }
-
-
-
-/*
-    public List<UserDto> deleteAllUsers(){
-        return userRepository.
-    }
-
-    public List<UserDto> deleteUserById(int id){
-        if(id < 0) {
-            LOGGER.log(Level.WARN, "Unknown user: " + id);
-            throw new InvalidUserId(Integer.toString(id));
-        }
-        Optional<User> userOpt = userRepository.findById(id);
-
-        if (userOpt.isEmpty()) {
-            throw new UsernameNotFoundException("");
-        }
-        return userOpt.stream().
-
-
-    }*/
-
-  //  public User createUser()
-
-
-    // userService.getReviewByMovieTitle(id, title); - Falta!
-    //userService.getUserReviews(id) - OK!
-    // userService.createUser(user)
-    //userService.updateUser(user)
-    // userService.deleteUserById(id)
-    // userService.deleteAllUsers()
 
 }

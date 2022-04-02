@@ -11,8 +11,6 @@ import javax.validation.constraints.Size;
 public class PasswordDto {
 
     @NotBlank
-    private Integer idUser;
-    @NotBlank
     private String oldPassword;
     @Size(min = 7)
     private String newPassword;
