@@ -195,6 +195,22 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
+    public UserDto turnAdmin(Integer userId) {
+        Optional<User> userOpt = userRepository.findById(userId);
+        if (userOpt.isEmpty()){
+            throw new UserNotFoundException(userId.toString());
+        }
+        User user =userOpt.get();
+
+        if(user.getRoles().contains(roleRepository.findByRole("ADMIN")) ||
+                user.getRoles().contains(roleRepository.findByRole("OWNER"))){
+            throw new InvalidAssertAuthoritiesException();
+        }
+        List<Role> roles = List.of(roleRepository.findByRole("ADMIN"));
+        user.setRoles(roles);
+        return userconverter.toDto(userRepository.save(user));
+    }
+
 
 
 /*

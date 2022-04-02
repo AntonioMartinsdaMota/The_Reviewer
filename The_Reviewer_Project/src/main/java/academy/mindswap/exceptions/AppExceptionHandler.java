@@ -26,7 +26,8 @@ public class AppExceptionHandler {
 
 
     @ExceptionHandler(value = {InvalidUserIdException.class, RatingOutOfRangeException.class,
-            YearOutOfRangeException.class, InvalidPasswordException.class, InvalidPasswordChangeRequestException.class})
+            YearOutOfRangeException.class, InvalidPasswordException.class, InvalidPasswordChangeRequestException.class,
+            InvalidAssertAuthoritiesException.class})
     public ResponseEntity<Error>dealWithBadRequest(Exception e, HttpServletRequest request){
         return ResponseEntity
                 .status(BAD_REQUEST)

@@ -87,6 +87,12 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @PutMapping("{userId}/admin")//OWNER
+    public ResponseEntity<UserDto> turnAdmin(@PathVariable Integer userId){
+        UserDto user = userService.turnAdmin(userId);
+        return ResponseEntity.ok(user);
+    }
+
     /**
      * Deleters
      */
