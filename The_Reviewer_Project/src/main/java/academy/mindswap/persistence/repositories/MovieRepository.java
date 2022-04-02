@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +29,6 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     List<Movie> findByYear(Integer year);
 
-    List<Movie> findByActorContaining(String actor);
+    List<Movie> findByActorsContaining(String actor);
 }
 

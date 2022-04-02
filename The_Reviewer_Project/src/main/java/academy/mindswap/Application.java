@@ -21,7 +21,7 @@ public class Application {
 				//.start();
 	}
 
-	@Bean
+	/*@Bean
 	CommandLineRunner run(UserService userService) {
 		return args -> {
 			userService.createRoles();
@@ -32,7 +32,7 @@ public class Application {
 	@Bean
 	PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
-	}
+	}*/
 
 
 

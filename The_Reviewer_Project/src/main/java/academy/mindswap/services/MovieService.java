@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -117,7 +116,8 @@ public class MovieService  {
 
     private String urlConverterToCinemaNos(String title) {
 
-        title = title.toLowerCase().replaceAll(" ", "-");
+        title = title.toLowerCase().replaceAll(" ", "-")
+                .replaceAll("[<>%\\$:;,.!?#%]", "-");
 
         if (title.contains("--")){
             title = title.replaceAll("--", "-");
@@ -128,7 +128,7 @@ public class MovieService  {
 
 
     public List<MovieDto> getMoviesFromActor(String actor) {
-        List<Movie> movies = movieRepository.findByActorContaining(actor);
+        List<Movie> movies = movieRepository.findByActorsContaining(actor);
         if (movies.isEmpty()) {
             throw new DirectorNotFoundException();
         }
