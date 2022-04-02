@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.OneToMany;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Locale;
 
@@ -68,5 +69,10 @@ public class MovieController {
         return ResponseEntity.ok(movieDtoList);
     }
 
-    //SESSÕES
+    @GetMapping(value = "/sessions/{movieId}")
+    public void getMovieSessions(@PathVariable Integer movieId,  HttpServletResponse httpServletResponse) {
+        String url = movieService.getSessionsUrl(movieId);
+        httpServletResponse.setHeader("Location", url);
+        httpServletResponse.setStatus(302);
+    }
 }

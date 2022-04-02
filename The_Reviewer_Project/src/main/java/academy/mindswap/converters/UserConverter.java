@@ -17,7 +17,7 @@ public class UserConverter {
         dto.setEmail(user.getEmail());
         dto.setUsername(user.getUsername());
         dto.setNumberOfReviews(user.getReviews().size());
-        dto.setPassword(user.getPassword());
+        dto.setPassword("*********");
         return dto;
     }
 

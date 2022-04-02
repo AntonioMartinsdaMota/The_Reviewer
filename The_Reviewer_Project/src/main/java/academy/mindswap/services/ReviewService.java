@@ -123,20 +123,31 @@ public class ReviewService {
 
     public void deleteReview(Integer reviewId, HttpServletRequest request){
 
-        String userEmail = tokenService.getEmailFromToken(request);
-        Optional<User> user = userRepository.findByEmail(userEmail);
-
         Optional<Review> reviewOpt = reviewRepository.findById(reviewId);
         if (reviewOpt.isEmpty()){
             throw new ReviewNotFoundException();
         }
 
-        if(!user.get().getUserId().equals(reviewOpt.get().getUser().getUserId()) /*OR ADMIN*/) {
-            throw new NotEnoughPermissionsException();
-        }
-
         reviewRepository.deleteById(reviewId);
     }
 
+    public void deleteOwnReview(Integer movieId, HttpServletRequest request) {
 
+        String userEmail = tokenService.getEmailFromToken(request);
+        User user = userRepository.findByEmail(userEmail).get();
+        Optional<Movie> movieOpt = movieRepository.findById(movieId);
+        if (movieOpt.isEmpty()){
+            throw new MovieNotFoundException();
+        }
+
+        Optional<Review> reviewOpt = reviewRepository.findByUserAndMovie(user, movieOpt.get());
+        if (reviewOpt.isEmpty()){
+            throw new ReviewNotFoundException();
+        }
+
+        reviewRepository.deleteById(reviewOpt.get().getReviewId());
+
+
+
+    }
 }

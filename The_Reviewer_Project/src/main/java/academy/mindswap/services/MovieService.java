@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -101,10 +102,35 @@ public class MovieService  {
     }
 
 
+    public String getSessionsUrl(Integer movieId) {
+        String urlBase = "https://cinemas.nos.pt/Filmes/Pages/movie.aspx";
+
+        Optional<Movie> movieOpt = movieRepository.findById(movieId);
+
+        if (movieOpt.isEmpty()){
+            throw  new MovieNotFoundException();
+        }
+
+        String portugueseTitle = movieOpt.get().getPortugueseTitle();
+
+        if (portugueseTitle.equals("")){
+            portugueseTitle = movieOpt.get().getOriginalTitle();
+        }
 
 
+        return urlBase.replaceAll("movie", urlConverterToCinemaNos(portugueseTitle));
+    }
 
+    private String urlConverterToCinemaNos(String title) {
 
+        title = title.toLowerCase().replaceAll(" ", "-");
+
+        if (title.contains("--")){
+            title = title.replaceAll("--", "-");
+            return urlConverterToCinemaNos(title);
+        }
+        return title;
+    }
 
 
 }

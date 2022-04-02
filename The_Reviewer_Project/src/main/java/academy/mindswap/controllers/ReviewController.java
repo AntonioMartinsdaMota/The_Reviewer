@@ -57,9 +57,14 @@ public class ReviewController {
      */
 
 
-    @DeleteMapping("/delete/{reviewId}")//ALL
+    @DeleteMapping("/delete/{reviewId}")//ADMIN
     public void deleteReviewById(@PathVariable Integer reviewId, HttpServletRequest request){
          reviewService.deleteReview(reviewId, request);
+    }
+
+    @DeleteMapping("/deletemyreview/{movieId}")//ALL
+    public void deleteOwnReview(@PathVariable Integer movieId, HttpServletRequest request){
+        reviewService.deleteOwnReview(movieId, request);
     }
 
     @DeleteMapping("/deleteall")//ADMIN
