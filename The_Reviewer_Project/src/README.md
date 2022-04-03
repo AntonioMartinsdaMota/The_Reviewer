@@ -72,11 +72,11 @@ docker run --name mymariadb -e MARIADB_ROOT_PASSWORD=mypass -p 3306:3306 -d mari
 
 
 #TO build the APP
-docker build -t users_service .
+docker build -t the_reviewer
 
 
 #TO run the APP
-docker run -it --rm --link mymariadb  -p 8080:8080 users_service
+docker run -it --rm --link mymariadb  -p 8080:8080 the_reviewer
 
 
 #TO run the APP in compose
