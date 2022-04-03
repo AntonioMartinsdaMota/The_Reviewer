@@ -200,7 +200,10 @@ public class UserService {
             throw new InvalidAssertAuthoritiesException();
         }
 
+
         user.getRoles().add(roleRepository.findByRole("ADMIN"));
+        user.getRoles().remove(roleRepository.findByRole("USER"));
+
         return userconverter.toDto(userRepository.save(user));
     }
 

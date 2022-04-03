@@ -30,7 +30,6 @@ public class User {
     private Collection<Role> roles = new ArrayList<>();
     @OneToMany (
             cascade = {CascadeType.ALL},
-            orphanRemoval = true,
             mappedBy = "user"
     )
     @Column

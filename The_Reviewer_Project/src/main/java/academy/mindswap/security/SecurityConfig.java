@@ -48,8 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic().authenticationEntryPoint(swaggerAuthenticationEntryPoint());
         http.authorizeRequests()
                 .antMatchers("/auth/login", "/api/user/create", "api/user/token/refresh").permitAll()
-                .antMatchers("/api/user/deleteall", "/api/review/deleteall").hasAnyAuthority("OWNER")
-                .antMatchers("/api/").hasAnyAuthority("USER", "OWNER")
+                .antMatchers("/api/*/deletebyid/*").hasAnyAuthority("ADMIN", "OWNER")
+                .antMatchers("/api/*/deleteall", "api/user/*/admin").hasAnyAuthority("OWNER")
                 .anyRequest().authenticated();
         http.addFilter(authenticationFilter);
         http.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

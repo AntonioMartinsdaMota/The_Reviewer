@@ -25,8 +25,6 @@ public class UserDto {
     @NotBlank( message= "Name cannot be empty")
     private String username;
 
-    @Email(message = "Invalid email address")
-    @NotBlank( message= "Email cannot be empty")
     private String email;
 
     private String password;
