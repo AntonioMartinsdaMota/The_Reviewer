@@ -2,17 +2,14 @@ package academy.mindswap.controllers;
 
 
 import academy.mindswap.commands.MovieDto;
-import academy.mindswap.persistence.models.Movie;
-import academy.mindswap.services.MovieService;
+import academy.mindswap.controllers.services.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.OneToMany;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Locale;
 
 @RestController
 @RequestMapping("/api/movie")
@@ -45,7 +42,7 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getMoviesFromDirector(director));
     }
 
-    @GetMapping("/searchactor/{director}")//ALL
+    @GetMapping("/searchactor/{actor}")//ALL
     public ResponseEntity<List<MovieDto>> getMoviesByActor(@PathVariable String actor) {
         return ResponseEntity.ok(movieService.getMoviesFromActor(actor));
     }
