@@ -9,6 +9,7 @@ import academy.mindswap.exceptions.notFoundExceptions.DirectorNotFoundException;
 import academy.mindswap.exceptions.notFoundExceptions.MovieNotFoundException;
 import academy.mindswap.exceptions.badRequestExceptions.RatingOutOfRangeException;
 import academy.mindswap.exceptions.badRequestExceptions.YearOutOfRangeException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,15 +22,16 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class MovieService  {
 
     //private static final Logger LOGGER = LogManager.getLogger(MovieService.class);
 
-    @Autowired
-    private MovieRepository movieRepository;
+    //@Autowired
+    private final MovieRepository movieRepository;
 
-    @Autowired
-    private MovieConverter movieConverter;
+    //@Autowired
+    private final MovieConverter movieConverter;
 
     public MovieDto save(MovieDto movieDto) {
         return movieConverter.convertToDto(movieRepository.save(movieConverter.convertToEntity(movieDto)));
@@ -64,7 +66,6 @@ public class MovieService  {
         }
         return movies.stream().map(m -> movieConverter.convertToDto(m)).collect(Collectors.toList());
     }
-
 
     public List<MovieDto> getMoviesByImdbRating(Float rating){
         if (rating < 0 || rating > 10) {

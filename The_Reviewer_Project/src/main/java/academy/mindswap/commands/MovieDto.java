@@ -32,4 +32,19 @@ public class MovieDto {
     private String actors;
 
     private Integer numberOfReviews;
+
+    @Override
+    public String toString() {
+        return "MovieDto{" +
+                "movieID=" + movieID +
+                ", originalTitle='" + originalTitle + '\'' +
+                ", portugueseTitle='" + portugueseTitle + '\'' +
+                ", year=" + year +
+                ", IMDBRating=" + IMDBRating +
+                ", rottenTomatoesRating=" + rottenTomatoesRating +
+                ", localRating=" + localRating +
+                ", directors='" + directors + '\'' +
+                ", actors='" + actors + '\'' +
+                '}';
+    }
 }

@@ -3,15 +3,17 @@ package academy.mindswap.converters;
 
 import academy.mindswap.commands.ReviewDto;
 import academy.mindswap.persistence.models.Review;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class ReviewConverter {
 
-    @Autowired
-    private ModelMapper modelMapper;
+
+    private final ModelMapper modelMapper;
 
     public ReviewDto convertToDto(Review review) {
         ReviewDto dto = modelMapper.map(review, ReviewDto.class);

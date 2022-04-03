@@ -8,6 +8,7 @@ import academy.mindswap.converters.UserConverter;
 import academy.mindswap.persistence.models.Role;
 import academy.mindswap.persistence.models.User;
 import academy.mindswap.persistence.repositories.MovieRepository;
+import academy.mindswap.persistence.repositories.ReviewRepository;
 import academy.mindswap.persistence.repositories.RoleRepository;
 import academy.mindswap.persistence.repositories.UserRepository;
 import academy.mindswap.exceptions.badRequestExceptions.*;
@@ -32,14 +33,14 @@ public class UserService {
 
     private static final Logger LOGGER = LogManager.getLogger(UserService.class);
 
-    @Autowired
+    //@Autowired
     private final UserRepository userRepository;
 
-    @Autowired
+    //@Autowired
     private final UserConverter userconverter;
 
-    @Autowired
-    private ReviewConverter reviewConverter;
+
+    private final ReviewConverter reviewConverter;
 
     @Autowired
     private MovieRepository movieRepository;
@@ -50,8 +51,8 @@ public class UserService {
     @Autowired
     private TokenService tokenService;
 
-    @Autowired
-    private RoleRepository roleRepository;
+
+    private final RoleRepository roleRepository;
 
     @Autowired
     private final PasswordEncoder passwordEncoder;

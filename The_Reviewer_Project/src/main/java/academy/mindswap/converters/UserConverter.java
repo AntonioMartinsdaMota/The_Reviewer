@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UserConverter {
 
-    @Autowired
-    private ModelMapper modelMapper;
+
+    private final ModelMapper modelMapper;
 
     public UserDto toDto(User user) {
         UserDto dto = modelMapper.map(user, UserDto.class);
