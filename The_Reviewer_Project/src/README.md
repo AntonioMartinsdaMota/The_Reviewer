@@ -1,21 +1,19 @@
 #THE REVIEWER APP
-This app is a service of movies reviews.
+This app is a service of movies reviews, made by André Dias, André Faiões, António Mota, João Souto and Maria João Morais.
+It was made in the context of the second project for MindSwap Aacademy.
 
-This application allows authenticated users to search movies by original or portuguese title, create reviews of them,
-see the local rating and internal ratings of Rotten Tomatoes and IMDB.
+This application allows authenticated users to search movies by original, director, and actors, create reviews of them,
+see the local rating and ratings of Rotten Tomatoes and IMDB.
 
-This application is linked with the websites of Rotten Tomatoes, IMDB and NOS cinemas:
- - https://www.rottentomatoes.com/
- - https://www.imdb.com/
- - https://cinemas.nos.pt/
+This application accesses APIs of IMDB MovieDB andit also redirects to NOS cinemas website.
 
-The users have to register and logged in, to make movies searches and reviews.
+The users have to register and login, to make movies searches and reviews.
 
 The application gives information about the searched film, namely the original title, the title in Portuguese, year,
 director, actors, Rotten Tomatoes Rating, IMDB Rating, number of Reviews. If the APP returns the information of a "movie 
 not found", it means that the film has not yet been reviewed.
 
-The application allows searching if there are available sessions of a specific film in NOS cinemas.
+The application also as a feature that redirects the client to an external webpage if there are available sessions of a specific film in NOS cinemas.
 
 POSSIBLE REQUESTS:
 
