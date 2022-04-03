@@ -3,9 +3,11 @@ package academy.mindswap.converters;
 import academy.mindswap.commands.*;
 import academy.mindswap.persistence.models.Movie;
 import academy.mindswap.persistence.models.Review;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,10 +16,11 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class MovieConverter {
 
-    @Autowired
-    private ModelMapper modelMapper;
+
+    private final ModelMapper modelMapper;
 
     public MovieDto convertToDto(Movie movie) {
 

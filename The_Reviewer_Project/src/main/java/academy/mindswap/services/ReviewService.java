@@ -13,6 +13,7 @@ import academy.mindswap.persistence.repositories.UserRepository;
 import academy.mindswap.exceptions.notFoundExceptions.MovieNotFoundException;
 import academy.mindswap.exceptions.notFoundExceptions.ReviewNotFoundException;
 import academy.mindswap.exceptions.otherExceptions.NotEnoughPermissionsException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,19 +23,20 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ReviewService {
 
-    @Autowired
-    private ReviewRepository reviewRepository;
 
-    @Autowired
-    private MovieRepository movieRepository;
+    private final ReviewRepository reviewRepository;
+
+
+    private final MovieRepository movieRepository;
 
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private ReviewConverter reviewConverter;
+
+    private final ReviewConverter reviewConverter;
 
     @Autowired
     private IMDBService imdbService;

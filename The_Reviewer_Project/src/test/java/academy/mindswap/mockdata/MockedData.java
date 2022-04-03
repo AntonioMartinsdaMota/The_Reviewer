@@ -6,6 +6,7 @@ import academy.mindswap.commands.ReviewDto;
 import academy.mindswap.commands.UserDto;
 import academy.mindswap.persistence.models.Movie;
 import academy.mindswap.persistence.models.Review;
+import academy.mindswap.persistence.models.Role;
 import academy.mindswap.persistence.models.User;
 import javax.servlet.http.Cookie;
 import java.util.HashSet;
@@ -176,6 +177,7 @@ public class MockedData {
                 .username("user1")
                 .password("123")
                 .email("j@123.pt")
+                .roles(List.of(new Role(1,"ADMIN")))
                 .reviews(mockedListReviews)
                 .build();
     }
