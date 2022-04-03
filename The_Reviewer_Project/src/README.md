@@ -5,7 +5,7 @@ It was made in the context of the second project for MindSwap Aacademy.
 This application allows authenticated users to search movies by original, director, and actors, create reviews of them,
 see the local rating and ratings of Rotten Tomatoes and IMDB.
 
-This application accesses APIs of IMDB MovieDB andit also redirects to NOS cinemas website.
+This application accesses APIs of IMDB, MovieDB, and, it also redirects to NOS cinemas website.
 
 The users have to register and login, to make movies searches and reviews.
 
