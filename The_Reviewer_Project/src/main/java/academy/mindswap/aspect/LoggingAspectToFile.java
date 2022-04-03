@@ -4,7 +4,11 @@ import academy.mindswap.utils.LogWriter;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 
+import java.security.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Optional;
 
@@ -15,6 +19,12 @@ public class LoggingAspectToFile {
         if (result.isPresent()) {
             LogWriter.writeToFile("After returning from " + joinPoint.getSignature().getName() + " with result " + result.get());
         }
+    }
+
+    @AfterReturning(value = "execution(* academy.mindswap.security.AuthenticationFilter.*(..))", returning = "result")
+    public void logAfterReturning3(JoinPoint joinPoint, Authentication result) {
+        User user =(User) result.getPrincipal();
+        LogWriter.writeToFile(LocalDateTime.now() + user.getUsername() + "login");
     }
 
     @AfterReturning(value = "execution(* academy.mindswap.controllers.MovieController.*(..))", returning = "result")

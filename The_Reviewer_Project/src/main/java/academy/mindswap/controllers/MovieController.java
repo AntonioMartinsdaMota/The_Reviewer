@@ -2,7 +2,7 @@ package academy.mindswap.controllers;
 
 
 import academy.mindswap.commands.MovieDto;
-import academy.mindswap.controllers.services.MovieService;
+import academy.mindswap.services.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
