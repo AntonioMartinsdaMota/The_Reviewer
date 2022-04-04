@@ -16,9 +16,9 @@ ENTRYPOINT ["java","-jar","/app.jar"]
 
 FROM openjdk:17-jdk-alpine as runner
 ENV MARIADB_DB=reviewer
-ENV MARIADB_USER=root
-ENV MARIADB_PASSWORD=mypass
-ENV MARIADB_URL=jdbc:mariadb://mymariadb:3306/${MARIADB_DB}
+ENV MARIADB_USER=group1
+ENV MARIADB_PASSWORD=Group1Password!
+ENV MARIADB_URL=jdbc:mariadb://ms-2nd-edition-groups-db00006104.mdb0002418.db.skysql.net:5003/group1?useSSL=true&trustServerCertificate=true
 ENV SERVER_PORT=8080
 ENV HIBERNATE_DDL_AUTO=update
 COPY --from=builder /app/target/*.jar /app.jar
