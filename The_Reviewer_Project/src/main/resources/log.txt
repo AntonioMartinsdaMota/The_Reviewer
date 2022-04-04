@@ -1,5 +1,0 @@
-
-2022-04-04T12:09:02.917157600 || owner@owner || Successful Login
-2022-04-04T12:10:09.355111400 || owner@owner || Successful Login
-2022-04-04T12:24:30.937758900 || owner@owner || Successful Login
-2022-04-04T12:28:25.674822900 || owner@owner || Successful Login
