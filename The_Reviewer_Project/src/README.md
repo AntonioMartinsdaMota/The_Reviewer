@@ -1,6 +1,6 @@
 #THE REVIEWER APP
 This app is a service of movies reviews, made by André Dias, André Faiões, António Mota, João Souto and Maria João Morais.
-It was made in the context of the second project for MindSwap Aacademy.
+It was made in the context of the second project for MindSwap Academy.
 
 This application allows authenticated users to search movies by original, director, and actors, create reviews of them,
 see the local rating and ratings of Rotten Tomatoes and IMDB.

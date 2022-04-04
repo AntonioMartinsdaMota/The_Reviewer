@@ -2,6 +2,7 @@ package academy.mindswap.services;
 
 import academy.mindswap.commands.ReviewDto;
 import academy.mindswap.converters.ReviewConverter;
+import academy.mindswap.exceptions.badRequestExceptions.RatingOutOfRangeException;
 import academy.mindswap.exceptions.notFoundExceptions.UserNotFoundException;
 import academy.mindswap.exceptions.otherExceptions.ReviewAlreadyExistsException;
 import academy.mindswap.persistence.models.Movie;
@@ -59,6 +60,10 @@ public class ReviewService {
     }
 
     public ReviewDto createReviewByMovieId(ReviewDto reviewDto, HttpServletRequest request) {
+
+        if (reviewDto.getLocalRating() < 1 || reviewDto.getLocalRating() > 5){
+            throw new RatingOutOfRangeException();
+        }
 
         String email = tokenService.getEmailFromToken(request);
 
