@@ -26,8 +26,8 @@ public class LoggingAspect {
 
     @AfterThrowing(value = "execution(* academy.mindswap.services.*Service.*(..))", throwing = "ex")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable ex) {
-        LOGGER.log(Level.INFO,LocalDateTime.now() + " -After throwing from " + joinPoint.getSignature().getName() + " with exception " + ex.getMessage());
-        LogWriter.writeToFile(LocalDateTime.now() + " -After throwing from " + joinPoint.getSignature().getName() + " with exception " + ex.getMessage());
+        LOGGER.log(Level.INFO,LocalDateTime.now() + " -After throwing from " + joinPoint.getSignature().getName() + " with exception " + ex.getMessage() + "\n");
+        LogWriter.writeToFile(LocalDateTime.now() + " -After throwing from " + joinPoint.getSignature().getName() + " with exception " + ex.getMessage() + "\n");
     }
 }
 

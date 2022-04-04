@@ -18,7 +18,7 @@ public class CustomApplicationListener implements ApplicationListener<Authentica
     @Override
     public void onApplicationEvent(AuthenticationFailureBadCredentialsEvent event) {
         Object userName = event.getAuthentication().getPrincipal();
-        LOGGER.log(Level.INFO, LocalDateTime.now() + " || " +  userName + " || " + "Login Failed");
-        LogWriter.writeToFile(LocalDateTime.now() + " || " +  userName + " || " + "Successful Login");
+        LOGGER.log(Level.INFO, LocalDateTime.now() + " || " +  userName + " || " + "Login Failed" + "\n");
+        LogWriter.writeToFile(LocalDateTime.now() + " || " +  userName + " || " + "Login Failed" + "\n");
     }
 }

@@ -67,8 +67,8 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
         User user =(User) authResult.getPrincipal();
-        LOGGER.log(Level.INFO, LocalDateTime.now() + " || " +  user.getUsername() + " || " + "Successful Login");
-        LogWriter.writeToFile(LocalDateTime.now() + " || " +  user.getUsername() + " || " + "Successful Login");
+        LOGGER.log(Level.INFO, LocalDateTime.now() + " || " +  user.getUsername() + " || " + "Successful Login" + "\n");
+        LogWriter.writeToFile(LocalDateTime.now() + " || " +  user.getUsername() + " || " + "Successful Login" + "\n");
         Algorithm algorithm = Algorithm.HMAC256("secret".getBytes());
         String access_token = JWT.create()
                 .withSubject(user.getUsername())
