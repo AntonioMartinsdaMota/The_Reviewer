@@ -14,9 +14,9 @@ spring:
       ddl-auto: ${HIBERNATE_DDL_AUTO:update}
       show-sql: true
   datasource:
-    url: ${MARIADB_URL:jdbc:mariadb://localhost:3306/reviewer}
-    username: ${MARIADB_USER:root}
-    password: ${MARIADB_PASSWORD:mypass}
+    url: jdbc:mariadb://ms-2nd-edition-groups-db00006104.mdb0002418.db.skysql.net:5003/group1?useSSL=true&trustServerCertificate=true
+    username: group1
+    password: Group1Password!
 
 
 
