@@ -20,7 +20,7 @@ ENV MARIADB_USER=group1
 ENV MARIADB_PASSWORD=Group1Password!
 ENV MARIADB_URL=jdbc:mariadb://ms-2nd-edition-groups-db00006104.mdb0002418.db.skysql.net:5003/group1?useSSL=true&trustServerCertificate=true
 ENV SERVER_PORT=8080
-ENV HIBERNATE_DDL_AUTO=update
+ENV HIBERNATE_DDL_AUTO=create-drop
 COPY --from=builder /app/target/*.jar /app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","/app.jar"]
