@@ -30,9 +30,8 @@ services:
       - '8080:8080'
     environment:
       MARIADB_DB: 'mindswap'
-      MARIADB_USER: 'root'
-      MARIADB_PASSWORD: 'mypass'
-      MARIADB_URL: jdbc:mariadb://mindswap-mariadb:3306/mindswap
+      MARIADB_USER: 'group1'
+      MARIADB_PASSWORD: 'Group1Password!'
+      MARIADB_URL: jdbc:mariadb://ms-2nd-edition-groups-db00006104.mdb0002418.db.skysql.net:5003/group1?useSSL=true&trustServerCertificate=true
       SERVER_PORT: '8080'
       HIBERNATE_DDL_AUTO: 'update'
-
