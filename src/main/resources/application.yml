@@ -1,0 +1,22 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+spring:
+
+  output:
+    ansi:
+      enabled: ALWAYS
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDB103Dialect
+    hibernate:
+      ddl-auto: ${HIBERNATE_DDL_AUTO:update}
+      show-sql: true
+  datasource:
+    url: jdbc:mariadb://ms-2nd-edition-groups-db00006104.mdb0002418.db.skysql.net:5003/group1?useSSL=true&trustServerCertificate=true
+    username: group1
+    password: Group1Password!
+
+
+

@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1eb23195-5629-43ff-9502-903d136140a6" name="Changes" comment="moved files" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="Heroku" />
+  </component>
+  <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$/.." source="origin/main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="Heroku" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="273HnCZU3D39OcOZPbfFWqHE8yM" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../pom.xml" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\João Souto\Desktop\mindSwap\IntelliJ\TheReviewer\The_Reviewer\The_Reviewer_Project" />
+      <recent name="C:\Users\João Souto\Desktop\mindSwap\IntelliJ\TheReviewer\The_Reviewer\The_Reviewer_Project\src\main\java\academy\mindswap" />
+      <recent name="C:\Users\João Souto\Desktop\mindSwap\IntelliJ\TheReviewer\The_Reviewer_Project\src\main\resources" />
+      <recent name="C:\Users\João Souto\Desktop\mindSwap\IntelliJ\TheReviewer\The_Reviewer_Project" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\João Souto\Desktop\mindSwap\IntelliJ\TheReviewer\The_Reviewer\The_Reviewer_Project" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="academy.mindswap.security" />
+      <recent name="academy.mindswap.commands" />
+      <recent name="academy.mindswap.config" />
+      <recent name="academy.mindswap.controllers" />
+      <recent name="academy.mindswap.services" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Docker.Dockerfile">
+    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="academy.mindswap.Application" />
+      <module name="reviewer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="academy.mindswap.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="reviewer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="academy.mindswap.unit.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="academy.mindswap.unit" />
+      <option name="MAIN_CLASS_NAME" value="academy.mindswap.unit.UserServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest.test_getUserById_Should_Return_Success" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="reviewer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="academy.mindswap.unit.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="academy.mindswap.unit" />
+      <option name="MAIN_CLASS_NAME" value="academy.mindswap.unit.UserServiceTest" />
+      <option name="METHOD_NAME" value="test_getUserById_Should_Return_Success" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="reviewer-image" />
+          <option name="containerName" value="reviewer-image" />
+          <option name="sourceFilePath" value="Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.Dockerfile" />
+        <item itemvalue="JUnit.UserServiceTest.test_getUserById_Should_Return_Success" />
+        <item itemvalue="JUnit.UserServiceTest" />
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Application.Application" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1eb23195-5629-43ff-9502-903d136140a6" name="Changes" comment="" />
+      <created>1648542015430</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1648542015430</updated>
+    </task>
+    <task id="LOCAL-00039" summary="small change">
+      <created>1648747354007</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1648747354007</updated>
+    </task>
+    <task id="LOCAL-00040" summary="small corrections">
+      <created>1648747605789</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1648747605789</updated>
+    </task>
+    <task id="LOCAL-00041" summary="localRating is working!">
+      <created>1648804491420</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1648804491420</updated>
+    </task>
+    <task id="LOCAL-00042" summary="small corrections">
+      <created>1648805448300</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1648805448300</updated>
+    </task>
+    <task id="LOCAL-00043" summary="added tokens">
+      <created>1648819078207</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1648819078207</updated>
+    </task>
+    <task id="LOCAL-00044" summary="JWT Token working!">
+      <created>1648834439035</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1648834439035</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Authentication Service and controller extinguished;">
+      <created>1648835078212</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1648835078212</updated>
+    </task>
+    <task id="LOCAL-00046" summary="JWT security added;&#10;Acceptance tests commented.">
+      <created>1648835917727</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1648835917727</updated>
+    </task>
+    <task id="LOCAL-00047" summary="swagger problem with authentication solved">
+      <created>1648837670106</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1648837670106</updated>
+    </task>
+    <task id="LOCAL-00048" summary="new users have USER role">
+      <created>1648838039311</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1648838039311</updated>
+    </task>
+    <task id="LOCAL-00049" summary="stop trace logs">
+      <created>1648838670595</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1648838670595</updated>
+    </task>
+    <task id="LOCAL-00050" summary="authentication by json">
+      <created>1648840271446</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1648840271447</updated>
+    </task>
+    <task id="LOCAL-00051" summary="authentication by json">
+      <created>1648885937941</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1648885937942</updated>
+    </task>
+    <task id="LOCAL-00052" summary="added cinemas nos sessions&#10;corrected reviews delete endpoints">
+      <created>1648889259767</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1648889259767</updated>
+    </task>
+    <task id="LOCAL-00053" summary="added put mapping to ReviewController">
+      <created>1648890008390</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1648890008390</updated>
+    </task>
+    <task id="LOCAL-00054" summary="added movie find by actor">
+      <created>1648890219594</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1648890219594</updated>
+    </task>
+    <task id="LOCAL-00055" summary="corrected change password&#10;and update user">
+      <created>1648891741111</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1648891741111</updated>
+    </task>
+    <task id="LOCAL-00056" summary="corrected sessions">
+      <created>1648892511216</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1648892511216</updated>
+    </task>
+    <task id="LOCAL-00057" summary="added model mapper to converters&#10;movie type deleted">
+      <created>1648894116165</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1648894116166</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Added turnAdmin feature">
+      <created>1648894979530</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1648894979530</updated>
+    </task>
+    <task id="LOCAL-00059" summary="if sessions page is not found, thrwos exception">
+      <created>1648896830901</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1648896830901</updated>
+    </task>
+    <task id="LOCAL-00060" summary="some corrections to reviews deletes">
+      <created>1648899575662</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1648899575666</updated>
+    </task>
+    <task id="LOCAL-00061" summary="small corrections">
+      <created>1648899939599</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1648899939599</updated>
+    </task>
+    <task id="LOCAL-00062" summary="small corrections">
+      <created>1648900663574</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1648900663574</updated>
+    </task>
+    <task id="LOCAL-00063" summary="small corrections">
+      <created>1648900764075</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1648900764076</updated>
+    </task>
+    <task id="LOCAL-00064" summary="small corrections">
+      <created>1648901891461</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1648901891461</updated>
+    </task>
+    <task id="LOCAL-00065" summary="corrected security, corrected sql error">
+      <created>1648979069357</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1648979069357</updated>
+    </task>
+    <task id="LOCAL-00066" summary="migrate refresh token to token service">
+      <created>1648979361485</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1648979361485</updated>
+    </task>
+    <task id="LOCAL-00067" summary="docker compose is working">
+      <created>1648982148834</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1648982148835</updated>
+    </task>
+    <task id="LOCAL-00068" summary="docker compose is working">
+      <created>1648982280943</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1648982280943</updated>
+    </task>
+    <task id="LOCAL-00069" summary="some changes to the readme">
+      <created>1649016154075</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1649016154075</updated>
+    </task>
+    <task id="LOCAL-00070" summary="some changes to the readme">
+      <created>1649016252361</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1649016252361</updated>
+    </task>
+    <task id="LOCAL-00071" summary="some changes in logging aspect">
+      <created>1649019889402</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1649019889402</updated>
+    </task>
+    <task id="LOCAL-00072" summary="limited local rating in reviews from 1 to 5.">
+      <created>1649019995331</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1649019995331</updated>
+    </task>
+    <task id="LOCAL-00073" summary="small changes">
+      <created>1649063225445</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1649063225461</updated>
+    </task>
+    <task id="LOCAL-00074" summary="small changes">
+      <created>1649063276293</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1649063276293</updated>
+    </task>
+    <task id="LOCAL-00075" summary="small changes">
+      <created>1649063297987</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1649063297987</updated>
+    </task>
+    <task id="LOCAL-00076" summary="move readme and create postman collection">
+      <created>1649065170310</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1649065170310</updated>
+    </task>
+    <task id="LOCAL-00077" summary="move readme and create postman collection">
+      <created>1649065209286</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1649065209286</updated>
+    </task>
+    <task id="LOCAL-00078" summary="..">
+      <created>1649065356505</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1649065356505</updated>
+    </task>
+    <task id="LOCAL-00079" summary="heroku settings">
+      <created>1649065900880</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1649065900880</updated>
+    </task>
+    <task id="LOCAL-00080" summary="heroku settings">
+      <created>1649071606176</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1649071606177</updated>
+    </task>
+    <task id="LOCAL-00081" summary="online database working">
+      <created>1649071755761</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1649071755762</updated>
+    </task>
+    <task id="LOCAL-00082" summary="online database working">
+      <created>1649071800711</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1649071800712</updated>
+    </task>
+    <task id="LOCAL-00083" summary="correction">
+      <created>1649072063026</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1649072063026</updated>
+    </task>
+    <task id="LOCAL-00084" summary="heroku">
+      <created>1649073613751</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1649073613751</updated>
+    </task>
+    <task id="LOCAL-00085" summary="heroku">
+      <created>1649073774224</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1649073774224</updated>
+    </task>
+    <task id="LOCAL-00086" summary="heroku">
+      <created>1649073979711</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1649073979711</updated>
+    </task>
+    <task id="LOCAL-00087" summary="moved files">
+      <created>1649076481356</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1649076481356</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="authentication by json" />
+    <MESSAGE value="added cinemas nos sessions&#10;corrected reviews delete endpoints" />
+    <MESSAGE value="added put mapping to ReviewController" />
+    <MESSAGE value="added movie find by actor" />
+    <MESSAGE value="corrected change password&#10;and update user" />
+    <MESSAGE value="corrected sessions" />
+    <MESSAGE value="added model mapper to converters&#10;movie type deleted" />
+    <MESSAGE value="Added turnAdmin feature" />
+    <MESSAGE value="if sessions page is not found, thrwos exception" />
+    <MESSAGE value="some corrections to reviews deletes" />
+    <MESSAGE value="small corrections" />
+    <MESSAGE value="corrected security, corrected sql error" />
+    <MESSAGE value="migrate refresh token to token service" />
+    <MESSAGE value="docker compose is working" />
+    <MESSAGE value="some changes to the readme" />
+    <MESSAGE value="some changes in logging aspect" />
+    <MESSAGE value="limited local rating in reviews from 1 to 5." />
+    <MESSAGE value="small changes" />
+    <MESSAGE value="move readme and create postman collection" />
+    <MESSAGE value=".." />
+    <MESSAGE value="heroku settings" />
+    <MESSAGE value="online database working" />
+    <MESSAGE value="correction" />
+    <MESSAGE value="heroku" />
+    <MESSAGE value="moved files" />
+    <option name="LAST_COMMIT_MESSAGE" value="moved files" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/academy/mindswap/services/MovieDBService.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/academy/mindswap/services/MovieDBService.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/academy/mindswap/services/MovieDBService.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/academy/mindswap/services/MovieDBService.java</url>
+          <line>57</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/academy/mindswap/services/MovieDBService.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/academy/mindswap/services/MovieDBService.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/academy/mindswap/services/MovieDBService.java</url>
+          <line>61</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/academy/mindswap/services/MovieDBService.java</url>
+          <line>63</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/academy/mindswap/services/MovieDBService.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="url" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>
